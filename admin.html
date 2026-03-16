@@ -3,30 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin - Plataforma</title>
+    <title>Admin - Corrida AMICC RP</title>
     
-    <!-- ⚠️ [SUBSTITUIR] Favicon da sua marca -->
     <link rel="icon" type="image/png" href="./assets/favicon.png">
     
-    <!-- Fontes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- Ícones -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- SheetJS para Exportação Excel -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     
     <style>
         :root {
-            /* ⚠️ [SUBSTITUIR] Cores da Sua Marca */
-            --primary-color: #6366f1;
-            --primary-dark: #4f46e5;
-            --primary-light: #a5b4fc;
-            --secondary-color: #0ea5e9;
-            --accent-color: #f59e0b;
+            --primary-color: #f97316;
+            --primary-dark: #ea580c;
+            --primary-light: #fdba74;
+            --secondary-color: #22c55e;
+            --accent-color: #eab308;
             
             --background: #0f172a;
             --surface: #1e293b;
@@ -58,7 +53,6 @@
             min-height: 100vh;
         }
 
-        /* Login Overlay */
         .login-overlay {
             position: fixed;
             top: 0;
@@ -186,14 +180,6 @@
             display: flex;
         }
 
-        .status-message.success {
-            background: rgb(34 197 94 / 0.1);
-            border: 1px solid var(--success);
-            color: var(--success);
-            display: flex;
-        }
-
-        /* Dashboard */
         .dashboard {
             display: none;
         }
@@ -202,7 +188,6 @@
             display: block;
         }
 
-        /* Header */
         .admin-header {
             background: var(--surface);
             border-bottom: 1px solid var(--border);
@@ -228,7 +213,6 @@
             gap: 0.75rem;
         }
 
-        /* Stats Cards */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -253,7 +237,7 @@
         .stat-card-icon {
             width: 40px;
             height: 40px;
-            background: rgb(99 102 241 / 0.1);
+            background: rgb(249 115 22 / 0.1);
             border-radius: var(--radius-md);
             display: flex;
             align-items: center;
@@ -271,7 +255,6 @@
             color: var(--text-secondary);
         }
 
-        /* Filters */
         .filters-bar {
             padding: 0 1.5rem 1rem;
             display: flex;
@@ -319,7 +302,6 @@
             border-color: var(--primary-color);
         }
 
-        /* Table */
         .table-container {
             padding: 0 1.5rem 1.5rem;
             overflow-x: auto;
@@ -358,7 +340,6 @@
             background: rgb(51 65 85 / 0.5);
         }
 
-        /* Status Badges */
         .badge {
             display: inline-flex;
             align-items: center;
@@ -387,7 +368,6 @@
             border: 1px solid var(--error);
         }
 
-        /* Actions */
         .action-buttons {
             display: flex;
             gap: 0.5rem;
@@ -422,7 +402,6 @@
             color: var(--error);
         }
 
-        /* Pagination */
         .pagination {
             display: flex;
             justify-content: space-between;
@@ -442,7 +421,6 @@
             gap: 0.5rem;
         }
 
-        /* Modal */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -466,7 +444,7 @@
             border-radius: var(--radius-lg);
             padding: 1.5rem;
             width: 100%;
-            max-width: 500px;
+            max-width: 600px;
             max-height: 90vh;
             overflow-y: auto;
         }
@@ -529,7 +507,6 @@
             border-top: 1px solid var(--border);
         }
 
-        /* Loading Spinner */
         .spinner {
             width: 20px;
             height: 20px;
@@ -543,7 +520,35 @@
             to { transform: rotate(360deg); }
         }
 
-        /* Responsive */
+        .settings-section {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            margin: 1.5rem;
+        }
+
+        .settings-section h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .pix-display {
+            background: var(--background);
+            border: 1px dashed var(--border);
+            padding: 1rem;
+            border-radius: var(--radius-md);
+            font-family: monospace;
+            font-size: 1rem;
+            color: var(--primary-light);
+            word-break: break-all;
+            margin-top: 0.5rem;
+        }
+
         @media (max-width: 768px) {
             .filters-bar {
                 flex-direction: column;
@@ -579,17 +584,15 @@
     <div class="login-overlay" id="loginOverlay">
         <div class="login-card">
             <div class="login-header">
-                <i class="fas fa-shield-halved"></i>
-                <!-- ⚠️ [SUBSTITUIR] Nome da Sua Plataforma -->
-                <h1>[CORRIDA AMICC RP]</h1>
-                <p>Área Administrativa Restrita</p>
+                <i class="fas fa-person-running"></i>
+                <h1>CORRIDA AMICC RP</h1>
+                <p>Painel Administrativo</p>
             </div>
             
             <form id="loginForm">
                 <div class="form-group">
                     <label for="adminEmail">E-mail</label>
-                    <!-- ⚠️ [SUBSTITUIR] Placeholder do e-mail -->
-                    <input type="email" id="adminEmail" placeholder="thiagoventuravalencio@gmail.com" required>
+                    <input type="email" id="adminEmail" placeholder="admin@amicc.com.br" required>
                 </div>
                 
                 <div class="form-group">
@@ -617,8 +620,7 @@
         <header class="admin-header">
             <h1>
                 <i class="fas fa-chart-line" style="color: var(--primary-color);"></i>
-                <!-- ⚠️ [SUBSTITUIR] Nome da Sua Plataforma -->
-                [NOME_DA_SUA_PLATAFORMA] - Admin
+                CORRIDA AMICC RP - Admin
             </h1>
             <div class="admin-header-actions">
                 <button class="btn btn-secondary btn-sm" id="refreshBtn">
@@ -637,7 +639,7 @@
         <div class="stats-grid">
             <div class="stat-card">
                 <div class="stat-card-header">
-                    <span class="stat-card-label">Total de Cadastros</span>
+                    <span class="stat-card-label">Total de Inscritos</span>
                     <div class="stat-card-icon">
                         <i class="fas fa-users"></i>
                     </div>
@@ -667,12 +669,30 @@
             
             <div class="stat-card">
                 <div class="stat-card-header">
-                    <span class="stat-card-label">Rejeitados</span>
-                    <div class="stat-card-icon" style="background: rgb(239 68 68 / 0.1); color: var(--error);">
-                        <i class="fas fa-times-circle"></i>
+                    <span class="stat-card-label">Camisetas Total</span>
+                    <div class="stat-card-icon" style="background: rgb(14 165 233 / 0.1); color: var(--secondary-color);">
+                        <i class="fas fa-tshirt"></i>
                     </div>
                 </div>
-                <div class="stat-card-value" id="statRejected">0</div>
+                <div class="stat-card-value" id="statShirts">0</div>
+            </div>
+        </div>
+
+        <!-- Configurações Rápidas -->
+        <div class="settings-section">
+            <h3><i class="fas fa-cog"></i> Configurações do Evento</h3>
+            <div class="form-group">
+                <label for="adminPixKey"><i class="fas fa-qrcode"></i> Chave PIX para Pagamento</label>
+                <input type="text" id="adminPixKey" placeholder="Digite a chave PIX (CPF, CNPJ, e-mail ou aleatória)">
+                <small style="color: var(--text-muted); margin-top: 0.5rem; display: block;">
+                    Esta chave será exibida na página de inscrição para os participantes.
+                </small>
+            </div>
+            <button class="btn btn-sm" id="savePixBtn" style="width: auto; margin-top: 0.5rem;">
+                <i class="fas fa-save"></i> Salvar Chave PIX
+            </button>
+            <div class="pix-display" id="currentPixKey" style="display: none; margin-top: 1rem;">
+                Chave atual: <span id="pixKeyValue"></span>
             </div>
         </div>
 
@@ -690,11 +710,13 @@
                 <option value="rejected">Rejeitados</option>
             </select>
             
-            <select class="filter-select" id="dateFilter">
-                <option value="all">Todas as Datas</option>
-                <option value="today">Hoje</option>
-                <option value="week">Esta Semana</option>
-                <option value="month">Este Mês</option>
+            <select class="filter-select" id="categoryFilter">
+                <option value="all">Todas as Categorias</option>
+                <option value="caminhada">Caminhada</option>
+                <option value="5km">5 KM</option>
+                <option value="10km">10 KM</option>
+                <option value="15km">15 KM</option>
+                <option value="21km">21 KM</option>
             </select>
         </div>
 
@@ -705,9 +727,10 @@
                     <tr>
                         <th>Nome</th>
                         <th>E-mail</th>
-                        <th>Telefone</th>
+                        <th>WhatsApp</th>
+                        <th>Categoria</th>
+                        <th>Camiseta</th>
                         <th>Status</th>
-                        <th>Data</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
@@ -737,7 +760,7 @@
     <div class="modal-overlay" id="modalOverlay">
         <div class="modal">
             <div class="modal-header">
-                <h2><i class="fas fa-user"></i> Detalhes do Usuário</h2>
+                <h2><i class="fas fa-user"></i> Detalhes do Inscrito</h2>
                 <button class="modal-close" id="modalClose">&times;</button>
             </div>
             <div class="modal-body" id="modalBody">
@@ -752,35 +775,34 @@
     <!-- Firebase SDK -->
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
-        import { getFirestore, collection, getDocs, doc, updateDoc, query, orderBy } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+        import { getFirestore, collection, getDocs, doc, updateDoc, query, orderBy, addDoc, getDoc } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
         import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
 
-        // ⚠️ [SUBSTITUIR] Configurações do Firebase (MESMAS do index.html)
+        // Configurações do Firebase
         const firebaseConfig = {
-  apiKey: "AIzaSyDJWWNufLuBg0GSLdhvHENWwrCFSHB9Vrc",
-  authDomain: "amicc-3185b.firebaseapp.com",
-  projectId: "amicc-3185b",
-  storageBucket: "amicc-3185b.firebasestorage.app",
-  messagingSenderId: "648176195292",
-  appId: "1:648176195292:web:9a85e16e79e17d3a488619"
-};
+            apiKey: "AIzaSyDJWWNufLuBg0GSLdhvHENWwrCFSHB9Vrc",
+            authDomain: "amicc-3185b.firebaseapp.com",
+            projectId: "amicc-3185b",
+            storageBucket: "amicc-3185b.firebasestorage.app",
+            messagingSenderId: "648176195292",
+            appId: "1:648176195292:web:9a85e16e79e17d3a488619"
+        };
 
-        // ⚠️ [SUBSTITUIR] E-mail do Admin (criado no Firebase Authentication)
-        const ADMIN_EMAIL = "[SEU_EMAIL_ADMIN]";
+        // E-mail do Admin
+        const ADMIN_EMAIL = "thiagoventuravalencio@gmail.com";
 
-        // Inicializar Firebase
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
         const auth = getAuth(app);
 
-        // Estado da aplicação
+        // Estado
         let allUsers = [];
         let filteredUsers = [];
         let currentPage = 1;
         const itemsPerPage = 20;
         let currentUser = null;
 
-        // Elementos do DOM
+        // Elementos
         const loginOverlay = document.getElementById('loginOverlay');
         const dashboard = document.getElementById('dashboard');
         const loginForm = document.getElementById('loginForm');
@@ -791,16 +813,16 @@
         const tableBody = document.getElementById('tableBody');
         const searchInput = document.getElementById('searchInput');
         const statusFilter = document.getElementById('statusFilter');
-        const dateFilter = document.getElementById('dateFilter');
+        const categoryFilter = document.getElementById('categoryFilter');
         const modalOverlay = document.getElementById('modalOverlay');
         const modalBody = document.getElementById('modalBody');
         const modalFooter = document.getElementById('modalFooter');
+        const adminPixKey = document.getElementById('adminPixKey');
+        const savePixBtn = document.getElementById('savePixBtn');
+        const currentPixKey = document.getElementById('currentPixKey');
+        const pixKeyValue = document.getElementById('pixKeyValue');
 
-        // ============================================
-        // AUTENTICAÇÃO
-        // ============================================
-
-        // Verificar estado de autenticação
+        // Autenticação
         onAuthStateChanged(auth, (user) => {
             if (user && user.email === ADMIN_EMAIL) {
                 showDashboard();
@@ -810,14 +832,12 @@
             }
         });
 
-        // Login
         loginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             
             const email = document.getElementById('adminEmail').value;
             const password = document.getElementById('adminPassword').value;
 
-            // UI Loading
             loginBtn.disabled = true;
             btnText.style.display = 'none';
             btnLoading.style.display = 'flex';
@@ -825,7 +845,6 @@
 
             try {
                 await signInWithEmailAndPassword(auth, email, password);
-                // onAuthStateChanged vai cuidar de mostrar o dashboard
             } catch (error) {
                 loginStatus.className = 'status-message error';
                 loginStatus.innerHTML = '<i class="fas fa-exclamation-circle"></i> ' + getErrorMessage(error.code);
@@ -837,27 +856,20 @@
             }
         });
 
-        // Logout
         document.getElementById('logoutBtn').addEventListener('click', async () => {
-            try {
-                await signOut(auth);
-                localStorage.removeItem('adminAuth');
-                location.reload();
-            } catch (error) {
-                console.error('Erro ao fazer logout:', error);
-            }
+            await signOut(auth);
+            localStorage.removeItem('adminAuth');
+            location.reload();
         });
 
         function showDashboard() {
             loginOverlay.style.display = 'none';
             dashboard.classList.add('active');
             loadUsers();
+            loadPixKey();
         }
 
-        // ============================================
-        // CARREGAR USUÁRIOS
-        // ============================================
-
+        // Carregar Usuários
         async function loadUsers() {
             try {
                 const usersRef = collection(db, 'users');
@@ -878,53 +890,78 @@
             }
         }
 
-        // ============================================
-        // FILTRAR USUÁRIOS
-        // ============================================
+        // Carregar Chave PIX
+        async function loadPixKey() {
+            try {
+                const settingsRef = doc(db, 'settings', 'event');
+                const settingsDoc = await getDoc(settingsRef);
+                if (settingsDoc.exists()) {
+                    const pixKey = settingsDoc.data().pixKey || '';
+                    if (pixKey) {
+                        adminPixKey.value = pixKey;
+                        pixKeyValue.textContent = pixKey;
+                        currentPixKey.style.display = 'block';
+                    }
+                }
+            } catch (error) {
+                console.error('Erro ao carregar PIX:', error);
+            }
+        }
 
+        // Salvar Chave PIX
+        savePixBtn.addEventListener('click', async () => {
+            const pixKey = adminPixKey.value.trim();
+            if (!pixKey) {
+                alert('Digite uma chave PIX válida');
+                return;
+            }
+
+            try {
+                const settingsRef = doc(db, 'settings', 'event');
+                await updateDoc(settingsRef, { pixKey }, { merge: true });
+                alert('Chave PIX salva com sucesso!');
+                pixKeyValue.textContent = pixKey;
+                currentPixKey.style.display = 'block';
+            } catch (error) {
+                if (error.code === 'firestore/permission-denied') {
+                    // Cria o documento se não existir
+                    await addDoc(collection(db, 'settings'), { 
+                        type: 'event',
+                        pixKey 
+                    });
+                    alert('Chave PIX salva com sucesso!');
+                    pixKeyValue.textContent = pixKey;
+                    currentPixKey.style.display = 'block';
+                } else {
+                    console.error('Erro ao salvar PIX:', error);
+                    alert('Erro ao salvar chave PIX');
+                }
+            }
+        });
+
+        // Filtrar
         function filterUsers() {
             const searchTerm = searchInput.value.toLowerCase();
             const statusValue = statusFilter.value;
-            const dateValue = dateFilter.value;
+            const categoryValue = categoryFilter.value;
 
             filteredUsers = allUsers.filter(user => {
-                // Busca por texto
                 const matchesSearch = 
                     user.fullName?.toLowerCase().includes(searchTerm) ||
                     user.email?.toLowerCase().includes(searchTerm) ||
                     user.phone?.includes(searchTerm);
 
-                // Filtro por status
                 const matchesStatus = statusValue === 'all' || user.status === statusValue;
+                const matchesCategory = categoryValue === 'all' || user.category === categoryValue;
 
-                // Filtro por data
-                let matchesDate = true;
-                if (dateValue !== 'all') {
-                    const now = new Date();
-                    const userDate = user.createdAt;
-                    
-                    if (dateValue === 'today') {
-                        matchesDate = userDate.toDateString() === now.toDateString();
-                    } else if (dateValue === 'week') {
-                        const weekAgo = new Date(now - 7 * 24 * 60 * 60 * 1000);
-                        matchesDate = userDate >= weekAgo;
-                    } else if (dateValue === 'month') {
-                        matchesDate = userDate.getMonth() === now.getMonth() && 
-                                     userDate.getFullYear() === now.getFullYear();
-                    }
-                }
-
-                return matchesSearch && matchesStatus && matchesDate;
+                return matchesSearch && matchesStatus && matchesCategory;
             });
 
             currentPage = 1;
             renderTable();
         }
 
-        // ============================================
-        // RENDERIZAR TABELA
-        // ============================================
-
+        // Renderizar Tabela
         function renderTable() {
             const start = (currentPage - 1) * itemsPerPage;
             const end = start + itemsPerPage;
@@ -933,7 +970,7 @@
             if (pageUsers.length === 0) {
                 tableBody.innerHTML = `
                     <tr>
-                        <td colspan="6" style="text-align: center; padding: 2rem; color: var(--text-muted);">
+                        <td colspan="7" style="text-align: center; padding: 2rem; color: var(--text-muted);">
                             <i class="fas fa-inbox" style="font-size: 2rem; margin-bottom: 0.5rem; display: block;"></i>
                             Nenhum registro encontrado
                         </td>
@@ -942,18 +979,17 @@
             } else {
                 tableBody.innerHTML = pageUsers.map(user => `
                     <tr>
-                        <td>
-                            <strong>${escapeHtml(user.fullName || 'N/A')}</strong>
-                        </td>
+                        <td><strong>${escapeHtml(user.fullName || 'N/A')}</strong></td>
                         <td>${escapeHtml(user.email || 'N/A')}</td>
                         <td>${formatPhone(user.phone)}</td>
+                        <td>${user.category || 'N/A'}</td>
+                        <td>${user.shirtSize || 'N/A'} (${user.quantity || 1}x)</td>
                         <td>
                             <span class="badge badge-${user.status || 'pending'}">
                                 <i class="fas fa-${getStatusIcon(user.status)}"></i>
                                 ${getStatusText(user.status)}
                             </span>
                         </td>
-                        <td>${formatDate(user.createdAt)}</td>
                         <td>
                             <div class="action-buttons">
                                 <button class="action-btn" onclick="viewUser('${user.id}')" title="Ver detalhes">
@@ -975,32 +1011,26 @@
                 `).join('');
             }
 
-            // Informações de paginação
             document.getElementById('paginationInfo').textContent = 
                 filteredUsers.length > 0 
                     ? `Mostrando ${start + 1}-${Math.min(end, filteredUsers.length)} de ${filteredUsers.length} registros`
                     : 'Nenhum registro';
 
-            // Botões de paginação
             document.getElementById('prevPage').disabled = currentPage === 1;
             document.getElementById('nextPage').disabled = end >= filteredUsers.length;
         }
 
-        // ============================================
-        // ATUALIZAR ESTATÍSTICAS
-        // ============================================
-
+        // Atualizar Stats
         function updateStats() {
             document.getElementById('statTotal').textContent = allUsers.length;
             document.getElementById('statPending').textContent = allUsers.filter(u => u.status === 'pending').length;
             document.getElementById('statApproved').textContent = allUsers.filter(u => u.status === 'approved').length;
-            document.getElementById('statRejected').textContent = allUsers.filter(u => u.status === 'rejected').length;
+            
+            const totalShirts = allUsers.reduce((sum, u) => sum + (u.quantity || 1), 0);
+            document.getElementById('statShirts').textContent = totalShirts;
         }
 
-        // ============================================
-        // MODAL DE DETALHES
-        // ============================================
-
+        // Modal
         window.viewUser = async (userId) => {
             const user = allUsers.find(u => u.id === userId);
             if (!user) return;
@@ -1016,8 +1046,24 @@
                     <span class="info-value">${escapeHtml(user.email)}</span>
                 </div>
                 <div class="info-row">
-                    <span class="info-label">Telefone</span>
+                    <span class="info-label">WhatsApp</span>
                     <span class="info-value">${formatPhone(user.phone)}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Categoria</span>
+                    <span class="info-value">${user.category || 'N/A'}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Tamanho Camiseta</span>
+                    <span class="info-value">${user.shirtSize || 'N/A'}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Quantidade Camisetas</span>
+                    <span class="info-value">${user.quantity || 1}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Contato de Emergência</span>
+                    <span class="info-value">${formatPhone(user.emergencyContact)}</span>
                 </div>
                 <div class="info-row">
                     <span class="info-label">Status</span>
@@ -1028,21 +1074,9 @@
                     </span>
                 </div>
                 <div class="info-row">
-                    <span class="info-label">Data de Cadastro</span>
+                    <span class="info-label">Data de Inscrição</span>
                     <span class="info-value">${formatDate(user.createdAt)}</span>
                 </div>
-                ${user.approvedAt ? `
-                <div class="info-row">
-                    <span class="info-label">Data de Aprovação</span>
-                    <span class="info-value">${formatDate(user.approvedAt)}</span>
-                </div>
-                ` : ''}
-                ${user.updatedAt ? `
-                <div class="info-row">
-                    <span class="info-label">Última Atualização</span>
-                    <span class="info-value">${formatDate(user.updatedAt)}</span>
-                </div>
-                ` : ''}
             `;
 
             modalFooter.innerHTML = `
@@ -1060,16 +1094,11 @@
             `;
 
             modalOverlay.classList.add('active');
-            
             document.getElementById('modalCloseBtn')?.addEventListener('click', closeModal);
         };
 
-        // ============================================
-        // ATUALIZAR STATUS
-        // ============================================
-
         window.updateStatus = async (userId, newStatus) => {
-            if (!confirm(`Tem certeza que deseja ${newStatus === 'approved' ? 'APROVAR' : 'REJEITAR'} este usuário?`)) {
+            if (!confirm(`Tem certeza que deseja ${newStatus === 'approved' ? 'APROVAR' : 'REJEITAR'} este inscrito?`)) {
                 return;
             }
 
@@ -1083,17 +1112,13 @@
 
                 await loadUsers();
                 closeModal();
-                
-                // Feedback visual
-                const message = newStatus === 'approved' ? 'Usuário aprovado com sucesso!' : 'Usuário rejeitado com sucesso!';
-                alert(message);
+                alert(`Inscrito ${newStatus === 'approved' ? 'aprovado' : 'rejeitado'} com sucesso!`);
             } catch (error) {
                 console.error('Erro ao atualizar status:', error);
-                alert('Erro ao atualizar status. Verifique as regras do Firestore.');
+                alert('Erro ao atualizar status.');
             }
         };
 
-        // Fechar modal
         function closeModal() {
             modalOverlay.classList.remove('active');
             currentUser = null;
@@ -1104,13 +1129,10 @@
             if (e.target === modalOverlay) closeModal();
         });
 
-        // ============================================
-        // EVENT LISTENERS
-        // ============================================
-
+        // Event Listeners
         searchInput.addEventListener('input', filterUsers);
         statusFilter.addEventListener('change', filterUsers);
-        dateFilter.addEventListener('change', filterUsers);
+        categoryFilter.addEventListener('change', filterUsers);
 
         document.getElementById('prevPage').addEventListener('click', () => {
             if (currentPage > 1) {
@@ -1126,14 +1148,9 @@
             }
         });
 
-        document.getElementById('refreshBtn').addEventListener('click', () => {
-            loadUsers();
-        });
+        document.getElementById('refreshBtn').addEventListener('click', loadUsers);
 
-        // ============================================
-        // EXPORTAR PARA EXCEL
-        // ============================================
-
+        // Exportar
         document.getElementById('exportBtn').addEventListener('click', () => {
             if (filteredUsers.length === 0) {
                 alert('Nenhum dado para exportar');
@@ -1143,25 +1160,22 @@
             const data = filteredUsers.map(u => ({
                 Nome: u.fullName || 'N/A',
                 Email: u.email || 'N/A',
-                Telefone: formatPhone(u.phone),
+                WhatsApp: formatPhone(u.phone),
+                Categoria: u.category || 'N/A',
+                Tamanho_Camiseta: u.shirtSize || 'N/A',
+                Quantidade_Camisetas: u.quantity || 1,
+                Contato_Emergencia: formatPhone(u.emergencyContact),
                 Status: getStatusText(u.status),
-                Data_Cadastro: formatDate(u.createdAt),
-                Data_Aprovacao: u.approvedAt ? formatDate(u.approvedAt) : 'N/A'
+                Data_Inscricao: formatDate(u.createdAt)
             }));
 
             const ws = XLSX.utils.json_to_sheet(data);
             const wb = XLSX.utils.book_new();
-            XLSX.utils.book_append_sheet(wb, ws, 'Usuários');
-            
-            // ⚠️ [SUBSTITUIR] Nome do arquivo exportado
-            const fileName = `[NOME_DA_PLATAFORMA]_usuarios_${new Date().toISOString().split('T')[0]}.xlsx`;
-            XLSX.writeFile(wb, fileName);
+            XLSX.utils.book_append_sheet(wb, ws, 'Inscritos');
+            XLSX.writeFile(wb, `CORRIDA_AMICC_RP_inscritos_${new Date().toISOString().split('T')[0]}.xlsx`);
         });
 
-        // ============================================
-        // FUNÇÕES UTILITÁRIAS
-        // ============================================
-
+        // Utilitários
         function escapeHtml(text) {
             if (!text) return 'N/A';
             const div = document.createElement('div');
@@ -1209,18 +1223,12 @@
 
         function getErrorMessage(errorCode) {
             switch(errorCode) {
-                case 'auth/user-not-found':
-                    return 'Usuário não encontrado';
-                case 'auth/wrong-password':
-                    return 'Senha incorreta';
-                case 'auth/invalid-email':
-                    return 'E-mail inválido';
-                case 'auth/too-many-requests':
-                    return 'Muitas tentativas. Tente mais tarde';
-                case 'auth/user-disabled':
-                    return 'Usuário desativado';
-                default:
-                    return 'Erro ao fazer login. Tente novamente';
+                case 'auth/user-not-found': return 'Usuário não encontrado';
+                case 'auth/wrong-password': return 'Senha incorreta';
+                case 'auth/invalid-email': return 'E-mail inválido';
+                case 'auth/too-many-requests': return 'Muitas tentativas. Tente mais tarde';
+                case 'auth/user-disabled': return 'Usuário desativado';
+                default: return 'Erro ao fazer login.';
             }
         }
     </script>
