@@ -5,27 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Corrida da AMICC Rio Preto - Inscrição Oficial</title>
     
-    <!-- Favicon -->
     <link rel="icon" type="image/png" href="./assets/favicon.png">
     
-    <!-- Fontes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     
-    <!-- Ícones -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
+        /* MANTENDO SUAS CORES ORIGINAIS */
         :root {
-            /* Cores da Corrida */
-            --primary-color: #f97316;        /* Laranja - Energia */
+            --primary-color: #f97316;
             --primary-dark: #ea580c;
             --primary-light: #fdba74;
-            --secondary-color: #22c55e;      /* Verde - Saúde */
-            --accent-color: #eab308;         /* Amarelo - Destaque */
+            --secondary-color: #22c55e;
+            --accent-color: #eab308;
             
-            /* Fundo */
             --background: #0f172a;
             --surface: #1e293b;
             --surface-elevated: #334155;
@@ -46,12 +42,7 @@
             --shadow-glow: 0 0 40px rgb(249 115 22 / 0.3);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: var(--font-main);
             background: var(--background);
@@ -61,443 +52,90 @@
             overflow-x: hidden;
         }
 
-        /* Background Animado */
         .bg-gradient {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: 
-                radial-gradient(circle at 20% 50%, rgb(249 115 22 / 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgb(34 197 94 / 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 40% 80%, rgb(234 179 8 / 0.1) 0%, transparent 50%);
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+            background: radial-gradient(circle at 20% 50%, rgb(249 115 22 / 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgb(34 197 94 / 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 80%, rgb(234 179 8 / 0.1) 0%, transparent 50%);
             animation: gradientShift 20s ease infinite;
         }
+        @keyframes gradientShift { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
 
-        @keyframes gradientShift {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
-        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-        }
-
-        /* Header */
+        /* HEADER */
         header {
-            padding: 1.5rem 0;
-            border-bottom: 1px solid var(--border);
-            backdrop-filter: blur(10px);
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            padding: 1.5rem 0; border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100;
             background: rgb(15 23 42 / 0.9);
         }
+        .header-content { display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; gap: 0.75rem; font-size: 1.5rem; font-weight: 800; color: var(--text-primary); text-decoration: none; }
+        .logo-icon { width: 45px; height: 45px; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
+        .logo span { background: linear-gradient(135deg, var(--primary-light), var(--text-primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        
+        /* BOTÕES */
+        .btn { padding: 0.75rem 1.5rem; background: linear-gradient(135deg, var(--primary-color), var(--primary-dark)); color: white; border: none; border-radius: var(--radius-md); font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; text-decoration: none; }
+        .btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-glow); }
+        .btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+        .btn-secondary { background: var(--surface-elevated); border: 1px solid var(--border); }
+        .btn-sm { padding: 0.5rem 1rem; font-size: 0.875rem; width: auto; }
 
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+        /* HERO & VAGAS */
+        .hero { padding: 4rem 0 2rem; text-align: center; }
+        .hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgb(249 115 22 / 0.1); border: 1px solid rgb(249 115 22 / 0.3); color: var(--primary-light); padding: 0.5rem 1rem; border-radius: var(--radius-full); font-size: 0.875rem; font-weight: 600; margin-bottom: 1.5rem; }
+        .hero h1 { font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 900; line-height: 1.1; margin-bottom: 1rem; background: linear-gradient(135deg, var(--text-primary) 0%, var(--primary-light) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-transform: uppercase; letter-spacing: -0.02em; }
+        .hero p { font-size: 1.25rem; color: var(--text-secondary); max-width: 700px; margin: 0 auto 2rem; }
+        
+        .progress-container { max-width: 500px; margin: 0 auto 3rem; background: var(--surface); padding: 1.5rem; border-radius: var(--radius-lg); border: 1px solid var(--border); }
+        .progress-header { display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-weight: 600; }
+        .progress-bar-bg { width: 100%; height: 12px; background: var(--surface-elevated); border-radius: var(--radius-full); overflow: hidden; }
+        .progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--secondary-color), var(--primary-color)); border-radius: var(--radius-full); width: 0%; transition: width 1s ease; }
 
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--text-primary);
-            text-decoration: none;
-        }
+        /* LOGOS ORGANIZADORES */
+        .organizers-gallery { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-bottom: 3rem; align-items: center; }
+        .organizer-logo { height: 80px; filter: grayscale(100%) brightness(200%); transition: all 0.3s ease; opacity: 0.7; }
+        .organizer-logo:hover { filter: grayscale(0%) brightness(100%); opacity: 1; transform: scale(1.05); }
 
-        .logo-icon {
-            width: 45px;
-            height: 45px;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            border-radius: var(--radius-md);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-        }
+        /* FORMULÁRIO */
+        .form-container { max-width: 600px; margin: 0 auto; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 2rem; box-shadow: var(--shadow-lg); }
+        .form-header { text-align: center; margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border); }
+        .form-header h2 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; }
+        
+        .form-grid { display: grid; gap: 1.25rem; }
+        .form-group { text-align: left; }
+        .form-group label { display: block; font-size: 0.875rem; font-weight: 500; color: var(--text-secondary); margin-bottom: 0.5rem; }
+        .form-group input, .form-group select { width: 100%; padding: 0.875rem 1rem; background: var(--background); border: 1px solid var(--border); border-radius: var(--radius-md); color: var(--text-primary); font-size: 1rem; transition: all 0.2s ease; }
+        .form-group input:focus, .form-group select:focus { outline: none; border-color: var(--primary-color); box-shadow: 0 0 0 3px rgb(249 115 22 / 0.2); }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        
+        /* SELEÇÃO DE CAMISETA */
+        .shirt-selection { background: var(--surface-elevated); padding: 1.5rem; border-radius: var(--radius-lg); margin-top: 1rem; border: 1px solid var(--primary-color); }
+        .radio-group { display: flex; gap: 1rem; margin-bottom: 1rem; }
+        .radio-option { flex: 1; position: relative; }
+        .radio-option input { position: absolute; opacity: 0; cursor: pointer; }
+        .radio-label { display: block; padding: 1rem; text-align: center; background: var(--background); border: 2px solid var(--border); border-radius: var(--radius-md); cursor: pointer; font-weight: 600; transition: all 0.2s ease; }
+        .radio-option input:checked ~ .radio-label { border-color: var(--primary-color); background: rgb(249 115 22 / 0.1); color: var(--primary-light); }
+        
+        /* SEÇÕES EXTRAS (MAPA, FAQ, ETC) */
+        .section-title { text-align: center; font-size: 2rem; margin-bottom: 2rem; color: var(--text-primary); }
+        .extra-section { padding: 4rem 0; border-top: 1px solid var(--border); }
+        
+        .shirt-showcase { display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center; align-items: center; }
+        .shirt-img { max-width: 250px; border-radius: var(--radius-lg); background: var(--surface-elevated); padding: 1rem; }
+        
+        .faq-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); margin-bottom: 1rem; overflow: hidden; }
+        .faq-question { padding: 1.25rem; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+        .faq-answer { padding: 0 1.25rem 1.25rem; color: var(--text-secondary); display: none; }
+        .faq-item.active .faq-answer { display: block; }
+        .faq-item.active .faq-question { color: var(--primary-light); }
 
-        .logo span {
-            background: linear-gradient(135deg, var(--primary-light), var(--text-primary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
+        .status-message { padding: 1rem; border-radius: var(--radius-md); margin-top: 1rem; display: none; align-items: center; gap: 0.75rem; font-size: 0.875rem; }
+        .status-message.success { background: rgb(34 197 94 / 0.1); border: 1px solid var(--success); color: var(--success); display: flex; }
+        .status-message.error { background: rgb(239 68 68 / 0.1); border: 1px solid var(--error); color: var(--error); display: flex; }
 
-        .btn {
-            padding: 0.75rem 1.5rem;
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
-            color: white;
-            border: none;
-            border-radius: var(--radius-md);
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            text-decoration: none;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-glow);
-        }
-
-        .btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .btn-secondary {
-            background: var(--surface-elevated);
-            border: 1px solid var(--border);
-        }
-
-        .btn-sm {
-            padding: 0.5rem 1rem;
-            font-size: 0.875rem;
-            width: auto;
-        }
-
-        /* Hero Section */
-        .hero {
-            padding: 4rem 0;
-            text-align: center;
-        }
-
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: rgb(249 115 22 / 0.1);
-            border: 1px solid rgb(249 115 22 / 0.3);
-            color: var(--primary-light);
-            padding: 0.5rem 1rem;
-            border-radius: var(--radius-full);
-            font-size: 0.875rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-        }
-
-        .hero-badge i {
-            color: var(--accent-color);
-        }
-
-        .hero h1 {
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            font-weight: 900;
-            line-height: 1.1;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--text-primary) 0%, var(--primary-light) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-transform: uppercase;
-            letter-spacing: -0.02em;
-        }
-
-        .hero p {
-            font-size: 1.25rem;
-            color: var(--text-secondary);
-            max-width: 700px;
-            margin: 0 auto 2rem;
-        }
-
-        /* Teams */
-        .teams {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-            margin-bottom: 2rem;
-        }
-
-        .team-badge {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            padding: 0.75rem 1.5rem;
-            border-radius: var(--radius-full);
-            font-weight: 600;
-            font-size: 0.875rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .team-badge i {
-            color: var(--primary-color);
-        }
-
-        /* Formulário */
-        .form-container {
-            max-width: 520px;
-            margin: 0 auto;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-xl);
-            padding: 2rem;
-            box-shadow: var(--shadow-lg);
-        }
-
-        .form-header {
-            text-align: center;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1.5rem;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .form-header h2 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .form-header p {
-            color: var(--text-secondary);
-            font-size: 0.875rem;
-        }
-
-        .form-grid {
-            display: grid;
-            gap: 1.25rem;
-        }
-
-        .form-group {
-            text-align: left;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 0.875rem;
-            font-weight: 500;
-            color: var(--text-secondary);
-            margin-bottom: 0.5rem;
-        }
-
-        .form-group label i {
-            margin-right: 0.5rem;
-            color: var(--primary-color);
-        }
-
-        .form-group input,
-        .form-group select {
-            width: 100%;
-            padding: 0.875rem 1rem;
-            background: var(--background);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-md);
-            color: var(--text-primary);
-            font-size: 1rem;
-            transition: all 0.2s ease;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgb(249 115 22 / 0.2);
-        }
-
-        .form-group input::placeholder {
-            color: var(--text-muted);
-        }
-
-        .form-group select {
-            cursor: pointer;
-        }
-
-        .form-group small {
-            display: block;
-            margin-top: 0.5rem;
-            font-size: 0.75rem;
-            color: var(--text-muted);
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
-
-        /* Status Messages */
-        .status-message {
-            padding: 1rem;
-            border-radius: var(--radius-md);
-            margin-top: 1rem;
-            display: none;
-            align-items: center;
-            gap: 0.75rem;
-            font-size: 0.875rem;
-        }
-
-        .status-message.success {
-            background: rgb(34 197 94 / 0.1);
-            border: 1px solid var(--success);
-            color: var(--success);
-            display: flex;
-        }
-
-        .status-message.error {
-            background: rgb(239 68 68 / 0.1);
-            border: 1px solid var(--error);
-            color: var(--error);
-            display: flex;
-        }
-
-        .status-message.processing {
-            background: rgb(14 165 233 / 0.1);
-            border: 1px solid var(--secondary-color);
-            color: var(--secondary-color);
-            display: flex;
-        }
-
-        /* Payment Info */
-        .payment-info {
-            margin-top: 1.5rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid var(--border);
-            text-align: center;
-        }
-
-        .payment-info p {
-            font-size: 0.875rem;
-            color: var(--text-muted);
-            margin-bottom: 0.75rem;
-        }
-
-        .pix-key {
-            background: var(--background);
-            border: 1px dashed var(--border);
-            padding: 1rem;
-            border-radius: var(--radius-md);
-            font-family: monospace;
-            font-size: 1rem;
-            color: var(--primary-light);
-            word-break: break-all;
-        }
-
-        /* Features */
-        .features {
-            padding: 4rem 0;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .feature-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            padding: 1.5rem;
-            transition: all 0.2s ease;
-        }
-
-        .feature-card:hover {
-            border-color: var(--primary-color);
-            transform: translateY(-4px);
-        }
-
-        .feature-icon {
-            width: 56px;
-            height: 56px;
-            background: rgb(249 115 22 / 0.1);
-            border-radius: var(--radius-md);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-        }
-
-        .feature-card h3 {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .feature-card p {
-            font-size: 0.875rem;
-            color: var(--text-secondary);
-        }
-
-        /* Footer */
-        footer {
-            padding: 2rem 0;
-            border-top: 1px solid var(--border);
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 0.875rem;
-            margin-top: 4rem;
-        }
-
-        .footer-logos {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
-        }
-
-        .footer-logo {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--text-secondary);
-            font-weight: 600;
-        }
-
-        .footer-logo i {
-            color: var(--primary-color);
-        }
-
-        /* Spinner */
-        .spinner {
-            width: 20px;
-            height: 20px;
-            border: 2px solid rgb(255 255 255 / 0.3);
-            border-top-color: white;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* Responsive */
-        @media (max-width: 640px) {
-            .form-container {
-                margin: 0 1rem;
-                padding: 1.5rem;
-            }
-            
-            .hero h1 {
-                font-size: 2rem;
-            }
-            
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-            
-            .teams {
-                flex-direction: column;
-                align-items: center;
-            }
-        }
+        footer { padding: 2rem 0; text-align: center; color: var(--text-muted); font-size: 0.875rem; margin-top: 2rem; border-top: 1px solid var(--border);}
+        .links-uteis a { color: var(--primary-light); text-decoration: none; margin: 0 10px; }
     </style>
 </head>
 <body>
@@ -506,239 +144,228 @@
     <header>
         <div class="container header-content">
             <a href="#" class="logo">
-                <div class="logo-icon">
-                    <i class="fas fa-person-running"></i>
-                </div>
+                <div class="logo-icon"><i class="fas fa-person-running"></i></div>
                 <span>CORRIDA AMICC RP</span>
             </a>
             <nav>
-                <a href="admin.html" class="btn btn-secondary btn-sm">
-                    <i class="fas fa-lock"></i> Admin
-                </a>
+                <a href="#inscricao" class="btn btn-sm">Inscreva-se</a>
+                <a href="admin.html" class="btn btn-secondary btn-sm"><i class="fas fa-lock"></i> Admin</a>
             </nav>
         </div>
     </header>
 
     <main class="container">
+        <!-- HERO E CONTADOR DE VAGAS -->
         <section class="hero">
-            <div class="hero-badge">
-                <i class="fas fa-heart"></i>
-                <span>Evento Beneficente • Inscrições Abertas</span>
-            </div>
-
+            <div class="hero-badge"><i class="fas fa-heart"></i><span>Evento Beneficente • Inscrições Abertas</span></div>
             <h1>CORRIDA AMICC RP</h1>
-            
-            <p>Participe desta corrida beneficente organizada por 3 equipes comprometidas com o esporte e solidariedade.</p>
+            <p>Participe desta corrida beneficente organizada em prol da saúde e solidariedade.</p>
 
-            <div class="teams">
-                <div class="team-badge">
-                    <i class="fas fa-trophy"></i>
-                    <span>DIGÃO</span>
-                </div>
-                <div class="team-badge">
-                    <i class="fas fa-trophy"></i>
-                    <span>LERUNNERS</span>
-                </div>
-                <div class="team-badge">
-                    <i class="fas fa-trophy"></i>
-                    <span>WOLF</span>
-                </div>
+            <div class="organizers-gallery">
+                <!-- Usando imagens genéricas como placeholder, substitua pelas suas na pasta /assets/ -->
+                <img src="./assets/logo-digao.png" alt="DIGÃO" class="organizer-logo" onerror="this.src='https://placehold.co/150x80/1e293b/f8fafc?text=DIGAO'">
+                <img src="./assets/logo-lerunners.png" alt="LERUNNERS" class="organizer-logo" onerror="this.src='https://placehold.co/150x80/1e293b/f8fafc?text=LERUNNERS'">
+                <img src="./assets/logo-wolf.png" alt="WOLF" class="organizer-logo" onerror="this.src='https://placehold.co/150x80/1e293b/f8fafc?text=WOLF'">
+                <img src="./assets/logo-amicc.png" alt="AMICC" class="organizer-logo" onerror="this.src='https://placehold.co/150x80/1e293b/f8fafc?text=AMICC'">
             </div>
 
+            <div class="progress-container">
+                <div class="progress-header">
+                    <span>Vagas Preenchidas</span>
+                    <span id="vagasText">Carregando...</span>
+                </div>
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" id="vagasBar"></div>
+                </div>
+                <small style="color: var(--text-muted); display: block; margin-top: 10px;">Corra e garanta sua vaga!</small>
+            </div>
+        </section>
+
+        <!-- SEÇÃO CAMISETAS -->
+        <section class="extra-section">
+            <h2 class="section-title"><i class="fas fa-tshirt"></i> Camisetas Oficiais</h2>
+            <div class="shirt-showcase">
+                <div style="text-align: center;">
+                    <img src="./assets/shirt-front.png" alt="Frente da Camiseta" class="shirt-img" onerror="this.src='https://placehold.co/300x400/1e293b/f8fafc?text=Frente+Camiseta'">
+                    <p style="margin-top: 10px;">Visão Frontal</p>
+                </div>
+                <div style="text-align: center;">
+                    <img src="./assets/shirt-back.png" alt="Verso da Camiseta" class="shirt-img" onerror="this.src='https://placehold.co/300x400/1e293b/f8fafc?text=Verso+Camiseta'">
+                    <p style="margin-top: 10px;">Visão Traseira</p>
+                </div>
+                <div style="max-width: 400px; margin-left: 2rem;">
+                    <h3>Tamanhos Disponíveis</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 1rem;">PP, P, M, G, GG, XG, XXG</p>
+                    <div style="background: var(--surface); padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--primary-color);">
+                        <h4 style="color: var(--primary-light); font-size: 1.5rem;">Apenas R$ <span id="displayPrecoCamiseta">--,--</span></h4>
+                        <p style="font-size: 0.875rem; color: var(--text-secondary);">Toda a renda é revertida para a AMICC.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FORMULÁRIO DE INSCRIÇÃO -->
+        <section id="inscricao" class="extra-section">
             <div class="form-container">
                 <div class="form-header">
                     <h2><i class="fas fa-clipboard-list"></i> Ficha de Inscrição</h2>
-                    <p>Preencha seus dados para participar do evento</p>
+                    <p>Preencha seus dados. Você pode optar por se inscrever gratuitamente ou adquirir a camiseta solidária.</p>
                 </div>
 
                 <form id="accessForm">
                     <div class="form-grid">
                         <div class="form-group">
-                            <label for="fullName">
-                                <i class="fas fa-user"></i> Nome Completo
-                            </label>
-                            <input 
-                                type="text" 
-                                id="fullName" 
-                                name="fullName" 
-                                placeholder="Digite seu nome completo"
-                                required
-                                autocomplete="name"
-                            >
+                            <label><i class="fas fa-user"></i> Nome Completo</label>
+                            <input type="text" name="fullName" required>
                         </div>
-
                         <div class="form-group">
-                            <label for="email">
-                                <i class="fas fa-envelope"></i> E-mail
-                            </label>
-                            <input 
-                                type="email" 
-                                id="email" 
-                                name="email" 
-                                placeholder="seu@email.com"
-                                required
-                                autocomplete="email"
-                            >
+                            <label><i class="fas fa-envelope"></i> E-mail</label>
+                            <input type="email" name="email" required>
                         </div>
-
-                        <div class="form-group">
-                            <label for="phone">
-                                <i class="fas fa-phone"></i> WhatsApp
-                            </label>
-                            <input 
-                                type="tel" 
-                                id="phone" 
-                                name="phone" 
-                                placeholder="(17) 99999-9999"
-                                required
-                                autocomplete="tel"
-                            >
-                            <small>Usaremos para enviar confirmação e informações</small>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label><i class="fas fa-phone"></i> WhatsApp</label>
+                                <input type="tel" id="phone" name="phone" placeholder="(17) 99999-9999" required>
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-phone-volume"></i> Contato Emergência</label>
+                                <input type="tel" id="emergencyContact" name="emergencyContact" placeholder="(17) 99999-9999" required>
+                            </div>
                         </div>
-
                         <div class="form-group">
-                            <label for="category">
-                                <i class="fas fa-flag-checkered"></i> Categoria
-                            </label>
-                            <select id="category" name="category" required>
-                                <option value="">Selecione sua categoria</option>
+                            <label><i class="fas fa-flag-checkered"></i> Categoria</label>
+                            <select name="category" required>
+                                <option value="">Selecione...</option>
                                 <option value="caminhada">Caminhada</option>
                                 <option value="5km">5 KM</option>
                                 <option value="10km">10 KM</option>
                                 <option value="15km">15 KM</option>
-                                <option value="21km">21 KM (Meia Maratona)</option>
+                                <option value="21km">21 KM</option>
                             </select>
                         </div>
 
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="shirtSize">
-                                    <i class="fas fa-tshirt"></i> Tamanho Camiseta
-                                </label>
-                                <select id="shirtSize" name="shirtSize" required>
-                                    <option value="">Selecione</option>
-                                    <option value="PP">PP</option>
-                                    <option value="P">P</option>
-                                    <option value="M">M</option>
-                                    <option value="G">G</option>
-                                    <option value="GG">GG</option>
-                                    <option value="XG">XG</option>
-                                    <option value="XXG">XXG</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="quantity">
-                                    <i class="fas fa-hashtag"></i> Quantidade Camisetas
-                                </label>
-                                <input 
-                                    type="number" 
-                                    id="quantity" 
-                                    name="quantity" 
-                                    placeholder="1"
-                                    min="1"
-                                    max="10"
-                                    value="1"
-                                    required
-                                >
+                        <!-- OPÇÃO DE CAMISETA (Gratuito x Pago) -->
+                        <div class="form-group">
+                            <label><i class="fas fa-gift"></i> Deseja adquirir a camiseta oficial?</label>
+                            <div class="radio-group">
+                                <div class="radio-option">
+                                    <input type="radio" name="querCamiseta" value="nao" id="camNao" checked>
+                                    <label for="camNao" class="radio-label">Não, Inscrição Gratuita</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" name="querCamiseta" value="sim" id="camSim">
+                                    <label for="camSim" class="radio-label">Sim, Quero Ajudar!</label>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="emergencyContact">
-                                <i class="fas fa-phone-volume"></i> Contato de Emergência
-                            </label>
-                            <input 
-                                type="tel" 
-                                id="emergencyContact" 
-                                name="emergencyContact" 
-                                placeholder="(17) 99999-9999"
-                                required
-                            >
-                            <small>Número de alguém para contato em caso de emergência</small>
+                        <!-- CAMPOS DA CAMISETA (Escondidos por padrão) -->
+                        <div id="shirtFields" class="shirt-selection" style="display: none;">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Tamanho</label>
+                                    <select id="shirtSize" name="shirtSize">
+                                        <option value="">Selecione</option>
+                                        <option value="PP">PP</option>
+                                        <option value="P">P</option>
+                                        <option value="M">M</option>
+                                        <option value="G">G</option>
+                                        <option value="GG">GG</option>
+                                        <option value="XG">XG</option>
+                                        <option value="XXG">XXG</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Quantidade</label>
+                                    <input type="number" id="quantity" name="quantity" min="1" max="10" value="1">
+                                </div>
+                            </div>
+                            <p style="margin-top: 10px; font-weight: bold; color: var(--primary-light);">
+                                Valor a pagar via PIX: R$ <span id="calcTotal">0,00</span>
+                            </p>
                         </div>
                     </div>
 
-                    <button type="submit" class="btn" id="submitBtn" style="margin-top: 1.5rem;">
-                        <span class="btn-text">
-                            <i class="fas fa-arrow-right"></i> Realizar Inscrição
-                        </span>
-                        <span class="btn-loading" style="display: none;">
-                            <div class="spinner"></div>
-                            Processando...
-                        </span>
+                    <button type="submit" class="btn" id="submitBtn" style="margin-top: 1.5rem; width: 100%;">
+                        <span class="btn-text">Finalizar Inscrição <i class="fas fa-arrow-right"></i></span>
+                        <span class="btn-loading" style="display: none;"><div class="spinner"></div> Processando...</span>
                     </button>
-
                     <div id="statusMessage" class="status-message"></div>
                 </form>
+            </div>
+        </section>
 
-                <div class="payment-info">
-                    <p><i class="fas fa-lock"></i> Inscrição sujeita a confirmação de pagamento</p>
-                    <p style="margin-bottom: 0.5rem;">Chave PIX para pagamento:</p>
-                    <!-- ⚠️ [ADMIN: Preencher com sua chave PIX] -->
-                    <div class="pix-key" id="pixKey">[CONFIGURAR CHAVE PIX NO ADMIN]</div>
-                    <p style="margin-top: 0.75rem; font-size: 0.75rem;">
-                        Após o pagamento, envie o comprovante para confirmação da inscrição.
-                    </p>
+        <!-- MAPA DO PERCURSO -->
+        <section class="extra-section">
+            <h2 class="section-title"><i class="fas fa-map-marked-alt"></i> Local e Percurso</h2>
+            <div style="text-align: center; max-width: 800px; margin: 0 auto;">
+                <p style="margin-bottom: 1rem; color: var(--text-secondary);">A largada acontecerá no Parque da Represa Municipal de São José do Rio Preto.</p>
+                <img src="./assets/mapa-percurso.png" alt="Mapa do Percurso" style="width: 100%; border-radius: var(--radius-lg); border: 2px solid var(--border);" onerror="this.src='https://placehold.co/800x400/1e293b/f8fafc?text=Mapa+do+Percurso+Aqui'">
+            </div>
+        </section>
+
+        <!-- DEPOIMENTOS / PROVA SOCIAL -->
+        <section class="extra-section" style="background: var(--surface-elevated);">
+            <div class="container">
+                <h2 class="section-title"><i class="fas fa-comments"></i> O que dizem os participantes</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; max-width: 1000px; margin: 0 auto;">
+                    <div style="background: var(--surface); padding: 1.5rem; border-radius: var(--radius-lg); border: 1px solid var(--border);">
+                        <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 1rem;">
+                            <img src="./assets/photos/depoimento1.jpg" alt="Participante" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;" onerror="this.src='https://placehold.co/50x50/f97316/fff?text=M'">
+                            <div>
+                                <h4 style="color: var(--text-primary); margin: 0;">Maria Silva</h4>
+                                <small style="color: var(--primary-light);">Edição Anterior</small>
+                            </div>
+                        </div>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem;">"A energia dessa corrida é incrível! Saber que estamos ajudando a AMICC e ainda cuidando da saúde não tem preço. Organização nota 10!"</p>
+                    </div>
+                    <div style="background: var(--surface); padding: 1.5rem; border-radius: var(--radius-lg); border: 1px solid var(--border);">
+                        <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 1rem;">
+                            <img src="./assets/photos/depoimento2.jpg" alt="Participante" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;" onerror="this.src='https://placehold.co/50x50/22c55e/fff?text=J'">
+                            <div>
+                                <h4 style="color: var(--text-primary); margin: 0;">João Pedro</h4>
+                                <small style="color: var(--primary-light);">Equipe LERUNNERS</small>
+                            </div>
+                        </div>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem;">"Percurso muito bem sinalizado e uma vibe espetacular. A camiseta é de altíssima qualidade. Com certeza estarei presente novamente este ano."</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Features -->
-        <section class="features">
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-medal"></i>
-                </div>
-                <h3>Medalha Exclusiva</h3>
-                <p>Todos os participantes recebem medalha de conclusão da corrida beneficente.</p>
+        <!-- FAQ -->
+        <section class="extra-section" style="max-width: 800px; margin: 0 auto;">
+            <h2 class="section-title"><i class="fas fa-question-circle"></i> Dúvidas Frequentes</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">Quando e onde será a entrega dos kits? <i class="fas fa-chevron-down"></i></div>
+                <div class="faq-answer">A entrega dos kits (camisetas) será realizada no sábado que antecede a prova, na sede da AMICC.</div>
             </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-tshirt"></i>
-                </div>
-                <h3>Camiseta Oficial</h3>
-                <p>Camiseta técnica exclusiva do evento com design das 3 equipes organizadoras.</p>
+            <div class="faq-item">
+                <div class="faq-question">Posso me inscrever apenas para caminhar? <i class="fas fa-chevron-down"></i></div>
+                <div class="faq-answer">Sim! Temos a categoria específica para Caminhada. O importante é participar e ajudar.</div>
             </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-hand-holding-heart"></i>
-                </div>
-                <h3>Causa Beneficente</h3>
-                <p>Toda renda arrecadada será destinada à AMICC Rio Preto.</p>
+            <div class="faq-item">
+                <div class="faq-question">Como funciona a inscrição gratuita? <i class="fas fa-chevron-down"></i></div>
+                <div class="faq-answer">Você pode participar do evento sem custo algum. A compra da camiseta é opcional e serve para arrecadar fundos para a instituição.</div>
             </div>
         </section>
     </main>
 
     <footer>
         <div class="container">
-            <div class="footer-logos">
-                <div class="footer-logo">
-                    <i class="fas fa-trophy"></i>
-                    <span>DIGÃO</span>
-                </div>
-                <div class="footer-logo">
-                    <i class="fas fa-trophy"></i>
-                    <span>LERUNNERS</span>
-                </div>
-                <div class="footer-logo">
-                    <i class="fas fa-trophy"></i>
-                    <span>WOLF</span>
-                </div>
+            <div class="links-uteis" style="margin-bottom: 1.5rem;">
+                <a href="regulamento.html"><i class="fas fa-file-contract"></i> Ler Regulamento</a>
             </div>
             <p>&copy; 2026 Corrida AMICC Rio Preto. Todos os direitos reservados.</p>
-            <p style="margin-top: 0.5rem;">Evento Beneficente • Organização: DIGÃO / LERUNNERS / WOLF</p>
         </div>
     </footer>
 
     <!-- Firebase SDK -->
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
-        import { getFirestore, collection, addDoc, serverTimestamp, query, where, getDocs } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+        import { getFirestore, collection, addDoc, serverTimestamp, query, where, getDocs, doc, getDoc } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
 
-        // Configurações do Firebase
         const firebaseConfig = {
             apiKey: "AIzaSyDJWWNufLuBg0GSLdhvHENWwrCFSHB9Vrc",
             authDomain: "amicc-3185b.firebaseapp.com",
@@ -751,144 +378,146 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // Elementos
+        // VARIÁVEIS DO EVENTO (Carregadas do Admin)
+        let precoCamiseta = 50.00; // Valor padrão
+        let limiteVagas = 500; // Valor padrão
+
+        // Elementos UI
         const form = document.getElementById('accessForm');
         const submitBtn = document.getElementById('submitBtn');
-        const btnText = submitBtn.querySelector('.btn-text');
-        const btnLoading = submitBtn.querySelector('.btn-loading');
         const statusMessage = document.getElementById('statusMessage');
-        const phoneInput = document.getElementById('phone');
-        const emergencyInput = document.getElementById('emergencyContact');
+        const radioNao = document.getElementById('camNao');
+        const radioSim = document.getElementById('camSim');
+        const shirtFields = document.getElementById('shirtFields');
+        const inputQtd = document.getElementById('quantity');
+        const calcTotalSpan = document.getElementById('calcTotal');
+        const displayPrecoCamiseta = document.getElementById('displayPrecoCamiseta');
 
-        // Máscara de telefone
+        // LÓGICA: Exibir/Ocultar campos da camiseta
+        // Explicação: Adicionamos um ouvinte (listener) nos botões de rádio para detectar a escolha do usuário
+        radioNao.addEventListener('change', () => {
+            shirtFields.style.display = 'none';
+            document.getElementById('shirtSize').removeAttribute('required');
+        });
+
+        radioSim.addEventListener('change', () => {
+            shirtFields.style.display = 'block';
+            document.getElementById('shirtSize').setAttribute('required', 'true');
+            atualizarTotal();
+        });
+
+        // Atualizar preço total na tela
+        inputQtd.addEventListener('input', atualizarTotal);
+
+        function atualizarTotal() {
+            const qtd = parseInt(inputQtd.value) || 1;
+            const total = qtd * precoCamiseta;
+            calcTotalSpan.textContent = total.toFixed(2).replace('.', ',');
+        }
+
+        // LÓGICA: Sanfona do FAQ (Accordion)
+        document.querySelectorAll('.faq-question').forEach(item => {
+            item.addEventListener('click', () => {
+                const parent = item.parentElement;
+                parent.classList.toggle('active');
+            });
+        });
+
+        // MÁSCARA DE TELEFONE
         function applyPhoneMask(value) {
             let digits = value.replace(/\D/g, '');
             if (digits.length > 11) digits = digits.slice(0, 11);
-            if (digits.length > 10) {
-                digits = digits.replace(/^(\d{2})(\d{5})(\d{4}).*/, '($1) $2-$3');
-            } else if (digits.length > 5) {
-                digits = digits.replace(/^(\d{2})(\d{4})(\d{0,4}).*/, '($1) $2-$3');
-            } else if (digits.length > 2) {
-                digits = digits.replace(/^(\d{2})(\d{0,5}).*/, '($1) $2');
-            } else if (digits.length > 0) {
-                digits = digits.replace(/^(\d{0,2}).*/, '($1');
-            }
+            if (digits.length > 10) return digits.replace(/^(\d{2})(\d{5})(\d{4}).*/, '($1) $2-$3');
+            if (digits.length > 5) return digits.replace(/^(\d{2})(\d{4})(\d{0,4}).*/, '($1) $2-$3');
+            if (digits.length > 2) return digits.replace(/^(\d{2})(\d{0,5}).*/, '($1) $2');
+            if (digits.length > 0) return digits.replace(/^(\d{0,2}).*/, '($1');
             return digits;
         }
+        document.getElementById('phone').addEventListener('input', e => e.target.value = applyPhoneMask(e.target.value));
+        document.getElementById('emergencyContact').addEventListener('input', e => e.target.value = applyPhoneMask(e.target.value));
 
-        phoneInput.addEventListener('input', (e) => {
-            e.target.value = applyPhoneMask(e.target.value);
-        });
+        // CARREGAR CONFIGURAÇÕES INICIAIS (Preço, Vagas)
+        async function carregarDadosEvento() {
+            try {
+                // Pega as configurações gerais
+                const settingsRef = doc(db, 'settings', 'event');
+                const settingsDoc = await getDoc(settingsRef);
+                if (settingsDoc.exists()) {
+                    const data = settingsDoc.data();
+                    if(data.precoCamiseta) precoCamiseta = parseFloat(data.precoCamiseta);
+                    if(data.limiteVagas) limiteVagas = parseInt(data.limiteVagas);
+                }
+                displayPrecoCamiseta.textContent = precoCamiseta.toFixed(2).replace('.', ',');
 
-        emergencyInput.addEventListener('input', (e) => {
-            e.target.value = applyPhoneMask(e.target.value);
-        });
+                // Conta quantos inscritos já existem
+                const usersRef = collection(db, 'users');
+                const usersSnapshot = await getDocs(usersRef);
+                const totalInscritos = usersSnapshot.size;
 
-        // Status messages
-        function showStatus(message, type) {
-            statusMessage.className = `status-message ${type}`;
-            statusMessage.innerHTML = type === 'processing' 
-                ? `<div class="spinner"></div> ${message}`
-                : `<i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i> ${message}`;
-            statusMessage.style.display = 'flex';
+                // Atualiza barra de progresso
+                const porcentagem = Math.min((totalInscritos / limiteVagas) * 100, 100);
+                document.getElementById('vagasBar').style.width = porcentagem + '%';
+                document.getElementById('vagasText').innerHTML = `<b>${totalInscritos}</b> de ${limiteVagas}`;
+
+            } catch (error) {
+                console.error('Erro ao carregar dados:', error);
+            }
         }
+        carregarDadosEvento();
 
-        function hideStatus() {
-            statusMessage.style.display = 'none';
-        }
-
-        // Verificar duplicidade
-        async function checkDuplicate(email, phone) {
-            const usersRef = collection(db, 'users');
-            const emailQuery = query(usersRef, where('email', '==', email.toLowerCase().trim()));
-            const phoneQuery = query(usersRef, where('phone', '==', phone.replace(/\D/g, '')));
-            
-            const [emailSnap, phoneSnap] = await Promise.all([
-                getDocs(emailQuery),
-                getDocs(phoneQuery)
-            ]);
-
-            if (!emailSnap.empty) return 'email';
-            if (!phoneSnap.empty) return 'phone';
-            return null;
-        }
-
-        // Submit
+        // VALIDAÇÃO E ENVIO (Submit)
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
-            hideStatus();
-
             const formData = new FormData(form);
+            const querCamiseta = formData.get('querCamiseta') === 'sim';
+            const qtd = parseInt(formData.get('quantity')) || 1;
+            const valorTotal = querCamiseta ? (qtd * precoCamiseta) : 0;
+
             const data = {
                 fullName: formData.get('fullName').trim(),
                 email: formData.get('email').toLowerCase().trim(),
                 phone: formData.get('phone').replace(/\D/g, ''),
                 category: formData.get('category'),
-                shirtSize: formData.get('shirtSize'),
-                quantity: parseInt(formData.get('quantity')) || 1,
                 emergencyContact: formData.get('emergencyContact').replace(/\D/g, ''),
-                status: 'pending',
-                paymentStatus: 'pending',
+                
+                // Novos campos
+                hasShirt: querCamiseta,
+                shirtSize: querCamiseta ? formData.get('shirtSize') : null,
+                quantity: querCamiseta ? qtd : 0,
+                totalAmount: valorTotal,
+                paymentStatus: querCamiseta ? 'pendente' : 'gratuito', // Gratuito se não comprou nada
+                
+                status: 'approved', // Podemos aprovar a inscrição na corrida automaticamente
                 createdAt: serverTimestamp()
             };
 
-            // Validações
-            if (data.fullName.length < 3) {
-                showStatus('Por favor, digite seu nome completo.', 'error');
-                return;
-            }
-
-            if (!data.email.includes('@')) {
-                showStatus('Por favor, digite um e-mail válido.', 'error');
-                return;
-            }
-
-            if (data.phone.length < 10) {
-                showStatus('Por favor, digite um WhatsApp válido.', 'error');
-                return;
-            }
-
-            // UI Loading
             submitBtn.disabled = true;
-            btnText.style.display = 'none';
-            btnLoading.style.display = 'flex';
+            document.querySelector('.btn-text').style.display = 'none';
+            document.querySelector('.btn-loading').style.display = 'flex';
 
             try {
-                const duplicate = await checkDuplicate(data.email, data.phone);
-                if (duplicate === 'email') {
-                    showStatus('Este e-mail já está cadastrado.', 'error');
-                    resetForm();
-                    return;
-                }
-                if (duplicate === 'phone') {
-                    showStatus('Este WhatsApp já está cadastrado.', 'error');
-                    resetForm();
-                    return;
-                }
+                // Validação de Duplicidade (Email ou Telefone)
+                const usersRef = collection(db, 'users');
+                const qEmail = query(usersRef, where('email', '==', data.email));
+                const snapEmail = await getDocs(qEmail);
+                if (!snapEmail.empty) throw new Error('Este e-mail já está cadastrado.');
 
-                await addDoc(collection(db, 'users'), data);
+                // Salva no Firestore e pega a referência (ID do documento)
+                const docRef = await addDoc(collection(db, 'users'), data);
 
-                showStatus('✅ Inscrição enviada! Em breve você receberá as instruções de pagamento.', 'success');
-                form.reset();
+                // Redireciona de forma profissional, enviando o ID para carregar os dados reais
+                window.location.href = `confirmacao.html?id=${docRef.id}`;
 
             } catch (error) {
-                console.error('Erro:', error);
-                showStatus('❌ Erro ao processar inscrição. Tente novamente.', 'error');
-            } finally {
-                resetForm();
+                statusMessage.className = 'status-message error';
+                statusMessage.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${error.message || 'Erro ao salvar. Tente novamente.'}`;
+                statusMessage.style.display = 'flex';
+                
+                submitBtn.disabled = false;
+                document.querySelector('.btn-text').style.display = 'flex';
+                document.querySelector('.btn-loading').style.display = 'none';
             }
         });
-
-        function resetForm() {
-            setTimeout(() => {
-                submitBtn.disabled = false;
-                btnText.style.display = 'flex';
-                btnLoading.style.display = 'none';
-                hideStatus();
-            }, 4000);
-        }
-
-        window.db = db;
     </script>
 </body>
 </html>
