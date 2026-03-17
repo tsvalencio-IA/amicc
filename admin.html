@@ -3,490 +3,476 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin - Corrida AMICC RP</title>
+    <title>Corrida da AMICC Rio Preto - Inscrição Oficial</title>
     
+    <!-- Favicon -->
     <link rel="icon" type="image/png" href="./assets/favicon.png">
+    
+    <!-- Fontes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Ícones -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Bibliotecas de Exportação e Gráficos -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
     <style>
-        /* Variáveis Globais Mantidas */
         :root {
-            --primary-color: #f97316; --primary-dark: #ea580c; --primary-light: #fdba74;
-            --secondary-color: #22c55e; --background: #0f172a; --surface: #1e293b;
-            --surface-elevated: #334155; --text-primary: #f8fafc; --text-secondary: #94a3b8;
-            --text-muted: #64748b; --border: #334155; --success: #22c55e; --error: #ef4444;
-            --warning: #f59e0b; --font-main: 'Inter', system-ui, sans-serif;
-            --radius-md: 0.5rem; --radius-lg: 0.75rem;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: var(--font-main); background: var(--background); color: var(--text-primary); min-height: 100vh; }
-
-        /* LOGIN (Ocultado se logado) */
-        .login-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--background); z-index: 1000; display: flex; align-items: center; justify-content: center; }
-        .login-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 2rem; width: 100%; max-width: 400px; }
-        .form-group label { display: block; font-size: 0.875rem; font-weight: 500; color: var(--text-secondary); margin-bottom: 0.5rem; }
-        .form-group input, .form-group select { width: 100%; padding: 0.75rem; background: var(--background); border: 1px solid var(--border); border-radius: var(--radius-md); color: var(--text-primary); margin-bottom: 1rem; }
-        .btn { width: 100%; padding: 0.75rem; background: linear-gradient(135deg, var(--primary-color), var(--primary-dark)); color: white; border: none; border-radius: var(--radius-md); font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
-        .btn-secondary { background: var(--surface-elevated); border: 1px solid var(--border); width: auto; }
-        
-        /* LAYOUT DASHBOARD */
-        .dashboard { display: none; }
-        .dashboard.active { display: block; }
-        .admin-header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
-        
-        /* NAVEGAÇÃO INTERNA (Abas) */
-        .admin-tabs { display: flex; gap: 1rem; padding: 1rem 1.5rem; border-bottom: 1px solid var(--border); background: var(--background); }
-        .tab-btn { background: none; border: none; color: var(--text-secondary); padding: 0.5rem 1rem; cursor: pointer; font-weight: 600; border-bottom: 2px solid transparent; }
-        .tab-btn.active { color: var(--primary-color); border-bottom-color: var(--primary-color); }
-        .tab-content { display: none; padding: 1.5rem; }
-        .tab-content.active { display: block; }
-
-        /* GRIDS & CARDS */
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
-        .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.25rem; }
-        .stat-card-value { font-size: 1.75rem; font-weight: 700; margin-top: 0.5rem; }
-
-        .charts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
-        .chart-container { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1rem; position: relative; height: 300px; }
-
-        /* TABELA */
-        .data-table { width: 100%; border-collapse: collapse; background: var(--surface); font-size: 0.875rem; }
-        .data-table th, .data-table td { padding: 1rem; text-align: left; border-bottom: 1px solid var(--border); }
-        .badge { padding: 0.25rem 0.5rem; border-radius: var(--radius-md); font-size: 0.75rem; }
-        .badge.pago { background: rgb(34 197 94 / 0.1); color: var(--success); }
-        .badge.pendente { background: rgb(245 158 11 / 0.1); color: var(--warning); }
-        .badge.gratuito { background: rgb(14 165 233 / 0.1); color: #38bdf8; }
-
-        .settings-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.5rem; max-width: 600px; margin-bottom: 1.5rem; }
-    </style>
-</head>
-<body>
-    <!-- Login Screen -->
-    <div class="login-overlay" id="loginOverlay">
-        <div class="login-card">
-            <h2 style="text-align: center; margin-bottom: 1rem;"><i class="fas fa-lock"></i> Acesso Restrito</h2>
-            <form id="loginForm">
-                <div class="form-group">
-                    <label>E-mail</label>
-                    <input type="email" id="adminEmail" required>
-                </div>
-                <div class="form-group">
-                    <label>Senha</label>
-                    <input type="password" id="adminPassword" required>
-                </div>
-                <button type="submit" class="btn" id="loginBtn">Entrar</button>
-            </form>
-        </div>
-    </div>
-
-    <!-- Dashboard -->
-    <div class="dashboard" id="dashboard">
-        <header class="admin-header">
-            <h1><i class="fas fa-chart-pie" style="color: var(--primary-color);"></i> Painel de Controle</h1>
-            <div style="display: flex; gap: 0.5rem;">
-                <button class="btn btn-secondary" onclick="loadUsers()"><i class="fas fa-sync"></i> Atualizar</button>
-                <button class="btn btn-secondary" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Sair</button>
-            </div>
-        </header>
-
-        <!-- Navegação -->
-        <div class="admin-tabs">
-            <button class="tab-btn active" onclick="openTab('visaoGeral')">Visão Geral & Gráficos</button>
-            <button class="tab-btn" onclick="openTab('inscritos')">Lista de Inscritos</button>
-            <button class="tab-btn" onclick="openTab('configuracoes')">Configurações</button>
-            <button class="tab-btn" onclick="openTab('gestaoConteudo')">Gestão de Conteúdo</button>
-        </div>
-
-        <!-- ABA 1: Visão Geral -->
-        <div id="visaoGeral" class="tab-content active">
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div style="color: var(--text-secondary);">Total de Inscritos</div>
-                    <div class="stat-card-value" id="statTotal">0</div>
-                </div>
-                <div class="stat-card">
-                    <div style="color: var(--secondary-color);">Inscrições com Camiseta</div>
-                    <div class="stat-card-value" id="statComCamiseta">0</div>
-                </div>
-                <div class="stat-card">
-                    <div style="color: #38bdf8;">Inscrições Gratuitas</div>
-                    <div class="stat-card-value" id="statGratuitos">0</div>
-                </div>
-                <div class="stat-card">
-                    <div style="color: var(--warning);">Pagamentos Pendentes</div>
-                    <div class="stat-card-value" id="statPendentes">0</div>
-                </div>
-            </div>
-
-            <!-- Gráficos -->
-            <div class="charts-grid">
-                <div class="chart-container">
-                    <canvas id="categoriaChart"></canvas>
-                </div>
-                <div class="chart-container">
-                    <canvas id="tamanhosChart"></canvas>
-                </div>
-            </div>
-        </div>
-
-        <!-- ABA 2: Lista de Inscritos -->
-        <div id="inscritos" class="tab-content">
-            <div style="display: flex; gap: 1rem; margin-bottom: 1rem; align-items: center; flex-wrap: wrap;">
-                <input type="text" id="searchInput" placeholder="Buscar nome ou email..." style="padding: 0.5rem; border-radius: var(--radius-md); border: 1px solid var(--border); background: var(--surface); color: white; width: 300px;">
-                <select id="filtroPagamento" style="padding: 0.5rem; border-radius: var(--radius-md); border: 1px solid var(--border); background: var(--surface); color: white;">
-                    <option value="all">Todos Pagamentos</option>
-                    <option value="pago">Apenas Pagos</option>
-                    <option value="pendente">Apenas Pendentes</option>
-                    <option value="gratuito">Apenas Gratuitos</option>
-                </select>
-                <button class="btn" style="width: auto;" onclick="exportarExcel()"><i class="fas fa-file-excel"></i> Exportar Geral</button>
-                <button class="btn btn-secondary" style="width: auto;" onclick="exportarCamisetas()"><i class="fas fa-tshirt"></i> Relatório Produção (Camisetas)</button>
-            </div>
-
-            <div style="overflow-x: auto; background: var(--surface); border-radius: var(--radius-lg); border: 1px solid var(--border);">
-                <table class="data-table">
-                    <thead>
-                        <tr>
-                            <th>Nome</th>
-                            <th>Contato</th>
-                            <th>Categoria</th>
-                            <th>Camiseta</th>
-                            <th>Total (R$)</th>
-                            <th>Pagamento</th>
-                            <th>Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tableBody">
-                        <!-- Gerado pelo JS -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- ABA 3: Configurações -->
-        <div id="configuracoes" class="tab-content">
-            <div class="settings-card">
-                <h3><i class="fas fa-cog"></i> Configurações do Evento</h3>
-                <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 1rem;">Estes dados atualizam a página principal automaticamente.</p>
-                
-                <div class="form-group">
-                    <label>Limite Total de Vagas</label>
-                    <input type="number" id="confVagas" placeholder="Ex: 500">
-                </div>
-                <div class="form-group">
-                    <label>Preço da Camiseta (R$)</label>
-                    <input type="number" step="0.01" id="confPreco" placeholder="Ex: 50.00">
-                </div>
-                <div class="form-group">
-                    <label>Sua Chave PIX (Para Recebimentos)</label>
-                    <input type="text" id="confPix" placeholder="Chave celular, CPF ou email">
-                </div>
-                
-                <button class="btn" onclick="salvarConfiguracoes()"><i class="fas fa-save"></i> Salvar Configurações</button>
-            </div>
-        </div>
-
-        <!-- ABA 4: Gestão de Conteúdo -->
-        <div id="gestaoConteudo" class="tab-content">
-            <div class="settings-card" style="max-width: 800px;">
-                <h3><i class="fas fa-edit"></i> Editar Conteúdos e Uploads</h3>
-                <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 1.5rem;">Os arquivos e textos alterados aqui serão hospedados no Firebase Storage e refletirão no site.</p>
-                
-                <div class="form-group">
-                    <label>Informação Adicional do Evento</label>
-                    <input type="text" id="contHero" placeholder="Ex: Prepare-se para o maior evento beneficente do ano!">
-                </div>
-                
-                <hr style="border: none; border-top: 1px solid var(--border); margin: 1.5rem 0;">
-                
-                <h4>Upload de Arquivos</h4>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem;">
-                    <div class="form-group">
-                        <label>Substituir Mapa do Percurso</label>
-                        <input type="file" id="uploadMapa" accept="image/*" style="padding: 0.5rem;">
-                        <button class="btn btn-secondary btn-sm" onclick="fazerUpload('uploadMapa', 'mapa-percurso.png')"><i class="fas fa-upload"></i> Subir Mapa</button>
-                    </div>
-                    <div class="form-group">
-                        <label>Substituir Imagem Camiseta (Frente)</label>
-                        <input type="file" id="uploadCamiseta" accept="image/*" style="padding: 0.5rem;">
-                        <button class="btn btn-secondary btn-sm" onclick="fazerUpload('uploadCamiseta', 'shirt-front.png')"><i class="fas fa-upload"></i> Subir Camiseta</button>
-                    </div>
-                </div>
-
-                <div id="uploadStatus" class="status-message" style="display:none; margin-top: 1rem; padding: 1rem; background: var(--surface-elevated); border-radius: var(--radius-md);"></div>
-
-                <hr style="border: none; border-top: 1px solid var(--border); margin: 1.5rem 0;">
-                <button class="btn" onclick="salvarConteudo()"><i class="fas fa-save"></i> Salvar Textos</button>
-            </div>
-        </div>
-
-    </div>
-
-    <script type="module">
-        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
-        import { getFirestore, collection, getDocs, doc, updateDoc, query, orderBy, getDoc, setDoc } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
-        import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
-        import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js';
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyDJWWNufLuBg0GSLdhvHENWwrCFSHB9Vrc",
-            authDomain: "amicc-3185b.firebaseapp.com",
-            projectId: "amicc-3185b",
-            storageBucket: "amicc-3185b.firebasestorage.app",
-            messagingSenderId: "648176195292",
-            appId: "1:648176195292:web:9a85e16e79e17d3a488619"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-        const auth = getAuth(app);
-        const storage = getStorage(app);
-
-        let allUsers = [];
-        let chartCategoria, chartTamanhos;
-
-        // Autenticação
-        onAuthStateChanged(auth, (user) => {
-            if (user && user.email === "thiagoventuravalencio@gmail.com") {
-                document.getElementById('loginOverlay').style.display = 'none';
-                document.getElementById('dashboard').classList.add('active');
-                carregarConfiguracoes();
-                window.loadUsers();
-            } else {
-                document.getElementById('loginOverlay').style.display = 'flex';
-                document.getElementById('dashboard').classList.remove('active');
-            }
-        });
-
-        document.getElementById('loginForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const email = document.getElementById('adminEmail').value;
-            const pass = document.getElementById('adminPassword').value;
-            try { await signInWithEmailAndPassword(auth, email, pass); } 
-            catch (error) { alert('Falha no login. Verifique as credenciais.'); }
-        });
-
-        document.getElementById('logoutBtn').addEventListener('click', () => signOut(auth));
-
-        // Controle de Abas
-        window.openTab = function(tabId) {
-            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById(tabId).classList.add('active');
-            event.currentTarget.classList.add('active');
-        };
-
-        // CARREGAR USUÁRIOS E GERAR GRÁFICOS
-        window.loadUsers = async function() {
-            try {
-                const q = query(collection(db, 'users'), orderBy('createdAt', 'desc'));
-                const snapshot = await getDocs(q);
-                allUsers = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
-                
-                atualizarCards();
-                renderTable(allUsers);
-                desenharGraficos();
-            } catch (error) {
-                console.error(error);
-                alert("Erro ao carregar dados.");
-            }
-        };
-
-        function atualizarCards() {
-            document.getElementById('statTotal').innerText = allUsers.length;
-            document.getElementById('statComCamiseta').innerText = allUsers.filter(u => u.hasShirt).length;
-            document.getElementById('statGratuitos').innerText = allUsers.filter(u => !u.hasShirt).length;
-            document.getElementById('statPendentes').innerText = allUsers.filter(u => u.paymentStatus === 'pendente').length;
-        }
-
-        function renderTable(users) {
-            const tbody = document.getElementById('tableBody');
-            tbody.innerHTML = '';
-            users.forEach(u => {
-                let badgeClass = u.paymentStatus === 'pago' ? 'pago' : (u.paymentStatus === 'gratuito' ? 'gratuito' : 'pendente');
-                let infoCamiseta = u.hasShirt ? `${u.shirtSize} (${u.quantity}x)` : 'Sem Camiseta';
-                
-                // Dropdown para mudar status de pagamento
-                let selectStatus = `<select onchange="mudarStatusPagamento('${u.id}', this.value)" style="padding:4px; border-radius:4px; background:var(--background); color:white; border:1px solid var(--border);">
-                    <option value="pendente" ${u.paymentStatus === 'pendente' ? 'selected' : ''}>Pendente</option>
-                    <option value="pago" ${u.paymentStatus === 'pago' ? 'selected' : ''}>Pago</option>
-                    <option value="gratuito" ${u.paymentStatus === 'gratuito' ? 'selected' : ''}>Gratuito</option>
-                </select>`;
-
-                // NOVO: Link para exibir o comprovante enviado pelo usuário
-                let linkComprovante = u.receiptUrl 
-                    ? `<a href="${u.receiptUrl}" target="_blank" style="color: var(--secondary-color); font-size: 0.8rem; display: block; margin-top: 5px;"><i class="fas fa-receipt"></i> Ver Comprovante</a>`
-                    : `<span style="color: var(--text-muted); font-size: 0.8rem; display: block; margin-top: 5px;">Sem anexo</span>`;
-
-                tbody.innerHTML += `
-                    <tr>
-                        <td><strong>${u.fullName}</strong><br><small style="color:var(--text-muted)">${u.email}</small></td>
-                        <td>${u.phone}</td>
-                        <td>${u.category}</td>
-                        <td>${infoCamiseta}</td>
-                        <td>R$ ${u.totalAmount || 0} ${linkComprovante}</td>
-                        <td><span class="badge ${badgeClass}">${u.paymentStatus.toUpperCase()}</span></td>
-                        <td>${selectStatus}</td>
-                    </tr>
-                `;
-            });
-        }
-
-        // Função para atualizar Status no Firebase
-        window.mudarStatusPagamento = async function(id, novoStatus) {
-            try {
-                await updateDoc(doc(db, 'users', id), { paymentStatus: novoStatus });
-                window.loadUsers(); // Recarrega para atualizar interface
-            } catch(e) { alert("Erro ao atualizar."); }
-        }
-
-        // Filtro em Memória
-        document.getElementById('searchInput').addEventListener('input', filtrarLista);
-        document.getElementById('filtroPagamento').addEventListener('change', filtrarLista);
-
-        function filtrarLista() {
-            const termo = document.getElementById('searchInput').value.toLowerCase();
-            const status = document.getElementById('filtroPagamento').value;
+            /* Cores da Corrida */
+            --primary-color: #f97316;        /* Laranja - Energia */
+            --primary-dark: #ea580c;
+            --primary-light: #fdba74;
+            --secondary-color: #22c55e;      /* Verde - Saúde */
+            --accent-color: #eab308;         /* Amarelo - Destaque */
             
-            const filtrados = allUsers.filter(u => {
-                const matchNome = u.fullName.toLowerCase().includes(termo) || u.email.toLowerCase().includes(termo);
-                const matchStatus = status === 'all' ? true : u.paymentStatus === status;
-                return matchNome && matchStatus;
-            });
-            renderTable(filtrados);
-        }
-
-        // Explicação: O Chart.js precisa de um elemento Canvas e um objeto de configuração
-        function desenharGraficos() {
-            // Contagem Categoria
-            const catCount = {};
-            allUsers.forEach(u => { catCount[u.category] = (catCount[u.category] || 0) + 1; });
+            /* Fundo */
+            --background: #0f172a;
+            --surface: #1e293b;
+            --surface-elevated: #334155;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --border: #334155;
+            --success: #22c55e;
+            --error: #ef4444;
+            --warning: #f59e0b;
             
-            if(chartCategoria) chartCategoria.destroy(); // destroi o antigo para não bugar
-            chartCategoria = new Chart(document.getElementById('categoriaChart'), {
-                type: 'pie',
-                data: {
-                    labels: Object.keys(catCount),
-                    datasets: [{ data: Object.values(catCount), backgroundColor: ['#f97316', '#22c55e', '#eab308', '#38bdf8', '#a855f7'] }]
-                },
-                options: { plugins: { title: { display: true, text: 'Inscritos por Categoria', color: 'white' } } }
-            });
-
-            // Contagem Tamanho Camiseta
-            const tamCount = { 'PP':0, 'P':0, 'M':0, 'G':0, 'GG':0, 'XG':0, 'XXG':0 };
-            allUsers.filter(u=>u.hasShirt).forEach(u => { tamCount[u.shirtSize] += u.quantity; });
-
-            if(chartTamanhos) chartTamanhos.destroy();
-            chartTamanhos = new Chart(document.getElementById('tamanhosChart'), {
-                type: 'bar',
-                data: {
-                    labels: Object.keys(tamCount),
-                    datasets: [{ label: 'Qtd Camisetas', data: Object.values(tamCount), backgroundColor: '#f97316' }]
-                },
-                options: { plugins: { title: { display: true, text: 'Demanda de Camisetas (Tamanhos)', color: 'white' } }, scales: { y: { ticks: { color:'white' } }, x: { ticks: {color:'white'} } } }
-            });
+            --font-main: 'Inter', system-ui, sans-serif;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+            --radius-full: 9999px;
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+            --shadow-glow: 0 0 40px rgb(249 115 22 / 0.3);
         }
 
-        // Exportar para Excel (Usando biblioteca XLSX)
-        window.exportarExcel = function() {
-            const data = allUsers.map(u => ({
-                Nome: u.fullName, Email: u.email, Telefone: u.phone, 
-                Categoria: u.category, QuerCamiseta: u.hasShirt ? 'Sim' : 'Não',
-                Tamanho: u.shirtSize || '-', Quantidade: u.quantity || 0,
-                ValorCobrado: u.totalAmount, StatusPagamento: u.paymentStatus
-            }));
-            const ws = XLSX.utils.json_to_sheet(data);
-            const wb = XLSX.utils.book_new();
-            XLSX.utils.book_append_sheet(wb, ws, "Inscritos");
-            XLSX.writeFile(wb, "Relatorio_Corrida_AMICC.xlsx");
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        // NOVO: Exportar Apenas Resumo de Camisetas para Produção
-        window.exportarCamisetas = function() {
-            const camisetas = allUsers.filter(u => u.hasShirt);
-            if (camisetas.length === 0) return alert("Nenhuma camiseta solicitada ainda.");
-            
-            const resumo = {};
-            camisetas.forEach(u => {
-                resumo[u.shirtSize] = (resumo[u.shirtSize] || 0) + u.quantity;
-            });
-
-            const data = Object.keys(resumo).map(tamanho => ({ 'Tamanho': tamanho, 'Total a Produzir': resumo[tamanho] }));
-            const ws = XLSX.utils.json_to_sheet(data);
-            const wb = XLSX.utils.book_new();
-            XLSX.utils.book_append_sheet(wb, ws, "Producao");
-            XLSX.writeFile(wb, "Relatorio_Camisetas_AMICC.xlsx");
+        body {
+            font-family: var(--font-main);
+            background: var(--background);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
         }
 
-        // CARREGAR E SALVAR CONFIGURAÇÕES GERAIS
-        async function carregarConfiguracoes() {
-            const docRef = doc(db, 'settings', 'event');
-            const docSnap = await getDoc(docRef);
-            if (docSnap.exists()) {
-                const data = docSnap.data();
-                document.getElementById('confVagas').value = data.limiteVagas || 500;
-                document.getElementById('confPreco').value = data.precoCamiseta || 50.00;
-                document.getElementById('confPix').value = data.pixKey || '';
-            }
+        /* Background Animado */
+        .bg-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 20% 50%, rgb(249 115 22 / 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgb(34 197 94 / 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgb(234 179 8 / 0.1) 0%, transparent 50%);
+            animation: gradientShift 20s ease infinite;
         }
 
-        window.salvarConfiguracoes = async function() {
-            const vagas = document.getElementById('confVagas').value;
-            const preco = document.getElementById('confPreco').value;
-            const pix = document.getElementById('confPix').value;
-            
-            try {
-                // setDoc com merge=true atualiza ou cria se não existir
-                await setDoc(doc(db, 'settings', 'event'), {
-                    limiteVagas: parseInt(vagas),
-                    precoCamiseta: parseFloat(preco),
-                    pixKey: pix
-                }, { merge: true });
-                alert("Configurações salvas! A página principal será atualizada.");
-            } catch (e) {
-                alert("Erro ao salvar configurações.");
-            }
+        @keyframes gradientShift {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
         }
 
-        // NOVO: Funções de Upload da Gestão de Conteúdo
-        window.fazerUpload = async function(inputId, nomeArquivo) {
-            const file = document.getElementById(inputId).files[0];
-            if (!file) return alert("Selecione um arquivo primeiro.");
-            
-            const statusDiv = document.getElementById('uploadStatus');
-            statusDiv.style.display = 'block';
-            statusDiv.style.color = 'var(--primary-light)';
-            statusDiv.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Enviando ${nomeArquivo}...`;
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            width: 100%;
+        }
 
-            try {
-                const storageRef = ref(storage, `assets/${nomeArquivo}`);
-                const uploadTask = uploadBytesResumable(storageRef, file);
-                
-                uploadTask.on('state_changed', null, 
-                    (error) => { statusDiv.innerHTML = 'Erro no envio.'; statusDiv.style.color = 'var(--error)'; }, 
-                    async () => {
-                        const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-                        statusDiv.style.color = 'var(--secondary-color)';
-                        statusDiv.innerHTML = `<i class="fas fa-check"></i> Upload concluído! A imagem será substituída no site principal.`;
-                    }
-                );
-            } catch (e) { console.error(e); }
-        };
+        main {
+            flex: 1;
+        }
 
-        window.salvarConteudo = async function() {
-            try {
-                await setDoc(doc(db, 'settings', 'content'), { heroInfo: document.getElementById('contHero').value }, { merge: true });
-                alert("Textos salvos!");
-            } catch(e) { alert("Erro ao salvar textos."); }
-        };
-    </script>
-</body>
-</html>
+        /* Header */
+        header {
+            padding: 1.5rem 0;
+            border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgb(15 23 42 / 0.9);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .logo span {
+            background: linear-gradient(135deg, var(--primary-light), var(--text-primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-secondary {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+        }
+
+        .btn-sm {
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            width: auto;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 4rem 0 2rem;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgb(249 115 22 / 0.1);
+            border: 1px solid rgb(249 115 22 / 0.3);
+            color: var(--primary-light);
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-full);
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--primary-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+
+        /* Vagas Progress */
+        .progress-container {
+            max-width: 500px;
+            margin: 0 auto 3rem;
+            background: var(--surface);
+            padding: 1.5rem;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .progress-bar-bg {
+            width: 100%;
+            height: 12px;
+            background: var(--surface-elevated);
+            border-radius: var(--radius-full);
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
+            border-radius: var(--radius-full);
+            width: 0%;
+            transition: width 1s ease;
+        }
+
+        /* Sponsors */
+        .sponsors-grid {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+            align-items: center;
+        }
+
+        .sponsor-img {
+            height: 60px;
+            filter: grayscale(100%) brightness(200%);
+            transition: all 0.3s ease;
+            opacity: 0.7;
+            object-fit: contain;
+        }
+
+        .sponsor-img:hover {
+            filter: grayscale(0%) brightness(100%);
+            opacity: 1;
+            transform: scale(1.05);
+            background: white;
+            border-radius: 8px;
+            padding: 5px;
+        }
+
+        /* Formulário */
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .form-header h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .form-grid {
+            display: grid;
+            gap: 1.25rem;
+        }
+
+        .form-group {
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group label i {
+            margin-right: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            background: var(--background);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: all 0.2s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgb(249 115 22 / 0.2);
+        }
+
+        .form-group small {
+            display: block;
+            margin-top: 0.5rem;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        /* Camiseta Selection */
+        .shirt-selection {
+            background: var(--surface-elevated);
+            padding: 1.5rem;
+            border-radius: var(--radius-lg);
+            margin-top: 1rem;
+            border: 1px solid var(--primary-color);
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .radio-option {
+            flex: 1;
+            position: relative;
+        }
+
+        .radio-option input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .radio-label {
+            display: block;
+            padding: 1rem;
+            text-align: center;
+            background: var(--background);
+            border: 2px solid var(--border);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            color: var(--text-secondary);
+        }
+
+        .radio-option input:checked ~ .radio-label {
+            border-color: var(--primary-color);
+            background: rgb(249 115 22 / 0.1);
+            color: var(--primary-light);
+        }
+
+        /* Status Messages */
+        .status-message {
+            padding: 1rem;
+            border-radius: var(--radius-md);
+            margin-top: 1rem;
+            display: none;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.875rem;
+        }
+
+        .status-message.success {
+            background: rgb(34 197 94 / 0.1);
+            border: 1px solid var(--success);
+            color: var(--success);
+            display: flex;
+        }
+
+        .status-message.error {
+            background: rgb(239 68 68 / 0.1);
+            border: 1px solid var(--error);
+            color: var(--error);
+            display: flex;
+        }
+
+        /* Extra Sections (Mapa, Camisetas, FAQ) */
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--text-primary);
+        }
+
+        .extra-section {
+            padding: 4rem 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .shirt-showcase {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .shirt-img {
+            max-width: 250px;
+            border-radius: var(--radius-lg);
+            background: var(--surface-elevated);
+            padding: 1rem;
+            transition: opacity 0.3s ease;
+        }
+
+        .faq-item {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 1.25rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-primary);
+        }
+
+        .faq-answer {
+            padding: 0 1.
