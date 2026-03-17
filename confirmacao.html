@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscrição Concluída - Corrida AMICC</title>
+    
+    <link rel="icon" type="image/png" href="./assets/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #f97316; --secondary-color: #22c55e;
+            --background: #0f172a; --surface: #1e293b; --surface-elevated: #334155; 
+            --text-primary: #f8fafc; --text-muted: #94a3b8; --border: #334155;
+            --radius-xl: 1rem; --radius-md: 0.5rem;
+        }
+        body { font-family: 'Inter', sans-serif; background: var(--background); color: var(--text-primary); display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; padding: 1rem; }
+        
+        .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 3rem 2rem; max-width: 500px; width: 100%; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .icon-success { font-size: 4rem; color: var(--secondary-color); margin-bottom: 1rem; }
+        h1 { margin-bottom: 0.5rem; }
+        p { color: var(--text-muted); line-height: 1.6; }
+        
+        .summary { background: rgba(0,0,0,0.2); padding: 1.5rem; border-radius: var(--radius-md); margin: 2rem 0; border: 1px dashed var(--border); text-align: left;}
+        
+        .pix-area { display: none; background: rgba(249, 115, 22, 0.1); border: 1px solid var(--primary-color); padding: 1.5rem; border-radius: var(--radius-md); margin-bottom: 2rem; }
+        .pix-key { font-family: monospace; background: var(--background); padding: 0.75rem; border-radius: 4px; color: var(--primary-color); word-break: break-all; margin: 1rem 0; font-size: 1.1rem; }
+        
+        .btn { display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.75rem 1.5rem; background: var(--primary-color); color: white; text-decoration: none; border-radius: var(--radius-md); font-weight: 600; width: 100%; margin-bottom: 1rem; border: none; cursor: pointer; transition: 0.2s; }
+        .btn:hover { filter: brightness(1.1); }
+        .btn-whatsapp { background: #25D366; }
+        .btn-facebook { background: #1877F2; }
+        
+        #uploadSection { margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+        input[type="file"] { width: 100%; padding: 0.5rem; background: var(--background); border: 1px solid var(--border); border-radius: var(--radius-md); color: var(--text-primary); margin-bottom: 1rem; }
+    </style>
+</head>
+<body>
+
+    <div class="card" id="mainCard">
+        <i class="fas fa-check-circle icon-success"></i>
+        <h1>Inscrição Recebida!</h1>
+        <p>Olá, <strong id="nomeUser">Corredor</strong>! Sua ficha foi salva com sucesso no sistema.</p>
+
+        <div class="summary">
+            <strong>Resumo da Inscrição:</strong><br><br>
+            <i class="fas fa-running"></i> Modalidade: <span id="tipoInscricao" style="color: var(--primary-color); font-weight: bold;">Carregando...</span><br>
+            <i class="fas fa-tshirt"></i> Camiseta: <span id="infoCamiseta">--</span><br>
+            <i class="fas fa-wallet"></i> Valor Total: R$ <span id="valorTotal">0,00</span>
+        </div>
+
+        <!-- Área de Pagamento e Upload -->
+        <div class="pix-area" id="pixArea">
+            <h3 style="color: var(--primary-color); margin-bottom: 0.5rem;"><i class="fas fa-qrcode"></i> Pagamento via PIX</h3>
+            <p style="font-size: 0.875rem;">Copie a chave abaixo e faça o pagamento da sua contribuição solidária.</p>
+            <div class="pix-key" id="chavePixTarget">Carregando chave...</div>
+            <button class="btn" style="background: var(--surface); border: 1px solid var(--primary-color);" onclick="copiarPix()">
+                <i class="fas fa-copy"></i> Copiar Chave PIX
+            </button>
+
+            <!-- UPLOAD DE COMPROVANTE -->
+            <div id="uploadSection">
+                <p style="font-size: 0.875rem; margin-bottom: 0.5rem; font-weight: bold;">Já pagou? Envie seu comprovante aqui:</p>
+                <input type="file" id="receiptFile" accept="image/*,application/pdf">
+                <button class="btn" id="uploadBtn" style="background: var(--surface-elevated); border: 1px solid var(--border);">
+                    <i class="fas fa-upload"></i> Enviar Comprovante
+                </button>
+                <div id="uploadStatus" style="font-size: 0.875rem; margin-top: 0.5rem;"></div>
+            </div>
+        </div>
+
+        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+            <a href="https://chat.whatsapp.com/seuLinkAqui" target="_blank" class="btn btn-whatsapp" style="margin-bottom: 0;">
+                <i class="fab fa-whatsapp"></i> Grupo Oficial
+            </a>
+            <button class="btn btn-facebook" style="margin-bottom: 0;" onclick="compartilhar()">
+                <i class="fas fa-share-alt"></i> Compartilhar
+            </button>
+        </div>
+        
+        <a href="index.html" style="color: var(--text-muted); text-decoration: none; font-size: 0.875rem;">Voltar ao início</a>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+        import { getFirestore, doc, getDoc, updateDoc } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+        import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js';
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDJWWNufLuBg0GSLdhvHENWwrCFSHB9Vrc",
+            projectId: "amicc-3185b",
+            storageBucket: "amicc-3185b.firebasestorage.app"
+        };
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const storage = getStorage(app);
+
+        // Extrai o ID do Firestore vindo pela URL (Mais seguro que LocalStorage)
+        const urlParams = new URLSearchParams(window.location.search);
+        const userId = urlParams.get('id');
+
+        if(userId) {
+            carregarDadosUsuario(userId);
+        } else {
+            document.getElementById('mainCard').innerHTML = '<h1>Ops!</h1><p>Nenhum código de inscrição encontrado.</p><a href="index.html" class="btn">Fazer Inscrição</a>';
+        }
+
+        async function carregarDadosUsuario(id) {
+            try {
+                const userSnap = await getDoc(doc(db, 'users', id));
+                if (userSnap.exists()) {
+                    const data = userSnap.data();
+                    document.getElementById('nomeUser').textContent = data.fullName.split(' ')[0];
+                    document.getElementById('valorTotal').textContent = (data.totalAmount || 0).toFixed(2).replace('.', ',');
+                    
+                    if(data.hasShirt && data.totalAmount > 0) {
+                        document.getElementById('tipoInscricao').textContent = "Solidária (Com Camiseta)";
+                        document.getElementById('infoCamiseta').textContent = `${data.shirtSize} (${data.quantity}x)`;
+                        document.getElementById('pixArea').style.display = 'block';
+                        buscarChavePix();
+                        
+                        // Ocultar upload se já enviou
+                        if(data.receiptUrl) {
+                            document.getElementById('uploadSection').innerHTML = '<p style="color: var(--secondary-color);"><i class="fas fa-check"></i> Comprovante já enviado!</p>';
+                        }
+                    } else {
+                        document.getElementById('tipoInscricao').textContent = "Inscrição Gratuita";
+                        document.getElementById('infoCamiseta').textContent = "Não solicitada";
+                    }
+                }
+            } catch (error) {
+                console.error("Erro ao carregar usuário:", error);
+            }
+        }
+
+        async function buscarChavePix() {
+            try {
+                const docSnap = await getDoc(doc(db, 'settings', 'event'));
+                if (docSnap.exists() && docSnap.data().pixKey) {
+                    document.getElementById('chavePixTarget').textContent = docSnap.data().pixKey;
+                }
+            } catch (e) { console.error(e); }
+        }
+
+        window.copiarPix = function() {
+            const textoPix = document.getElementById('chavePixTarget').textContent;
+            navigator.clipboard.writeText(textoPix).then(() => alert("Chave copiada! Abra o app do seu banco."));
+        }
+
+        window.compartilhar = function() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Vou correr na AMICC RP!',
+                    text: 'Acabei de me inscrever na Corrida Beneficente AMICC RP. Venha participar também e ajudar essa causa!',
+                    url: window.location.origin
+                });
+            } else {
+                alert("Compartilhe nosso site: " + window.location.origin);
+            }
+        }
+
+        // LÓGICA DE UPLOAD DE COMPROVANTE (Requisito atendido)
+        document.getElementById('uploadBtn')?.addEventListener('click', async () => {
+            const fileInput = document.getElementById('receiptFile');
+            const file = fileInput.files[0];
+            if(!file) return alert('Selecione uma imagem ou PDF do seu comprovante.');
+
+            const status = document.getElementById('uploadStatus');
+            status.style.color = 'var(--primary-color)';
+            status.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+
+            try {
+                const storageRef = ref(storage, `comprovantes/${userId}_${file.name}`);
+                const uploadTask = uploadBytesResumable(storageRef, file);
+
+                uploadTask.on('state_changed', null, 
+                    (error) => { status.innerHTML = 'Erro ao enviar.'; status.style.color = 'red'; }, 
+                    async () => {
+                        const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+                        // Atualiza o usuário no Firestore com a URL do comprovante
+                        await updateDoc(doc(db, 'users', userId), { receiptUrl: downloadURL });
+                        
+                        status.style.color = 'var(--secondary-color)';
+                        status.innerHTML = '<i class="fas fa-check"></i> Comprovante enviado com sucesso!';
+                        document.getElementById('uploadBtn').style.display = 'none';
+                        fileInput.style.display = 'none';
+                    }
+                );
+            } catch (err) {
+                console.error(err);
+                status.innerHTML = 'Erro de permissão no Storage.';
+            }
+        });
+    </script>
+</body>
+</html>
