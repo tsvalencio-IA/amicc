@@ -15,10 +15,10 @@
             --text-primary: #f8fafc; --text-secondary: #94a3b8; --border: #334155;
             --radius-lg: 0.75rem;
         }
-        body { font-family: 'Inter', sans-serif; background: var(--background); color: var(--text-primary); line-height: 1.8; margin: 0; padding: 0; }
+        body { font-family: 'Inter', sans-serif; background: var(--background); color: var(--text-primary); line-height: 1.8; margin: 0; padding: 0; display: flex; flex-direction: column; min-height: 100vh; }
         
         .header-simple { background: var(--surface); padding: 2rem 0; text-align: center; border-bottom: 1px solid var(--border); margin-bottom: 2rem; }
-        .container { max-width: 800px; margin: 0 auto; padding: 0 1.5rem 4rem; }
+        .container { max-width: 800px; margin: 0 auto; padding: 0 1.5rem 2rem; flex: 1; }
         
         h1 { color: var(--primary-color); margin-bottom: 0.5rem; }
         h2 { border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; margin-top: 2.5rem; color: #eab308; }
@@ -27,6 +27,22 @@
         
         .btn-back { display: inline-block; margin-top: 2rem; color: var(--primary-color); text-decoration: none; font-weight: 600; }
         .btn-back:hover { text-decoration: underline; }
+
+        /* Nova Assinatura ThIAguinho Soluções */
+        .footer-thiaguinho {
+            text-align: center;
+            padding: 1.5rem;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--border);
+            margin-top: auto;
+            letter-spacing: 0.05em;
+            background: var(--background);
+        }
+        .footer-thiaguinho strong {
+            color: var(--primary-light);
+            font-weight: 800;
+        }
     </style>
 </head>
 <body>
@@ -64,6 +80,10 @@
 
             <a href="index.html" class="btn-back"><i class="fas fa-arrow-left"></i> Voltar para Inscrição</a>
         </div>
+    </div>
+
+    <div class="footer-thiaguinho">
+        powered by <strong>thIAguinho Soluções</strong>
     </div>
 
 </body>
