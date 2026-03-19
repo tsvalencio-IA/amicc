@@ -10,94 +10,56 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* MANTENDO SUAS CORES ORIGINAIS */
         :root {
-            --primary-color: #f97316;
-            --primary-dark: #ea580c;
-            --primary-light: #fdba74;
-            --secondary-color: #22c55e;
-            --accent-color: #eab308;
-            
-            --background: #0f172a;
-            --surface: #1e293b;
-            --surface-elevated: #334155;
-            --text-primary: #f8fafc;
-            --text-secondary: #94a3b8;
-            --text-muted: #64748b;
-            --border: #334155;
-            --success: #22c55e;
-            --error: #ef4444;
-            --warning: #f59e0b;
-            
-            --font-main: 'Inter', system-ui, sans-serif;
-            --radius-md: 0.5rem;
-            --radius-lg: 0.75rem;
-            --radius-xl: 1rem;
-            --radius-full: 9999px;
-            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
-            --shadow-glow: 0 0 40px rgb(249 115 22 / 0.3);
+            --primary-color: #f97316; --primary-dark: #ea580c; --primary-light: #fdba74;
+            --secondary-color: #22c55e; --accent-color: #eab308; --background: #0f172a;
+            --surface: #1e293b; --surface-elevated: #334155; --text-primary: #f8fafc;
+            --text-secondary: #94a3b8; --text-muted: #64748b; --border: #334155;
+            --success: #22c55e; --error: #ef4444; --warning: #f59e0b;
+            --font-main: 'Inter', system-ui, sans-serif; --radius-md: 0.5rem;
+            --radius-lg: 0.75rem; --radius-xl: 1rem; --radius-full: 9999px;
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1); --shadow-glow: 0 0 40px rgb(249 115 22 / 0.3);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: var(--font-main);
-            background: var(--background);
-            color: var(--text-primary);
-            line-height: 1.6;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
+        body { font-family: var(--font-main); background: var(--background); color: var(--text-primary); line-height: 1.6; min-height: 100vh; overflow-x: hidden; }
 
-        .bg-gradient {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
-            background: radial-gradient(circle at 20% 50%, rgb(249 115 22 / 0.15) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 20%, rgb(34 197 94 / 0.15) 0%, transparent 50%),
-                        radial-gradient(circle at 40% 80%, rgb(234 179 8 / 0.1) 0%, transparent 50%);
-            animation: gradientShift 20s ease infinite;
-        }
+        .bg-gradient { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: radial-gradient(circle at 20% 50%, rgb(249 115 22 / 0.15) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgb(34 197 94 / 0.15) 0%, transparent 50%), radial-gradient(circle at 40% 80%, rgb(234 179 8 / 0.1) 0%, transparent 50%); animation: gradientShift 20s ease infinite; }
         @keyframes gradientShift { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
 
         .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
 
-        /* HEADER */
-        header {
-            padding: 1.5rem 0; border-bottom: 1px solid var(--border);
-            backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100;
-            background: rgb(15 23 42 / 0.9);
-        }
+        header { padding: 1.5rem 0; border-bottom: 1px solid var(--border); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100; background: rgb(15 23 42 / 0.9); }
         .header-content { display: flex; justify-content: space-between; align-items: center; }
         .logo { display: flex; align-items: center; gap: 0.75rem; font-size: 1.5rem; font-weight: 800; color: var(--text-primary); text-decoration: none; }
         .logo-icon { width: 45px; height: 45px; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
         .logo span { background: linear-gradient(135deg, var(--primary-light), var(--text-primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
         
-        /* BOTÕES */
         .btn { padding: 0.75rem 1.5rem; background: linear-gradient(135deg, var(--primary-color), var(--primary-dark)); color: white; border: none; border-radius: var(--radius-md); font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; text-decoration: none; }
         .btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-glow); }
         .btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
         .btn-secondary { background: var(--surface-elevated); border: 1px solid var(--border); }
         .btn-sm { padding: 0.5rem 1rem; font-size: 0.875rem; width: auto; }
 
-        /* HERO & VAGAS */
         .hero { padding: 4rem 0 2rem; text-align: center; }
         .hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgb(249 115 22 / 0.1); border: 1px solid rgb(249 115 22 / 0.3); color: var(--primary-light); padding: 0.5rem 1rem; border-radius: var(--radius-full); font-size: 0.875rem; font-weight: 600; margin-bottom: 1.5rem; }
         .hero h1 { font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 900; line-height: 1.1; margin-bottom: 1rem; background: linear-gradient(135deg, var(--text-primary) 0%, var(--primary-light) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-transform: uppercase; letter-spacing: -0.02em; }
         .hero p { font-size: 1.25rem; color: var(--text-secondary); max-width: 700px; margin: 0 auto 2rem; }
         
-        .progress-container { max-width: 500px; margin: 0 auto 3rem; background: var(--surface); padding: 1.5rem; border-radius: var(--radius-lg); border: 1px solid var(--border); }
+        .progress-container { max-width: 500px; margin: 0 auto 1.5rem; background: var(--surface); padding: 1.5rem; border-radius: var(--radius-lg); border: 1px solid var(--border); }
         .progress-header { display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-weight: 600; }
         .progress-bar-bg { width: 100%; height: 12px; background: var(--surface-elevated); border-radius: var(--radius-full); overflow: hidden; }
         .progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--secondary-color), var(--primary-color)); border-radius: var(--radius-full); width: 0%; transition: width 1s ease; }
 
-        /* LOGOS ORGANIZADORES */
+        .milk-alert { max-width: 500px; margin: 0 auto 3rem; background: rgba(34, 197, 94, 0.1); border: 1px dashed var(--secondary-color); padding: 1rem; border-radius: var(--radius-md); color: var(--secondary-color); font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 0.75rem; }
+
         .organizers-gallery { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-bottom: 3rem; align-items: center; }
         .organizer-logo { height: 80px; filter: grayscale(100%) brightness(200%); transition: all 0.3s ease; opacity: 0.7; }
         .organizer-logo:hover { filter: grayscale(0%) brightness(100%); opacity: 1; transform: scale(1.05); }
 
-        /* FORMULÁRIO */
         .form-container { max-width: 600px; margin: 0 auto; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 2rem; box-shadow: var(--shadow-lg); }
         .form-header { text-align: center; margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border); }
         .form-header h2 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; }
@@ -109,15 +71,8 @@
         .form-group input:focus, .form-group select:focus { outline: none; border-color: var(--primary-color); box-shadow: 0 0 0 3px rgb(249 115 22 / 0.2); }
         .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
         
-        /* SELEÇÃO DE CAMISETA */
-        .shirt-selection { background: var(--surface-elevated); padding: 1.5rem; border-radius: var(--radius-lg); margin-top: 1rem; border: 1px solid var(--primary-color); }
-        .radio-group { display: flex; gap: 1rem; margin-bottom: 1rem; }
-        .radio-option { flex: 1; position: relative; }
-        .radio-option input { position: absolute; opacity: 0; cursor: pointer; }
-        .radio-label { display: block; padding: 1rem; text-align: center; background: var(--background); border: 2px solid var(--border); border-radius: var(--radius-md); cursor: pointer; font-weight: 600; transition: all 0.2s ease; }
-        .radio-option input:checked ~ .radio-label { border-color: var(--primary-color); background: rgb(249 115 22 / 0.1); color: var(--primary-light); }
+        .shirt-selection { background: var(--surface-elevated); padding: 1.5rem; border-radius: var(--radius-lg); border: 1px solid var(--primary-color); }
         
-        /* SEÇÕES EXTRAS (MAPA, FAQ, ETC) */
         .section-title { text-align: center; font-size: 2rem; margin-bottom: 2rem; color: var(--text-primary); }
         .extra-section { padding: 4rem 0; border-top: 1px solid var(--border); }
         
@@ -155,61 +110,61 @@
     </header>
 
     <main class="container">
-        <!-- HERO E CONTADOR DE VAGAS -->
+        <!-- HERO -->
         <section class="hero">
-            <div class="hero-badge"><i class="fas fa-heart"></i><span>Evento Beneficente • Inscrições Abertas</span></div>
+            <div class="hero-badge"><i class="fas fa-heart"></i><span>Evento Beneficente • Lote Inicial de Camisetas</span></div>
             <h1>CORRIDA AMICC RP</h1>
-            <p>Participe desta corrida beneficente organizada em prol da saúde e solidariedade.</p>
+            <p id="heroText">Participe desta corrida beneficente organizada em prol da saúde e solidariedade.</p>
 
-            <div class="organizers-gallery">
-                <!-- Usando imagens genéricas como placeholder, substitua pelas suas na pasta /assets/ -->
-                <img src="./assets/logo-digao.png" alt="DIGÃO" class="organizer-logo" onerror="this.src='https://placehold.co/150x80/1e293b/f8fafc?text=DIGAO'">
-                <img src="./assets/logo-lerunners.png" alt="LERUNNERS" class="organizer-logo" onerror="this.src='https://placehold.co/150x80/1e293b/f8fafc?text=LERUNNERS'">
-                <img src="./assets/logo-wolf.png" alt="WOLF" class="organizer-logo" onerror="this.src='https://placehold.co/150x80/1e293b/f8fafc?text=WOLF'">
-                <img src="./assets/logo-amicc.png" alt="AMICC" class="organizer-logo" onerror="this.src='https://placehold.co/150x80/1e293b/f8fafc?text=AMICC'">
-            </div>
+            <!-- AQUI SÃO PUXADOS OS LOGOS DOS ORGANIZADORES -->
+            <div class="organizers-gallery" id="boxOrganizadores"></div>
 
             <div class="progress-container">
                 <div class="progress-header">
-                    <span>Vagas Preenchidas</span>
+                    <span>Camisetas Lote 1</span>
                     <span id="vagasText">Carregando...</span>
                 </div>
                 <div class="progress-bar-bg">
                     <div class="progress-bar-fill" id="vagasBar"></div>
                 </div>
-                <small style="color: var(--text-muted); display: block; margin-top: 10px;">Corra e garanta sua vaga!</small>
+                <small style="color: var(--text-muted); display: block; margin-top: 10px;">Garanta a sua antes que acabe o estoque!</small>
+            </div>
+
+            <div class="milk-alert">
+                <i class="fas fa-box-open" style="font-size: 1.5rem;"></i>
+                <span>Atenção: É obrigatório levar 1 Litro de Leite no dia do evento (Doação AMICC).</span>
             </div>
         </section>
 
         <!-- SEÇÃO CAMISETAS -->
         <section class="extra-section">
-            <h2 class="section-title"><i class="fas fa-tshirt"></i> Camisetas Oficiais</h2>
+            <h2 class="section-title"><i class="fas fa-tshirt"></i> Camiseta Oficial (Modelo Casual)</h2>
             <div class="shirt-showcase">
                 <div style="text-align: center;">
-                    <img src="./assets/shirt-front.png" alt="Frente da Camiseta" class="shirt-img" onerror="this.src='https://placehold.co/300x400/1e293b/f8fafc?text=Frente+Camiseta'">
+                    <img id="imgCamisetaFrente" src="./assets/shirt-front.png" alt="Frente da Camiseta" class="shirt-img" onerror="this.src='https://placehold.co/300x400/1e293b/f8fafc?text=Frente+Camiseta'">
                     <p style="margin-top: 10px;">Visão Frontal</p>
                 </div>
                 <div style="text-align: center;">
-                    <img src="./assets/shirt-back.png" alt="Verso da Camiseta" class="shirt-img" onerror="this.src='https://placehold.co/300x400/1e293b/f8fafc?text=Verso+Camiseta'">
+                    <img id="imgCamisetaVerso" src="./assets/shirt-back.png" alt="Verso da Camiseta" class="shirt-img" onerror="this.src='https://placehold.co/300x400/1e293b/f8fafc?text=Verso+Camiseta'">
                     <p style="margin-top: 10px;">Visão Traseira</p>
                 </div>
                 <div style="max-width: 400px; margin-left: 2rem;">
                     <h3>Tamanhos Disponíveis</h3>
-                    <p style="color: var(--text-secondary); margin-bottom: 1rem;">PP, P, M, G, GG, XG, XXG</p>
+                    <p style="color: var(--text-secondary); margin-bottom: 1rem;">PP, P, M, G, GG, XG, XXG (Apenas modelo casual).</p>
                     <div style="background: var(--surface); padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--primary-color);">
-                        <h4 style="color: var(--primary-light); font-size: 1.5rem;">Apenas R$ <span id="displayPrecoCamiseta">--,--</span></h4>
+                        <h4 style="color: var(--primary-light); font-size: 1.5rem;">Valor Único: R$ <span id="displayPrecoCamiseta">50,00</span></h4>
                         <p style="font-size: 0.875rem; color: var(--text-secondary);">Toda a renda é revertida para a AMICC.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- FORMULÁRIO DE INSCRIÇÃO -->
+        <!-- FORMULÁRIO -->
         <section id="inscricao" class="extra-section">
             <div class="form-container">
                 <div class="form-header">
                     <h2><i class="fas fa-clipboard-list"></i> Ficha de Inscrição</h2>
-                    <p>Preencha seus dados. Você pode optar por se inscrever gratuitamente ou adquirir a camiseta solidária.</p>
+                    <p>Preencha seus dados para garantir seu número de peito e camiseta.</p>
                 </div>
 
                 <form id="accessForm">
@@ -224,7 +179,7 @@
                         </div>
                         <div class="form-row">
                             <div class="form-group">
-                                <label><i class="fas fa-phone"></i> WhatsApp</label>
+                                <label><i class="fab fa-whatsapp"></i> WhatsApp (Com DDD)</label>
                                 <input type="tel" id="phone" name="phone" placeholder="(17) 99999-9999" required>
                             </div>
                             <div class="form-group">
@@ -232,63 +187,52 @@
                                 <input type="tel" id="emergencyContact" name="emergencyContact" placeholder="(17) 99999-9999" required>
                             </div>
                         </div>
+                        
+                        <!-- REGRA: APENAS 3KM OU 5KM -->
                         <div class="form-group">
-                            <label><i class="fas fa-flag-checkered"></i> Categoria</label>
+                            <label><i class="fas fa-flag-checkered"></i> Modalidade</label>
                             <select name="category" required>
                                 <option value="">Selecione...</option>
-                                <option value="caminhada">Caminhada</option>
-                                <option value="5km">5 KM</option>
-                                <option value="10km">10 KM</option>
-                                <option value="15km">15 KM</option>
-                                <option value="21km">21 KM</option>
+                                <option value="caminhada-3km">Caminhada de 3 KM</option>
+                                <option value="corrida-5km">Corrida de 5 KM</option>
                             </select>
                         </div>
 
-                        <!-- OPÇÃO DE CAMISETA (Gratuito x Pago) -->
-                        <div class="form-group">
-                            <label><i class="fas fa-gift"></i> Deseja adquirir a camiseta oficial?</label>
-                            <div class="radio-group">
-                                <div class="radio-option">
-                                    <input type="radio" name="querCamiseta" value="nao" id="camNao" checked>
-                                    <label for="camNao" class="radio-label">Não, Inscrição Gratuita</label>
-                                </div>
-                                <div class="radio-option">
-                                    <input type="radio" name="querCamiseta" value="sim" id="camSim">
-                                    <label for="camSim" class="radio-label">Sim, Quero Ajudar!</label>
-                                </div>
+                        <!-- REGRA: CAMISETA É OBRIGATÓRIA -->
+                        <div id="shirtFields" class="shirt-selection">
+                            <div style="margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px dashed var(--border);">
+                                <strong><i class="fas fa-tshirt"></i> Kit Oficial</strong>
+                                <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem;">A inscrição inclui a Camiseta Oficial (Modelo Casual). <strong>Lembre-se:</strong> a doação de 1L de leite será exigida na retirada.</p>
                             </div>
-                        </div>
-
-                        <!-- CAMPOS DA CAMISETA (Escondidos por padrão) -->
-                        <div id="shirtFields" class="shirt-selection" style="display: none;">
+                            
                             <div class="form-row">
                                 <div class="form-group">
-                                    <label>Tamanho</label>
-                                    <select id="shirtSize" name="shirtSize">
+                                    <label>Tamanho da Camiseta</label>
+                                    <select id="shirtSize" name="shirtSize" required>
                                         <option value="">Selecione</option>
-                                        <option value="PP">PP</option>
-                                        <option value="P">P</option>
-                                        <option value="M">M</option>
-                                        <option value="G">G</option>
-                                        <option value="GG">GG</option>
-                                        <option value="XG">XG</option>
-                                        <option value="XXG">XXG</option>
+                                        <option value="PP">PP (Casual)</option>
+                                        <option value="P">P (Casual)</option>
+                                        <option value="M">M (Casual)</option>
+                                        <option value="G">G (Casual)</option>
+                                        <option value="GG">GG (Casual)</option>
+                                        <option value="XG">XG (Casual)</option>
+                                        <option value="XXG">XXG (Casual)</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label>Quantidade</label>
-                                    <input type="number" id="quantity" name="quantity" min="1" max="10" value="1">
+                                    <input type="number" id="quantity" name="quantity" min="1" max="10" value="1" required>
                                 </div>
                             </div>
-                            <p style="margin-top: 10px; font-weight: bold; color: var(--primary-light);">
-                                Valor a pagar via PIX: R$ <span id="calcTotal">0,00</span>
+                            <p style="margin-top: 10px; font-weight: bold; color: var(--primary-light); font-size: 1.1rem; text-align: center; background: rgba(0,0,0,0.2); padding: 0.8rem; border-radius: 0.5rem;">
+                                Total a pagar (PIX): R$ <span id="calcTotal">50,00</span>
                             </p>
                         </div>
                     </div>
 
                     <button type="submit" class="btn" id="submitBtn" style="margin-top: 1.5rem; width: 100%;">
-                        <span class="btn-text">Finalizar Inscrição <i class="fas fa-arrow-right"></i></span>
-                        <span class="btn-loading" style="display: none;"><div class="spinner"></div> Processando...</span>
+                        <span class="btn-text">Prosseguir para o Pagamento <i class="fas fa-arrow-right"></i></span>
+                        <span class="btn-loading" style="display: none;"><i class="fas fa-spinner fa-spin" style="margin-right: 8px;"></i> Processando sistema...</span>
                     </button>
                     <div id="statusMessage" class="status-message"></div>
                 </form>
@@ -300,35 +244,16 @@
             <h2 class="section-title"><i class="fas fa-map-marked-alt"></i> Local e Percurso</h2>
             <div style="text-align: center; max-width: 800px; margin: 0 auto;">
                 <p style="margin-bottom: 1rem; color: var(--text-secondary);">A largada acontecerá no Parque da Represa Municipal de São José do Rio Preto.</p>
-                <img src="./assets/mapa-percurso.png" alt="Mapa do Percurso" style="width: 100%; border-radius: var(--radius-lg); border: 2px solid var(--border);" onerror="this.src='https://placehold.co/800x400/1e293b/f8fafc?text=Mapa+do+Percurso+Aqui'">
+                <img id="imgMapa" src="./assets/mapa-percurso.png" alt="Mapa do Percurso" style="width: 100%; border-radius: var(--radius-lg); border: 2px solid var(--border);" onerror="this.src='https://placehold.co/800x400/1e293b/f8fafc?text=Mapa+do+Percurso+Aqui'">
             </div>
         </section>
 
-        <!-- DEPOIMENTOS / PROVA SOCIAL -->
-        <section class="extra-section" style="background: var(--surface-elevated);">
-            <div class="container">
-                <h2 class="section-title"><i class="fas fa-comments"></i> O que dizem os participantes</h2>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; max-width: 1000px; margin: 0 auto;">
-                    <div style="background: var(--surface); padding: 1.5rem; border-radius: var(--radius-lg); border: 1px solid var(--border);">
-                        <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 1rem;">
-                            <img src="./assets/photos/depoimento1.jpg" alt="Participante" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;" onerror="this.src='https://placehold.co/50x50/f97316/fff?text=M'">
-                            <div>
-                                <h4 style="color: var(--text-primary); margin: 0;">Maria Silva</h4>
-                                <small style="color: var(--primary-light);">Edição Anterior</small>
-                            </div>
-                        </div>
-                        <p style="color: var(--text-secondary); font-size: 0.9rem;">"A energia dessa corrida é incrível! Saber que estamos ajudando a AMICC e ainda cuidando da saúde não tem preço. Organização nota 10!"</p>
-                    </div>
-                    <div style="background: var(--surface); padding: 1.5rem; border-radius: var(--radius-lg); border: 1px solid var(--border);">
-                        <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 1rem;">
-                            <img src="./assets/photos/depoimento2.jpg" alt="Participante" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;" onerror="this.src='https://placehold.co/50x50/22c55e/fff?text=J'">
-                            <div>
-                                <h4 style="color: var(--text-primary); margin: 0;">João Pedro</h4>
-                                <small style="color: var(--primary-light);">Equipe LERUNNERS</small>
-                            </div>
-                        </div>
-                        <p style="color: var(--text-secondary); font-size: 0.9rem;">"Percurso muito bem sinalizado e uma vibe espetacular. A camiseta é de altíssima qualidade. Com certeza estarei presente novamente este ano."</p>
-                    </div>
+        <!-- NOVO: ÁREA DE PATROCINADORES -->
+        <section class="extra-section" style="border-top: none; padding-top: 0;">
+            <div class="container" style="text-align: center;">
+                <h3 style="color: var(--text-muted); text-transform: uppercase; font-size: 0.9rem; letter-spacing: 2px; margin-bottom: 1.5rem;">Apoio e Patrocínio</h3>
+                <div class="organizers-gallery" id="boxPatrocinadores">
+                    <!-- Preenchido pelo Javascript -->
                 </div>
             </div>
         </section>
@@ -339,17 +264,18 @@
             
             <div class="faq-item">
                 <div class="faq-question">Quando e onde será a entrega dos kits? <i class="fas fa-chevron-down"></i></div>
-                <div class="faq-answer">A entrega dos kits (camisetas) será realizada no sábado que antecede a prova, na sede da AMICC.</div>
+                <div class="faq-answer">A entrega dos kits (camisetas) será realizada em data a ser anunciada no nosso WhatsApp. <strong>Atenção: É obrigatório levar 1 Litro de Leite no momento da retirada.</strong></div>
             </div>
             <div class="faq-item">
-                <div class="faq-question">Posso me inscrever apenas para caminhar? <i class="fas fa-chevron-down"></i></div>
-                <div class="faq-answer">Sim! Temos a categoria específica para Caminhada. O importante é participar e ajudar.</div>
+                <div class="faq-question">Quais são as opções de percurso? <i class="fas fa-chevron-down"></i></div>
+                <div class="faq-answer">Teremos apenas duas modalidades oficiais: Caminhada de 3km e Corrida de 5km.</div>
             </div>
             <div class="faq-item">
-                <div class="faq-question">Como funciona a inscrição gratuita? <i class="fas fa-chevron-down"></i></div>
-                <div class="faq-answer">Você pode participar do evento sem custo algum. A compra da camiseta é opcional e serve para arrecadar fundos para a instituição.</div>
+                <div class="faq-question">Tem opção de inscrição sem camiseta? <i class="fas fa-chevron-down"></i></div>
+                <div class="faq-answer">Neste primeiro lote promocional com 300 vagas, todas as inscrições são feitas mediante a compra da camiseta, visando arrecadar fundos para a AMICC.</div>
             </div>
         </section>
+
     </main>
 
     <footer>
@@ -361,10 +287,10 @@
         </div>
     </footer>
 
-    <!-- Firebase SDK -->
+    <!-- SDK Firebase -->
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
-        import { getFirestore, collection, addDoc, serverTimestamp, query, where, getDocs, doc, getDoc } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+        import { getFirestore, collection, doc, getDoc, getDocs, query, where, runTransaction, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
 
         const firebaseConfig = {
             apiKey: "AIzaSyDJWWNufLuBg0GSLdhvHENWwrCFSHB9Vrc",
@@ -378,35 +304,17 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // VARIÁVEIS DO EVENTO (Carregadas do Admin)
-        let precoCamiseta = 50.00; // Valor padrão
-        let limiteVagas = 500; // Valor padrão
+        let precoCamiseta = 50.00; 
+        let limiteVagas = 300; 
+        let vercelUrl = ""; // A URL DA SUA VERCEL FICARÁ AQUI
 
-        // Elementos UI
         const form = document.getElementById('accessForm');
         const submitBtn = document.getElementById('submitBtn');
         const statusMessage = document.getElementById('statusMessage');
-        const radioNao = document.getElementById('camNao');
-        const radioSim = document.getElementById('camSim');
-        const shirtFields = document.getElementById('shirtFields');
         const inputQtd = document.getElementById('quantity');
         const calcTotalSpan = document.getElementById('calcTotal');
         const displayPrecoCamiseta = document.getElementById('displayPrecoCamiseta');
 
-        // LÓGICA: Exibir/Ocultar campos da camiseta
-        // Explicação: Adicionamos um ouvinte (listener) nos botões de rádio para detectar a escolha do usuário
-        radioNao.addEventListener('change', () => {
-            shirtFields.style.display = 'none';
-            document.getElementById('shirtSize').removeAttribute('required');
-        });
-
-        radioSim.addEventListener('change', () => {
-            shirtFields.style.display = 'block';
-            document.getElementById('shirtSize').setAttribute('required', 'true');
-            atualizarTotal();
-        });
-
-        // Atualizar preço total na tela
         inputQtd.addEventListener('input', atualizarTotal);
 
         function atualizarTotal() {
@@ -415,15 +323,6 @@
             calcTotalSpan.textContent = total.toFixed(2).replace('.', ',');
         }
 
-        // LÓGICA: Sanfona do FAQ (Accordion)
-        document.querySelectorAll('.faq-question').forEach(item => {
-            item.addEventListener('click', () => {
-                const parent = item.parentElement;
-                parent.classList.toggle('active');
-            });
-        });
-
-        // MÁSCARA DE TELEFONE
         function applyPhoneMask(value) {
             let digits = value.replace(/\D/g, '');
             if (digits.length > 11) digits = digits.slice(0, 11);
@@ -436,58 +335,84 @@
         document.getElementById('phone').addEventListener('input', e => e.target.value = applyPhoneMask(e.target.value));
         document.getElementById('emergencyContact').addEventListener('input', e => e.target.value = applyPhoneMask(e.target.value));
 
-        // CARREGAR CONFIGURAÇÕES INICIAIS (Preço, Vagas)
+        document.querySelectorAll('.faq-question').forEach(item => {
+            item.addEventListener('click', () => {
+                const parent = item.parentElement;
+                parent.classList.toggle('active');
+            });
+        });
+
         async function carregarDadosEvento() {
             try {
-                // Pega as configurações gerais
+                const textRef = doc(db, 'settings', 'content');
+                const textSnap = await getDoc(textRef);
+                if(textSnap.exists()) {
+                    const cData = textSnap.data();
+                    if(cData.heroInfo) document.getElementById('heroText').innerText = cData.heroInfo;
+                    if(cData.mapaUrl) document.getElementById('imgMapa').src = cData.mapaUrl;
+                    if(cData.camisetaFrenteUrl) document.getElementById('imgCamisetaFrente').src = cData.camisetaFrenteUrl;
+                    if(cData.camisetaVersoUrl) document.getElementById('imgCamisetaVerso').src = cData.camisetaVersoUrl;
+
+                    // Carrega Organizadores
+                    let orgsHtml = '';
+                    if(cData.org1Url) orgsHtml += `<img src="${cData.org1Url}" class="organizer-logo">`;
+                    if(cData.org2Url) orgsHtml += `<img src="${cData.org2Url}" class="organizer-logo">`;
+                    if(cData.org3Url) orgsHtml += `<img src="${cData.org3Url}" class="organizer-logo">`;
+                    if(cData.org4Url) orgsHtml += `<img src="${cData.org4Url}" class="organizer-logo">`;
+                    if(orgsHtml !== '') document.getElementById('boxOrganizadores').innerHTML = orgsHtml;
+
+                    // Carrega Patrocinadores
+                    let patsHtml = '';
+                    if(cData.pat1Url) patsHtml += `<img src="${cData.pat1Url}" class="organizer-logo">`;
+                    if(cData.pat2Url) patsHtml += `<img src="${cData.pat2Url}" class="organizer-logo">`;
+                    if(cData.pat3Url) patsHtml += `<img src="${cData.pat3Url}" class="organizer-logo">`;
+                    if(cData.pat4Url) patsHtml += `<img src="${cData.pat4Url}" class="organizer-logo">`;
+                    if(patsHtml !== '') document.getElementById('boxPatrocinadores').innerHTML = patsHtml;
+                }
+
                 const settingsRef = doc(db, 'settings', 'event');
                 const settingsDoc = await getDoc(settingsRef);
                 if (settingsDoc.exists()) {
                     const data = settingsDoc.data();
                     if(data.precoCamiseta) precoCamiseta = parseFloat(data.precoCamiseta);
                     if(data.limiteVagas) limiteVagas = parseInt(data.limiteVagas);
+                    if(data.vercelUrl) vercelUrl = data.vercelUrl; // Pega a URL do disparo do admin
                 }
                 displayPrecoCamiseta.textContent = precoCamiseta.toFixed(2).replace('.', ',');
+                atualizarTotal(); 
 
-                // Conta quantos inscritos já existem
                 const usersRef = collection(db, 'users');
                 const usersSnapshot = await getDocs(usersRef);
                 const totalInscritos = usersSnapshot.size;
 
-                // Atualiza barra de progresso
                 const porcentagem = Math.min((totalInscritos / limiteVagas) * 100, 100);
                 document.getElementById('vagasBar').style.width = porcentagem + '%';
                 document.getElementById('vagasText').innerHTML = `<b>${totalInscritos}</b> de ${limiteVagas}`;
 
             } catch (error) {
-                console.error('Erro ao carregar dados:', error);
+                console.error('Erro ao carregar:', error);
             }
         }
         carregarDadosEvento();
 
-        // VALIDAÇÃO E ENVIO (Submit)
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             const formData = new FormData(form);
-            const querCamiseta = formData.get('querCamiseta') === 'sim';
             const qtd = parseInt(formData.get('quantity')) || 1;
-            const valorTotal = querCamiseta ? (qtd * precoCamiseta) : 0;
+            const valorTotal = qtd * precoCamiseta; 
+            const phoneClean = formData.get('phone').replace(/\D/g, ''); // Telefone limpo
 
             const data = {
                 fullName: formData.get('fullName').trim(),
                 email: formData.get('email').toLowerCase().trim(),
-                phone: formData.get('phone').replace(/\D/g, ''),
+                phone: phoneClean,
                 category: formData.get('category'),
                 emergencyContact: formData.get('emergencyContact').replace(/\D/g, ''),
-                
-                // Novos campos
-                hasShirt: querCamiseta,
-                shirtSize: querCamiseta ? formData.get('shirtSize') : null,
-                quantity: querCamiseta ? qtd : 0,
+                hasShirt: true, 
+                shirtSize: formData.get('shirtSize'),
+                quantity: qtd,
                 totalAmount: valorTotal,
-                paymentStatus: querCamiseta ? 'pendente' : 'gratuito', // Gratuito se não comprou nada
-                
-                status: 'approved', // Podemos aprovar a inscrição na corrida automaticamente
+                paymentStatus: 'pendente', 
                 createdAt: serverTimestamp()
             };
 
@@ -496,21 +421,77 @@
             document.querySelector('.btn-loading').style.display = 'flex';
 
             try {
-                // Validação de Duplicidade (Email ou Telefone)
                 const usersRef = collection(db, 'users');
                 const qEmail = query(usersRef, where('email', '==', data.email));
                 const snapEmail = await getDocs(qEmail);
-                if (!snapEmail.empty) throw new Error('Este e-mail já está cadastrado.');
+                if (!snapEmail.empty) throw new Error('Este e-mail já realizou inscrição.');
 
-                // Salva no Firestore e pega a referência (ID do documento)
-                const docRef = await addDoc(collection(db, 'users'), data);
+                const docId = await runTransaction(db, async (transaction) => {
+                    const counterRef = doc(db, 'meta', 'counter');
+                    const inventoryRef = doc(db, 'estoque', 'camisetas');
 
-                // Redireciona de forma profissional, enviando o ID para carregar os dados reais
-                window.location.href = `confirmacao.html?id=${docRef.id}`;
+                    const counterDoc = await transaction.get(counterRef);
+                    let nextNumeroPeito = 1;
+                    if (counterDoc.exists() && typeof counterDoc.data().lastNumber !== 'undefined') {
+                        nextNumeroPeito = counterDoc.data().lastNumber + 1;
+                    }
+
+                    const inventoryDoc = await transaction.get(inventoryRef);
+                    let estoqueAtual = 0;
+                    let estoqueDados = {};
+
+                    if (!inventoryDoc.exists()) {
+                        estoqueDados = { 'PP': 100, 'P': 100, 'M': 100, 'G': 100, 'GG': 100, 'XG': 100, 'XXG': 100 };
+                        estoqueAtual = estoqueDados[data.shirtSize];
+                    } else {
+                        estoqueDados = inventoryDoc.data();
+                        estoqueAtual = estoqueDados[data.shirtSize] || 0;
+                    }
+
+                    if (estoqueAtual < data.quantity) {
+                        throw new Error(`Estoque esgotado para o tamanho ${data.shirtSize}.`);
+                    }
+                    
+                    estoqueDados[data.shirtSize] = estoqueAtual - data.quantity;
+                    transaction.set(inventoryRef, estoqueDados, { merge: true });
+
+                    transaction.set(counterRef, { lastNumber: nextNumeroPeito }, { merge: true });
+                    data.numeroPeito = nextNumeroPeito;
+                    
+                    const newUserRef = doc(collection(db, 'users'));
+                    transaction.set(newUserRef, data);
+
+                    return newUserRef.id;
+                });
+
+                // ==========================================
+                // DISPARO AUTOMÁTICO PARA A VERCEL
+                // ==========================================
+                if (vercelUrl && vercelUrl !== "") {
+                    try {
+                        const linkConfirmacao = window.location.href.split('index.html')[0] + `confirmacao.html?id=${docId}`;
+                        await fetch(vercelUrl, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                phone: data.phone,
+                                name: data.fullName,
+                                peito: data.numeroPeito,
+                                total: data.totalAmount,
+                                linkCheckout: linkConfirmacao
+                            })
+                        });
+                    } catch (errVercel) {
+                        console.log("Erro ao contatar Vercel, mas inscrição foi salva.", errVercel);
+                    }
+                }
+
+                // Redireciona
+                window.location.href = `confirmacao.html?id=${docId}`;
 
             } catch (error) {
                 statusMessage.className = 'status-message error';
-                statusMessage.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${error.message || 'Erro ao salvar. Tente novamente.'}`;
+                statusMessage.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${error.message || 'Erro no processamento.'}`;
                 statusMessage.style.display = 'flex';
                 
                 submitBtn.disabled = false;
