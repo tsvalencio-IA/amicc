@@ -106,7 +106,7 @@
         .form-group input, .form-group select { width: 100%; padding: 0.875rem 1rem; background: var(--background); border: 1px solid var(--border); border-radius: var(--radius-md); color: var(--text-primary); font-size: 1rem; transition: all 0.2s ease; }
         .form-group input:focus, .form-group select:focus { outline: none; border-color: var(--primary-color); box-shadow: 0 0 0 3px rgb(249 115 22 / 0.2); }
         
-        /* Ajuste para telas pequenas (Celulares) para evitar esmagamento dos campos */
+        /* Correção para evitar que os campos esmagem no celular */
         .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
         @media (max-width: 600px) {
             .form-row { grid-template-columns: 1fr; gap: 1.25rem; }
@@ -396,6 +396,7 @@
         const btnAddCart = document.getElementById('btnAddCart');
         const statusMessage = document.getElementById('statusMessage');
         const displayPrecoCamiseta = document.getElementById('displayPrecoCamiseta');
+        const cpfField = document.getElementById('cpf');
 
         // Máscaras de Input (Telefones e CPF)
         function applyPhoneMask(value) {
@@ -407,6 +408,7 @@
             if (digits.length > 0) return digits.replace(/^(\d{0,2}).*/, '($1');
             return digits;
         }
+        
         function applyCpfMask(value) {
             let digits = value.replace(/\D/g, '');
             if (digits.length > 11) digits = digits.slice(0, 11);
@@ -414,9 +416,51 @@
                          .replace(/(\d{3})(\d{3})(\d{1,3})/, "$1.$2.$3")
                          .replace(/(\d{3})(\d{1,3})/, "$1.$2");
         }
+        
         document.getElementById('phone').addEventListener('input', e => e.target.value = applyPhoneMask(e.target.value));
         document.getElementById('emergencyContact').addEventListener('input', e => e.target.value = applyPhoneMask(e.target.value));
-        document.getElementById('cpf').addEventListener('input', e => e.target.value = applyCpfMask(e.target.value));
+        
+        // Eventos no CPF para checagem em tempo real
+        cpfField.addEventListener('input', e => {
+            e.target.value = applyCpfMask(e.target.value);
+            // Libera o erro se o usuário voltar a digitar
+            statusMessage.style.display = 'none';
+            btnAddCart.disabled = false;
+            cpfField.style.borderColor = 'var(--border)';
+        });
+
+        cpfField.addEventListener('blur', async (e) => {
+            const cpfClean = e.target.value.replace(/\D/g, '');
+            
+            // Só faz a busca no banco se o CPF estiver completo (11 dígitos)
+            if (cpfClean.length === 11) {
+                // 1. Checa se já está na lista atual do carrinho
+                if (cart.some(item => item.cpf === cpfClean)) {
+                    mostrarErro(`O CPF ${e.target.value} já foi adicionado na lista de atletas abaixo.`);
+                    btnAddCart.disabled = true;
+                    cpfField.style.borderColor = 'var(--error)';
+                    return;
+                }
+
+                // 2. Checa no Banco de Dados permanentemente (Não importa a data da inscrição)
+                try {
+                    const usersRef = collection(db, 'users');
+                    const qCpf = query(usersRef, where('cpf', '==', cpfClean));
+                    const snapCpf = await getDocs(qCpf);
+                    
+                    if (!snapCpf.empty) {
+                        mostrarErro(`CPF JÁ INSCRITO: O CPF ${e.target.value} já possui uma inscrição registrada no sistema.`);
+                        btnAddCart.disabled = true;
+                        cpfField.style.borderColor = 'var(--error)';
+                    } else {
+                        // CPF livre
+                        cpfField.style.borderColor = 'var(--success)';
+                    }
+                } catch (error) {
+                    console.error("Erro ao verificar CPF no banco de dados:", error);
+                }
+            }
+        });
 
         document.querySelectorAll('.faq-question').forEach(item => {
             item.addEventListener('click', () => {
@@ -479,37 +523,41 @@
         }
         carregarDadosEvento();
 
-        // FUNÇÃO DE ADICIONAR ATLETA AO CARRINHO
+        // FUNÇÃO DE ADICIONAR ATLETA AO CARRINHO (NÍVEL 1 DE VERIFICAÇÃO NO SUBMIT)
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             
             statusMessage.style.display = 'none';
             const formData = new FormData(form);
             const cpfClean = formData.get('cpf').replace(/\D/g, ''); 
+            const cpfDigitadoComMascara = formData.get('cpf');
             
             if (cpfClean.length !== 11) {
-                mostrarErro("Por favor, digite um CPF válido.");
+                mostrarErro("Por favor, digite um CPF válido contendo 11 números.");
                 return;
             }
 
             btnAddCart.disabled = true;
-            btnAddCart.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Verificando...';
+            btnAddCart.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Verificando no sistema...';
 
             try {
-                // Bloqueio de CPF duplicado no BANCO DE DADOS (1 inscrição por CPF)
+                // Bloqueio de CPF duplicado no BANCO DE DADOS
                 const usersRef = collection(db, 'users');
                 const qCpf = query(usersRef, where('cpf', '==', cpfClean));
                 const snapCpf = await getDocs(qCpf);
-                if (!snapCpf.empty) throw new Error('Este CPF já está inscrito na corrida.');
+                
+                if (!snapCpf.empty) {
+                    throw new Error(`Este CPF (${cpfDigitadoComMascara}) já possui uma inscrição pendente ou paga confirmada no sistema. Cada atleta deve usar seu próprio CPF.`);
+                }
 
                 // Bloqueio de CPF duplicado no CARRINHO ATUAL
                 if (cart.some(item => item.cpf === cpfClean)) {
-                    throw new Error('Este CPF já foi adicionado na lista atual abaixo.');
+                    throw new Error(`Este CPF (${cpfDigitadoComMascara}) já foi adicionado na lista verde logo abaixo. Preencha o CPF do próximo atleta.`);
                 }
 
                 // Prepara os dados do Atleta
                 const atleta = {
-                    email: formData.get('email').toLowerCase().trim(), // O email do responsável
+                    email: formData.get('email').toLowerCase().trim(), 
                     phone: formData.get('phone').replace(/\D/g, ''),
                     emergencyContact: formData.get('emergencyContact').replace(/\D/g, ''),
                     
@@ -536,6 +584,7 @@
                 document.getElementById('gender').value = '';
                 document.getElementById('category').value = '';
                 document.getElementById('shirtSize').value = '';
+                cpfField.style.borderColor = 'var(--border)';
 
                 btnAddCart.innerHTML = '<i class="fas fa-check"></i> Adicionado! Cadastre outro ou Finalize.';
                 setTimeout(() => {
@@ -562,11 +611,14 @@
             
             cart.forEach((item, index) => {
                 let catNome = item.category === 'caminhada-3km' ? 'Caminhada 3km' : 'Corrida 5km';
+                // Máscara bonita do CPF só para exibir na tela do carrinho
+                let cpfFormatado = item.cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+                
                 cartDiv.innerHTML += `
                     <div class="cart-item">
                         <div>
                             <strong style="color:white; font-size:1.1rem;">${item.fullName}</strong> <span style="font-size:0.75rem; background: var(--primary-color); color: white; padding: 2px 6px; border-radius: 4px; margin-left: 5px;">${catNome}</span><br>
-                            <small style="color:var(--text-secondary);">CPF: ${item.cpf} | Camiseta: ${item.shirtSize} | R$ ${item.totalAmount.toFixed(2).replace('.',',')}</small>
+                            <small style="color:var(--text-secondary);">CPF: ${cpfFormatado} | Camiseta: ${item.shirtSize} | R$ ${item.totalAmount.toFixed(2).replace('.',',')}</small>
                         </div>
                         <button type="button" class="btn-sm" style="background:var(--error); border:none; color:white; border-radius:0.25rem; cursor:pointer;" onclick="removerDoCarrinho(${index})"><i class="fas fa-trash"></i></button>
                     </div>
@@ -585,13 +637,13 @@
             renderCart();
         };
 
-        // LÓGICA FINAL: ENVIANDO TODO O GRUPO PARA O BANCO DE DADOS DE UMA VEZ
+        // LÓGICA FINAL: ENVIANDO TODO O GRUPO PARA O BANCO DE DADOS (NÍVEL 2 DE VERIFICAÇÃO)
         window.finalizarPedido = async function() {
             if (cart.length === 0) return;
             
             const nomePreenchido = document.getElementById('fullName').value.trim();
             if (nomePreenchido !== '') {
-                alert('Você preencheu os dados de um atleta mas esqueceu de clicar no botão "Adicionar Atleta à Lista". Adicione-o primeiro antes de finalizar!');
+                alert('Você preencheu os dados de um atleta mas esqueceu de clicar no botão "Adicionar Atleta à Lista". Adicione-o primeiro antes de finalizar o pedido!');
                 return;
             }
 
@@ -604,6 +656,18 @@
             document.querySelector('#btnFinalizar .btn-loading').style.display = 'inline-block';
 
             try {
+                // ==========================================
+                // BLINDAGEM FINAL DE CPF ANTES DE SALVAR
+                // ==========================================
+                // Garante que se o usuário abriu 2 abas ou deixou o site muito tempo aberto, não haja duplicidade.
+                for (let i = 0; i < cart.length; i++) {
+                    const qCheck = query(collection(db, 'users'), where('cpf', '==', cart[i].cpf));
+                    const snapCheck = await getDocs(qCheck);
+                    if (!snapCheck.empty) {
+                        throw new Error(`Falha Crítica: O CPF do atleta ${cart[i].fullName} já foi registrado no sistema por outra pessoa agora pouco. Por favor, remova-o do carrinho clicando na lixeira vermelha.`);
+                    }
+                }
+
                 // Gera um ID de Lote (Batch) para linkar todos esses atletas ao mesmo comprador
                 const batchId = 'B' + Date.now().toString() + Math.floor(Math.random() * 1000).toString();
 
