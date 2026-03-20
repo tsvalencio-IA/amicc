@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout e Confirmação - Corrida AMICC</title>
+    <title>Checkout e Confirmação – 3° TREINO DE 5KM EM PROL DA AMICC</title>
     
     <link rel="icon" type="image/png" href="./assets/favicon.png">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
@@ -14,85 +14,87 @@
         body { font-family: 'Inter', sans-serif; background: var(--background); color: var(--text-primary); display: flex; flex-direction: column; min-height: 100vh; margin: 0; }
         
         .main-content { flex: 1; display: flex; align-items: center; justify-content: center; padding: 2rem 1rem; }
-        .card { background: var(--surface); border: 1px solid var(--border); border-radius: 1rem; padding: 3rem 2rem; max-width: 500px; width: 100%; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .card { background: var(--surface); border: 1px solid var(--border); border-radius: 1rem; padding: 2rem; max-width: 600px; width: 100%; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
         
         .footer-thiaguinho { text-align: center; padding: 1.5rem; font-size: 0.8rem; color: #94a3b8; border-top: 1px solid var(--border); background: var(--background); margin-top: auto; letter-spacing: 0.05em; }
         .footer-thiaguinho strong { color: #fdba74; font-weight: 800; }
 
-        .checkout-box { background: rgba(249, 115, 22, 0.05); border: 2px solid var(--primary-color); border-radius: 1rem; padding: 2rem 1.5rem; margin-bottom: 1.5rem; position: relative; overflow: hidden; }
-        .checkout-badge { background: var(--primary-color); color: white; padding: 0.4rem 1rem; border-radius: 0 0 1rem 1rem; position: absolute; top: 0; left: 50%; transform: translateX(-50%); font-weight: bold; font-size: 0.85rem; letter-spacing: 1px; }
-        .pix-key-container { background: var(--background); border: 1px dashed var(--border); padding: 1rem; border-radius: 0.5rem; margin: 1rem 0; word-break: break-all; font-family: monospace; font-size: 1.1rem; color: var(--primary-light); }
+        .step-card { background: var(--background); border: 1px solid var(--border); border-radius: 0.75rem; padding: 1.5rem; margin-bottom: 1rem; text-align: left; position: relative; }
+        .step-number { position: absolute; top: -12px; left: -12px; background: var(--primary-color); color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; box-shadow: 0 4px 10px rgba(249, 115, 22, 0.4); }
+        .step-card h3 { margin: 0 0 0.5rem 0; font-size: 1.1rem; color: white; }
+        .step-card p { margin: 0 0 1rem 0; font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4; }
         
-        .btn-copy { background: var(--surface-elevated); color: white; border: 1px solid var(--border); padding: 0.8rem; border-radius: 0.5rem; width: 100%; font-weight: 600; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-bottom: 1.5rem; }
-        .btn-copy:hover { background: var(--border); }
-        .btn-copy.copied { background: #22c55e; border-color: #22c55e; color: white; }
+        .btn-whats { width: 100%; background: #25D366; padding: 1rem; color: white; border: none; border-radius: 0.5rem; font-size: 1rem; font-weight: 800; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 0.5rem; box-sizing: border-box; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3); transition: transform 0.2s; }
+        .btn-whats:hover { transform: scale(1.02); }
 
-        .step-title { font-size: 0.9rem; color: var(--text-secondary); text-transform: uppercase; font-weight: 800; letter-spacing: 1px; margin-bottom: 0.5rem; text-align: left; }
+        /* DESENHO DO NÚMERO DE PEITO (TICKET) */
+        .bib-ticket { background: #ffffff; border: 4px solid var(--primary-color); border-radius: 12px; padding: 1.5rem; text-align: center; color: #000; margin-bottom: 1rem; box-shadow: 0 8px 20px rgba(0,0,0,0.4); position: relative; overflow: hidden; }
+        .bib-hole { position: absolute; width: 15px; height: 15px; border-radius: 50%; background: var(--surface); }
+        .bib-hole.tl { top: 10px; left: 10px; } .bib-hole.tr { top: 10px; right: 10px; }
+        .bib-hole.bl { bottom: 10px; left: 10px; } .bib-hole.br { bottom: 10px; right: 10px; }
+        .bib-header { font-weight: 800; font-size: 0.85rem; color: #ea580c; text-transform: uppercase; margin-bottom: 0.5rem; letter-spacing: 1px; }
+        .bib-number { font-size: 5rem; margin: 0; font-weight: 900; color: #0f172a; line-height: 1; letter-spacing: -2px; }
+        .bib-name { font-size: 1.2rem; font-weight: 800; color: #334155; margin-top: 0.5rem; text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .bib-details { font-size: 0.9rem; font-weight: 700; color: #64748b; margin-top: 0.2rem; text-transform: uppercase; }
+
+        .tickets-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
     </style>
 </head>
 <body>
 
     <div class="main-content">
         <div class="card" id="mainCard">
-            <i id="mainIcon" class="fas fa-check-circle" style="font-size: 4rem; color: #22c55e; margin-bottom: 1rem;"></i>
-            <h1 id="mainTitle">Inscrição Recebida!</h1>
-            <p id="mainDesc" style="color: #94a3b8; margin-bottom: 1rem;">Sua ficha foi gerada com sucesso.</p>
-
+            
             <div id="loadingBox" style="margin: 2rem 0; color: #94a3b8;">
-                <i class="fas fa-spinner fa-spin"></i> Preparando seu painel de pagamento...
+                <i class="fas fa-spinner fa-spin" style="font-size: 2rem; margin-bottom: 1rem;"></i><br>
+                Preparando suas inscrições...
             </div>
             
-            <div id="pixBox" style="display: none;">
-                <div class="checkout-box">
-                    <div class="checkout-badge"><i class="fas fa-shopping-cart"></i> FINALIZAR COMPRA</div>
-                    
-                    <div style="margin-top: 1rem;">
-                        <h2 style="font-size: 2.2rem; margin: 0; color: white;">R$ <span id="pixValue">0,00</span></h2>
-                        <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 1.5rem;">Valor referente ao Kit (Camiseta Oficial)</p>
+            <div id="contentBox" style="display: none;">
+                <h1 id="mainTitle" style="margin-top: 0; margin-bottom: 0.5rem;">Quase lá!</h1>
+                <p id="mainDesc" style="color: #94a3b8; margin-bottom: 1.5rem; font-size: 0.9rem;">Seus números de peito já foram reservados. Siga os passos para garantir.</p>
+
+                <!-- AREA DINÂMICA DE TICKETS (Múltiplos ou único) -->
+                <div class="tickets-container" id="ticketsContainer"></div>
+
+                <!-- FLUXO INTELIGENTE DE CHECKOUT -->
+                <div id="pixBox" style="display: none;">
+                    <div style="background: rgba(239, 68, 68, 0.1); border: 1px dashed #ef4444; padding: 1rem; border-radius: 0.75rem; margin-bottom: 1.5rem; text-align: left;">
+                        <strong style="color: #ef4444; display: block; margin-bottom: 0.3rem;"><i class="fas fa-exclamation-triangle"></i> ATENÇÃO:</strong>
+                        <span style="font-size: 0.85rem; color: #f8fafc;">A vaga e as camisetas só estarão garantidas após o pagamento total. Lembre-se: será exigida a doação de <strong>2 Litros de Leite ou 2 kg de alimentos</strong> por atleta na retirada dos kits.</span>
                     </div>
 
-                    <div style="text-align: left;">
-                        <div class="step-title">PASSO 1: Copie a Chave PIX</div>
-                        <div class="pix-key-container" id="pixKeyDisplay">Carregando chave...</div>
-                        <input type="text" id="hiddenPixInput" style="position: absolute; left: -9999px;" aria-hidden="true">
-                        <button id="btnCopyPix" class="btn-copy" onclick="copyPixKey()">
-                            <i class="fas fa-copy"></i> Copiar Chave
-                        </button>
-                    </div>
-
-                    <hr style="border: none; border-top: 1px solid rgba(255,255,255,0.1); margin: 1.5rem 0;">
-
-                    <div style="text-align: left;">
-                        <div class="step-title">PASSO 2: Envie o Comprovante</div>
-                        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">Faça o pagamento no app do seu banco e envie o comprovante clicando no botão abaixo.</p>
+                    <!-- PASSO 1: Força o cliente a abrir o WhatsApp -->
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <h3>Solicite a Chave PIX</h3>
+                        <p>O total do seu pedido é de <strong>R$ <span id="pixValue">0,00</span></strong>. Clique no botão abaixo para nos enviar as informações. Nós responderemos com a chave PIX para pagamento.</p>
                         
-                        <a id="btnWhatsCheckout" href="#" target="_blank" style="width: 100%; background: #25D366; padding: 1rem; color: white; border: none; border-radius: 0.5rem; font-size: 1rem; font-weight: 800; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 0.5rem; box-sizing: border-box; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);">
-                            <i class="fab fa-whatsapp" style="font-size: 1.3rem;"></i> ENVIAR COMPROVANTE AQUI
+                        <a id="btnWhatsCheckout" href="#" target="_blank" class="btn-whats">
+                            <i class="fab fa-whatsapp" style="font-size: 1.3rem;"></i> SOLICITAR CHAVE PIX AQUI
                         </a>
                     </div>
+
+                    <!-- PASSO 2: Envio do Comprovante -->
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <h3>Envie o Comprovante</h3>
+                        <p style="margin-bottom: 0;">Após receber nossa chave e pagar no app do seu banco, basta <strong>anexar a foto do comprovante</strong> naquela mesma conversa do WhatsApp!</p>
+                    </div>
                 </div>
+
+                <div id="pagoBox" style="display: none; margin-top: 1rem;">
+                    <i class="fas fa-check-circle" style="font-size: 4rem; color: #22c55e; margin-bottom: 1rem;"></i>
+                    <h2 style="color: #22c55e; margin-bottom: 0.5rem;">Inscrições Confirmadas</h2>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1.5rem;">O pagamento deste grupo já foi processado e as vagas estão garantidas!</p>
+                    
+                    <a id="btnWhatsGeneric" href="#" target="_blank" style="width: 100%; background: var(--surface-elevated); padding: 0.75rem; color: white; border: 1px solid var(--border); border-radius: 0.5rem; font-size: 0.9rem; font-weight: 600; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 0.5rem; box-sizing: border-box;">
+                        <i class="fab fa-whatsapp"></i> Falar com a Organização
+                    </a>
+                </div>
+
+                <a href="index.html" style="color: var(--primary-color); text-decoration: none; font-weight: 600; font-size: 0.9rem; display: inline-block; margin-top: 1.5rem;"><i class="fas fa-arrow-left"></i> Voltar ao site</a>
             </div>
-
-            <!-- AVISO CRÍTICO DO LEITE -->
-            <div style="background: rgba(34, 197, 94, 0.1); border: 1px dashed var(--secondary-color); padding: 1rem; border-radius: 0.75rem; text-align: left; margin-bottom: 1.5rem;">
-                <strong style="color: var(--secondary-color); display: block; margin-bottom: 0.3rem;"><i class="fas fa-exclamation-triangle"></i> IMPORTANTE:</strong>
-                <span style="font-size: 0.85rem; color: var(--text-primary);">A retirada da camiseta no dia do evento SÓ SERÁ PERMITIDA mediante a entrega de <strong>1 Litro de Leite</strong> (Doação AMICC).</span>
-            </div>
-
-            <div id="userData" style="display: none; background: #0f172a; border: 1px solid var(--border); border-radius: 0.75rem; padding: 1.5rem; text-align: left; margin-bottom: 1.5rem;">
-                <div style="font-size: 0.8rem; color: var(--text-secondary); text-transform: uppercase; font-weight: 800; margin-bottom: 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem;">Resumo da Ficha</div>
-                <p style="margin-bottom: 0.5rem; color: #94a3b8;">Nome: <strong style="color: white;" id="uName"></strong></p>
-                <p style="margin-bottom: 0.5rem; color: #94a3b8;">Nº de Peito: <strong style="color: var(--primary-color); font-size: 1.2rem;" id="uPeito"></strong></p>
-                <p style="margin-bottom: 0.5rem; color: #94a3b8;">Modalidade: <strong style="color: white;" id="uCategoria"></strong></p>
-                <p style="margin-bottom: 0.5rem; color: #94a3b8;">Camiseta: <strong style="color: white;" id="uCamiseta"></strong></p>
-                <p style="margin-bottom: 0; color: #94a3b8;">Status: <span id="uStatus" style="padding: 0.2rem 0.6rem; border-radius: 4px; font-weight: bold; font-size: 0.8rem; text-transform: uppercase;"></span></p>
-            </div>
-
-            <a id="btnWhatsGeneric" href="#" target="_blank" style="display: none; width: 100%; margin-bottom: 1.5rem; background: var(--surface-elevated); padding: 0.75rem; color: white; border: 1px solid var(--border); border-radius: 0.5rem; font-size: 0.9rem; font-weight: 600; text-decoration: none; align-items: center; justify-content: center; gap: 0.5rem; box-sizing: border-box;">
-                <i class="fab fa-whatsapp"></i> Falar com a Organização
-            </a>
-
-            <a href="index.html" style="color: var(--primary-color); text-decoration: none; font-weight: 600; font-size: 0.9rem;"><i class="fas fa-arrow-left"></i> Voltar ao site</a>
         </div>
     </div>
 
@@ -102,7 +104,7 @@
 
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
-        import { getFirestore, doc, getDoc } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+        import { getFirestore, collection, doc, getDoc, getDocs, query, where } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
 
         const firebaseConfig = {
             apiKey: "AIzaSyDJWWNufLuBg0GSLdhvHENWwrCFSHB9Vrc",
@@ -116,92 +118,98 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // A PARTIR DE AGORA, ESTE TELEFONE VEM DO PAINEL ADMIN. Se falhar, usa esse padrão abaixo.
         let WHATSAPP_GESTOR = "5517999999999"; 
-        
-        let pixKeyGlobal = ""; 
-
-        window.copyPixKey = function() {
-            const input = document.getElementById('hiddenPixInput');
-            input.value = pixKeyGlobal;
-            input.select();
-            input.setSelectionRange(0, 99999); 
-            
-            try {
-                document.execCommand('copy');
-                const btn = document.getElementById('btnCopyPix');
-                btn.classList.add('copied');
-                btn.innerHTML = '<i class="fas fa-check"></i> Chave Copiada!';
-                setTimeout(() => {
-                    btn.classList.remove('copied');
-                    btn.innerHTML = '<i class="fas fa-copy"></i> Copiar Chave';
-                }, 3000);
-            } catch (err) {
-                alert("Erro ao copiar. Selecione o texto da chave manualmente.");
-            }
-        };
 
         const urlParams = new URLSearchParams(window.location.search);
-        const userId = urlParams.get('id');
+        const batchId = urlParams.get('batch');
+        const legacyId = urlParams.get('id');
 
-        if(userId) {
-            getDoc(doc(db, 'settings', 'event')).then(settingsSnap => {
-                if(settingsSnap.exists()) {
-                    if(settingsSnap.data().pixKey) pixKeyGlobal = settingsSnap.data().pixKey;
-                    // Tenta puxar o zap do admin
-                    if(settingsSnap.data().whatsappGestor) {
-                        WHATSAPP_GESTOR = settingsSnap.data().whatsappGestor.replace(/\D/g, ''); // Garante que só tenha números
+        async function processarTela() {
+            try {
+                const settingsSnap = await getDoc(doc(db, 'settings', 'event'));
+                if(settingsSnap.exists() && settingsSnap.data().whatsappGestor) {
+                    WHATSAPP_GESTOR = settingsSnap.data().whatsappGestor.replace(/\D/g, ''); 
+                }
+
+                let grupoAtletas = [];
+
+                // Puxa o lote inteiro se tiver batchId
+                if (batchId) {
+                    const qBatch = query(collection(db, 'users'), where('batchId', '==', batchId));
+                    const snapBatch = await getDocs(qBatch);
+                    if (!snapBatch.empty) {
+                        snapBatch.forEach(d => grupoAtletas.push(d.data()));
+                    }
+                } else if (legacyId) {
+                    // Fallback para caso antigo de ID único
+                    const snapLegacy = await getDoc(doc(db, 'users', legacyId));
+                    if (snapLegacy.exists()) {
+                        grupoAtletas.push(snapLegacy.data());
                     }
                 }
 
-                getDoc(doc(db, 'users', userId)).then(snap => {
-                    if(snap.exists()) {
-                        const data = snap.data();
-                        
-                        document.getElementById('loadingBox').style.display = 'none';
-                        document.getElementById('userData').style.display = 'block';
-                        
-                        document.getElementById('uName').innerText = data.fullName;
-                        document.getElementById('uPeito').innerText = '#' + String(data.numeroPeito).padStart(3, '0');
-                        document.getElementById('uCategoria').innerText = data.category === 'caminhada-3km' ? 'Caminhada 3 KM' : 'Corrida 5 KM';
-                        document.getElementById('uCamiseta').innerText = `${data.shirtSize} (${data.quantity}x)`;
-                        
-                        const elStatus = document.getElementById('uStatus');
-                        elStatus.innerText = data.paymentStatus;
-                        
-                        if (data.paymentStatus === 'pago') {
-                            elStatus.style.background = 'rgb(34 197 94 / 0.1)'; elStatus.style.color = '#22c55e';
-                            const msgPago = `🏃 Olá!\n\nSou *${data.fullName}* (Nº Peito: *#${data.numeroPeito}*).\nEstou com uma dúvida sobre minha inscrição. (Não vou esquecer meu 1L de leite!)`;
-                            const btnGeneric = document.getElementById('btnWhatsGeneric');
-                            btnGeneric.href = `https://wa.me/${WHATSAPP_GESTOR}?text=${encodeURIComponent(msgPago)}`;
-                            btnGeneric.style.display = 'flex';
+                if (grupoAtletas.length > 0) {
+                    document.getElementById('loadingBox').style.display = 'none';
+                    document.getElementById('contentBox').style.display = 'block';
 
-                        } else if (data.paymentStatus === 'pendente') {
-                            elStatus.style.background = 'rgb(245 158 11 / 0.1)'; elStatus.style.color = '#f59e0b';
-                            
-                            document.getElementById('mainIcon').className = 'fas fa-stopwatch';
-                            document.getElementById('mainIcon').style.color = '#f97316';
-                            document.getElementById('mainTitle').innerText = 'Quase lá!';
-                            document.getElementById('mainDesc').innerText = 'Finalize sua compra via PIX para confirmar sua inscrição.';
-                            
-                            document.getElementById('pixBox').style.display = 'block';
-                            document.getElementById('pixValue').innerText = data.totalAmount.toFixed(2).replace('.', ',');
-                            document.getElementById('pixKeyDisplay').innerText = pixKeyGlobal;
+                    const container = document.getElementById('ticketsContainer');
+                    let valorTotalLote = 0;
+                    let todosPagos = true;
+                    let infoParaWhats = '';
+                    let nomeContato = grupoAtletas[0].fullName;
 
-                            const msgPix = `🛒 *COMPROVANTE DE PAGAMENTO*\n\nCorrida AMICC RP\nAtleta: *${data.fullName}*\nNº de Peito: *#${data.numeroPeito}*\nValor pago: *R$ ${data.totalAmount.toFixed(2).replace('.', ',')}*\n\n_Estou ciente de que preciso levar 1 Litro de Leite para a doação._\n\n_Anexe o comprovante abaixo:_`;
-                            document.getElementById('btnWhatsCheckout').href = `https://wa.me/${WHATSAPP_GESTOR}?text=${encodeURIComponent(msgPix)}`;
-                        }
+                    // Cria um Ticket Visual para CADA atleta do pedido
+                    grupoAtletas.forEach(data => {
+                        let peitoFormatado = '#' + String(data.numeroPeito).padStart(3, '0');
+                        let modalidadeText = data.category === 'caminhada-3km' ? 'Caminhada 3km' : 'Corrida 5km';
+                        
+                        container.innerHTML += `
+                            <div class="bib-ticket">
+                                <div class="bib-hole tl"></div><div class="bib-hole tr"></div>
+                                <div class="bib-hole bl"></div><div class="bib-hole br"></div>
+                                <div class="bib-header">3° TREINO DE 5KM EM PROL DA AMICC</div>
+                                <h1 class="bib-number">${peitoFormatado}</h1>
+                                <div class="bib-name">${data.fullName}</div>
+                                <div class="bib-details">${modalidadeText} • ${data.gender || 'ND'}</div>
+                            </div>
+                        `;
+
+                        valorTotalLote += data.totalAmount;
+                        if (data.paymentStatus === 'pendente') todosPagos = false;
+
+                        infoParaWhats += `\n🎫 *Peito ${peitoFormatado}* - ${data.fullName} (${modalidadeText}) | 👕 ${data.shirtSize}`;
+                    });
+
+                    if (todosPagos) {
+                        document.getElementById('mainTitle').innerText = 'Inscrições Confirmadas!';
+                        document.getElementById('mainDesc').style.display = 'none';
+                        document.getElementById('pagoBox').style.display = 'block';
+
+                        const msgPago = `🏃 Olá!\n\nSou responsável pela inscrição do grupo de *${grupoAtletas.length}* pessoa(s).\nEstou com uma dúvida sobre minha inscrição. (Estou ciente da doação de alimentos na retirada!)`;
+                        document.getElementById('btnWhatsGeneric').href = `https://wa.me/55${WHATSAPP_GESTOR}?text=${encodeURIComponent(msgPago)}`;
 
                     } else {
-                        document.getElementById('loadingBox').innerHTML = '<i class="fas fa-times-circle" style="color:#ef4444"></i> Ficha não encontrada.';
+                        document.getElementById('pixBox').style.display = 'block';
+                        document.getElementById('pixValue').innerText = valorTotalLote.toFixed(2).replace('.', ',');
+
+                        let cabecalhoMensagem = grupoAtletas.length > 1 
+                            ? `Oi, tudo bem? Estou inscrevendo um GRUPO de ${grupoAtletas.length} atletas na 3° TREINO DA AMICC!\n\nSou o contato responsável pelas seguintes fichas:`
+                            : `Oi, tudo bem? Estou me inscrevendo no 3° TREINO DA AMICC!\n\nSou *${nomeContato}*. Minha ficha:`;
+
+                        const msgPix = `${cabecalhoMensagem}\n${infoParaWhats}\n\nPor favor, me envie a *chave PIX* para eu realizar o pagamento de R$ ${valorTotalLote.toFixed(2).replace('.', ',')} e enviar o comprovante por aqui mesmo.\n\n_(Estou ciente da doação de 2L de Leite ou 2 kg de Alimentos)_`;
+                        
+                        document.getElementById('btnWhatsCheckout').href = `https://wa.me/55${WHATSAPP_GESTOR}?text=${encodeURIComponent(msgPix)}`;
                     }
-                }).catch(err => {
-                    document.getElementById('loadingBox').innerText = 'Erro ao carregar os dados.';
-                });
-            });
-        } else {
-            document.getElementById('loadingBox').innerText = 'Nenhuma inscrição informada.';
+
+                } else {
+                    document.getElementById('loadingBox').innerHTML = '<i class="fas fa-times-circle" style="color:#ef4444; font-size: 2rem; margin-bottom: 1rem;"></i><br>Fichas não encontradas.';
+                }
+            } catch (err) {
+                document.getElementById('loadingBox').innerText = 'Erro ao carregar os dados.';
+            }
         }
+
+        processarTela();
     </script>
 </body>
 </html>
