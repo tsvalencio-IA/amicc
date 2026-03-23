@@ -29,9 +29,18 @@
 
         .login-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--background); z-index: 1000; display: flex; align-items: center; justify-content: center; }
         .login-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 2rem; width: 100%; max-width: 400px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
+        
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(5px); z-index: 2000; display: none; align-items: center; justify-content: center; padding: 1rem; }
+        .modal-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); width: 100%; max-width: 500px; max-height: 90vh; overflow-y: auto; padding: 2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.7); position: relative; }
+        .modal-close { position: absolute; top: 1rem; right: 1rem; background: none; border: none; color: var(--text-secondary); font-size: 1.5rem; cursor: pointer; }
+        .modal-close:hover { color: var(--error); }
+
         .form-group label { display: block; font-size: 0.875rem; font-weight: 500; color: var(--text-secondary); margin-bottom: 0.5rem; }
-        .form-group input, .form-group select { width: 100%; padding: 0.75rem; background: var(--background); border: 1px solid var(--border); border-radius: var(--radius-md); color: var(--text-primary); margin-bottom: 1rem; }
-        .form-group input:focus { outline: none; border-color: var(--primary-color); }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 0.75rem; background: var(--background); border: 1px solid var(--border); border-radius: var(--radius-md); color: var(--text-primary); margin-bottom: 1rem; font-family: var(--font-main);}
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--primary-color); }
+        .form-row { display: flex; gap: 1rem; }
+        .form-row .form-group { flex: 1; }
+
         .btn { width: 100%; padding: 0.75rem; background: linear-gradient(135deg, var(--primary-color), var(--primary-dark)); color: white; border: none; border-radius: var(--radius-md); font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.5rem; transition: opacity 0.2s; }
         .btn:hover { opacity: 0.9; }
         .btn-secondary { background: var(--surface-elevated); border: 1px solid var(--border); width: auto; }
@@ -39,6 +48,8 @@
         .btn-danger:hover { background: var(--error); color: white; }
         .btn-whats { background: rgba(37, 211, 102, 0.1); border: 1px solid #25D366; color: #25D366; }
         .btn-whats:hover { background: #25D366; color: white; }
+        .btn-info { background: rgba(56, 189, 248, 0.1); border: 1px solid #38bdf8; color: #38bdf8; }
+        .btn-info:hover { background: #38bdf8; color: white; }
         .btn-sm { padding: 0.4rem 0.8rem; font-size: 0.8rem; }
         
         .dashboard { display: none; flex: 1; }
@@ -51,11 +62,12 @@
         .tab-content { display: none; padding: 1.5rem; }
         .tab-content.active { display: block; }
 
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
-        .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.25rem; }
-        .stat-card-value { font-size: 1.75rem; font-weight: 700; margin-top: 0.5rem; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1rem; }
+        .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.25rem; display: flex; flex-direction: column; }
+        .stat-card-value { font-size: 1.75rem; font-weight: 700; margin-top: 0.2rem; margin-bottom: 0.5rem; }
+        .kpi-desc { font-size: 0.75rem; color: var(--text-muted); line-height: 1.3; border-top: 1px solid var(--border); padding-top: 0.5rem; margin-top: auto; }
 
-        .charts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
+        .charts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; margin-top: 2rem; }
         .chart-container { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1rem; position: relative; height: 300px; }
 
         .data-table { width: 100%; border-collapse: collapse; background: var(--surface); font-size: 0.875rem; }
@@ -64,6 +76,9 @@
         .badge { padding: 0.25rem 0.5rem; border-radius: var(--radius-md); font-size: 0.75rem; font-weight: 600; }
         .badge.pago { background: rgb(34 197 94 / 0.1); color: var(--success); }
         .badge.pendente { background: rgb(245 158 11 / 0.1); color: var(--warning); }
+        .badge.receita { background: rgb(56 189 248 / 0.1); color: #38bdf8; }
+        .badge.despesa { background: rgb(239 68 68 / 0.1); color: #ef4444; }
+        .badge.gratuito { background: rgb(139 92 246 / 0.1); color: #8b5cf6; } /* Adicionado para Inscrições Gratuitas */
 
         .settings-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.5rem; margin-bottom: 1.5rem; }
         .admin-list { list-style: none; margin-top: 1rem; }
@@ -73,24 +88,134 @@
         
         .footer-thiaguinho { text-align: center; padding: 1.5rem; font-size: 0.8rem; color: #94a3b8; border-top: 1px solid var(--border); background: var(--background); margin-top: auto; letter-spacing: 0.05em; }
         .footer-thiaguinho strong { color: #fdba74; font-weight: 800; }
+        
+        .checkbox-container { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1.5rem; justify-content: center; }
+        .checkbox-container input[type="checkbox"] { width: auto; margin: 0; cursor: pointer; }
+        .checkbox-container label { font-size: 0.85rem; color: var(--text-secondary); cursor: pointer; margin: 0; }
     </style>
 </head>
 <body>
+    <!-- OVERLAY DE LOGIN -->
     <div class="login-overlay" id="loginOverlay">
         <div class="login-card">
             <h2 style="text-align: center; margin-bottom: 1rem; color: var(--primary-light);"><i class="fas fa-shield-alt"></i> Acesso Restrito</h2>
             <form id="loginForm">
                 <div class="form-group">
                     <label>E-mail do Administrador</label>
-                    <input type="email" id="adminEmail" required placeholder="admin@amicc.com.br">
+                    <input type="email" id="adminEmail" required placeholder="admin@amicc.com.br" autocomplete="username">
                 </div>
                 <div class="form-group">
                     <label>Senha</label>
-                    <input type="password" id="adminPassword" required placeholder="••••••••">
+                    <input type="password" id="adminPassword" required placeholder="••••••••" autocomplete="current-password">
                 </div>
+                
+                <div class="checkbox-container">
+                    <input type="checkbox" id="rememberMe">
+                    <label for="rememberMe">Lembrar meu e-mail</label>
+                </div>
+
                 <button type="submit" class="btn" id="loginBtn"><i class="fas fa-sign-in-alt"></i> Entrar no Painel</button>
             </form>
             <div id="loginError" style="color: var(--error); margin-top: 1rem; text-align: center; font-size: 0.875rem; display: none;"></div>
+        </div>
+    </div>
+
+    <!-- MODAL PARA EDITAR ATLETA -->
+    <div class="modal-overlay" id="modalEditarUsuario">
+        <div class="modal-card">
+            <button class="modal-close" onclick="fecharModalEdicao()"><i class="fas fa-times"></i></button>
+            <h2 style="color: var(--primary-light); margin-bottom: 1.5rem;"><i class="fas fa-user-edit"></i> Corrigir Dados do Atleta</h2>
+            
+            <input type="hidden" id="editUserId">
+            
+            <div class="form-group">
+                <label>Nome Completo</label>
+                <input type="text" id="editFullName">
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>CPF</label>
+                    <input type="text" inputmode="numeric" id="editCpf">
+                </div>
+                <div class="form-group">
+                    <label>Data de Nascimento</label>
+                    <input type="text" inputmode="numeric" id="editBirthDate" placeholder="DD/MM/AAAA" maxlength="10">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>WhatsApp</label>
+                    <input type="tel" inputmode="numeric" id="editPhone">
+                </div>
+                <div class="form-group">
+                    <label>Sexo</label>
+                    <select id="editGender">
+                        <option value="Masculino">Masculino</option>
+                        <option value="Feminino">Feminino</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Modalidade</label>
+                    <select id="editCategory">
+                        <option value="caminhada-3km">Caminhada 3 KM</option>
+                        <option value="corrida-5km">Corrida 5 KM</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Camiseta</label>
+                    <select id="editShirtSize">
+                        <option value="Sem Camiseta">Sem Camiseta</option>
+                        <option value="P">P (Busto: 48cm / Altura: 68cm)</option>
+                        <option value="M">M (Busto: 50cm / Altura: 69cm)</option>
+                        <option value="G">G (Busto: 52cm / Altura: 71cm)</option>
+                        <option value="GG">GG (Busto: 54cm / Altura: 73cm)</option>
+                        <option value="XG">XG (Busto: 56cm / Altura: 75cm)</option>
+                        <option value="XXG">XXG (Busto: 58cm / Altura: 77cm)</option>
+                    </select>
+                </div>
+            </div>
+
+            <button class="btn" onclick="salvarEdicaoUsuario()"><i class="fas fa-save"></i> Salvar Alterações e Registrar Log</button>
+        </div>
+    </div>
+
+    <!-- MODAL PARA LANÇAMENTO FINANCEIRO -->
+    <div class="modal-overlay" id="modalFinancas">
+        <div class="modal-card">
+            <button class="modal-close" onclick="fecharModalFinancas()"><i class="fas fa-times"></i></button>
+            <h2 style="color: var(--success); margin-bottom: 1.5rem;"><i class="fas fa-file-invoice-dollar"></i> Lançamento Financeiro</h2>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Tipo de Lançamento</label>
+                    <select id="finTipo" required>
+                        <option value="Receita">Outras Receitas</option>
+                        <option value="Patrocinio">Patrocínio</option>
+                        <option value="Doacao">Doação em Dinheiro</option>
+                        <option value="Despesa">Despesa / Compra</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Valor (R$)</label>
+                    <input type="number" id="finValor" step="0.01" required placeholder="0.00" inputmode="numeric">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Entidade (Credor / Doador / Patrocinador)</label>
+                <input type="text" id="finEntidade" required placeholder="Ex: Supermercados Muffato">
+            </div>
+            <div class="form-group">
+                <label>Descrição Detalhada / Referência</label>
+                <textarea id="finDescricao" rows="2" required placeholder="Ex: Compra de 300 águas para o trajeto"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Data do Pagamento/Recebimento</label>
+                <input type="date" id="finData" required>
+            </div>
+
+            <button class="btn" style="background: linear-gradient(135deg, var(--success), #16a34a);" onclick="salvarTransacaoFinanceira()"><i class="fas fa-save"></i> Gravar Transação no Cofre</button>
         </div>
     </div>
 
@@ -98,7 +223,8 @@
         <header class="admin-header">
             <h1 style="font-size: 1.25rem;"><i class="fas fa-chart-pie" style="color: var(--primary-color);"></i> Painel de Controle</h1>
             <div style="display: flex; gap: 0.5rem; align-items: center;">
-                <span id="loggedUser" style="color: var(--text-secondary); font-size: 0.875rem; margin-right: 1rem;"></span>
+                <a href="index.html" class="btn btn-secondary btn-sm" style="color: white; border-color: var(--border); text-decoration: none;"><i class="fas fa-home"></i> Ver Site</a>
+                <span id="loggedUser" style="color: var(--text-secondary); font-size: 0.875rem; margin-right: 1rem; margin-left: 1rem;"></span>
                 <span style="color: var(--secondary-color); font-size: 0.8rem; margin-right: 1rem;"><i class="fas fa-circle" style="font-size: 8px;"></i> Tempo Real</span>
                 <button class="btn btn-danger btn-sm" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Sair</button>
             </div>
@@ -107,6 +233,7 @@
         <div class="admin-tabs">
             <button class="tab-btn active" onclick="openTab('visaoGeral')"><i class="fas fa-home"></i> Visão Geral</button>
             <button class="tab-btn" onclick="openTab('inscritos')"><i class="fas fa-users"></i> Geral (Gerenciar)</button>
+            <button class="tab-btn" onclick="openTab('financas')"><i class="fas fa-wallet"></i> Controle Financeiro</button>
             <button class="tab-btn" onclick="openTab('logs')"><i class="fas fa-history"></i> Histórico de Ações</button>
             <button class="tab-btn" onclick="openTab('premiacao')"><i class="fas fa-trophy"></i> Listas de Premiação</button>
             <button class="tab-btn" onclick="openTab('gestaoConteudo')"><i class="fas fa-images"></i> Imagens do Site</button>
@@ -115,24 +242,78 @@
         </div>
 
         <div id="visaoGeral" class="tab-content active">
+            <!-- BLOCO 1: DADOS BÁSICOS -->
             <div class="stats-grid">
                 <div class="stat-card">
-                    <div style="color: var(--text-secondary);">Total de Inscritos</div>
+                    <div style="color: var(--text-secondary);"><i class="fas fa-users"></i> Total de Inscritos</div>
                     <div class="stat-card-value" id="statTotal">0</div>
+                    <div class="kpi-desc">Soma de todas as fichas geradas no site (inclui pagas e as que estão aguardando o PIX).</div>
                 </div>
                 <div class="stat-card">
-                    <div style="color: var(--secondary-color);">Meta Inicial (Vagas)</div>
+                    <div style="color: var(--secondary-color);"><i class="fas fa-flag-checkered"></i> Meta (Vagas)</div>
                     <div class="stat-card-value" id="statVagasInfo">0</div>
+                    <div class="kpi-desc">Limite máximo de vagas configuradas para o evento no momento.</div>
                 </div>
                 <div class="stat-card">
-                    <div style="color: var(--success);">Pagamentos Confirmados</div>
+                    <div style="color: var(--success);"><i class="fas fa-check-circle"></i> Inscrições Confirmadas</div>
                     <div class="stat-card-value" id="statPagos">0</div>
+                    <div class="kpi-desc">Atletas com vaga garantida (pagamento aprovado ou inscrição gratuita validada).</div>
                 </div>
                 <div class="stat-card">
-                    <div style="color: var(--warning);">Pagamentos Pendentes</div>
+                    <div style="color: var(--warning);"><i class="fas fa-clock"></i> Pagamentos Pendentes</div>
                     <div class="stat-card-value" id="statPendentes">0</div>
+                    <div class="kpi-desc">Inscrições geradas que ainda não enviaram comprovante ou não foram aprovadas pela gestão.</div>
                 </div>
             </div>
+
+            <!-- BLOCO 2: KPIS ESTRATÉGICOS -->
+            <div class="stats-grid">
+                <div class="stat-card" style="border-left: 4px solid #3b82f6;">
+                    <div style="color: var(--text-secondary);"><i class="fas fa-chart-line"></i> Taxa de Conversão</div>
+                    <div class="stat-card-value" id="kpiConversao" style="color: #3b82f6;">0%</div>
+                    <div class="kpi-desc">Mostra a eficiência: Quantos % das pessoas que preencheram a ficha realmente efetuaram o pagamento.</div>
+                </div>
+                <div class="stat-card" style="border-left: 4px solid #8b5cf6;">
+                    <div style="color: var(--text-secondary);"><i class="fas fa-coins"></i> Receita Potencial (Todos)</div>
+                    <div class="stat-card-value" id="kpiReceitaPotencial" style="color: #8b5cf6;">R$ 0,00</div>
+                    <div class="kpi-desc">A soma em dinheiro de TODOS os atletas (pagos + pendentes). O teto máximo caso todos paguem.</div>
+                </div>
+                <div class="stat-card" style="border-left: 4px solid #ec4899;">
+                    <div style="color: var(--text-secondary);"><i class="fas fa-running"></i> Atletas (5 KM)</div>
+                    <div class="stat-card-value" id="kpi5km" style="color: #ec4899;">0</div>
+                    <div class="kpi-desc">Total de participantes (pagos e pendentes) que escolheram correr o trajeto principal de 5km.</div>
+                </div>
+                <div class="stat-card" style="border-left: 4px solid #14b8a6;">
+                    <div style="color: var(--text-secondary);"><i class="fas fa-walking"></i> Atletas (3 KM)</div>
+                    <div class="stat-card-value" id="kpi3km" style="color: #14b8a6;">0</div>
+                    <div class="kpi-desc">Total de participantes (pagos e pendentes) que escolheram a caminhada de 3km.</div>
+                </div>
+            </div>
+
+            <!-- BLOCO 3: KPIS FINANCEIROS E DEMOGRÁFICOS -->
+            <div class="stats-grid">
+                <div class="stat-card" style="border-left: 4px solid var(--success);">
+                    <div style="color: var(--text-secondary);"><i class="fas fa-hand-holding-usd"></i> Receita Efetiva (Inscrições)</div>
+                    <div class="stat-card-value" id="kpiReceitaEfetiva" style="color: var(--success);">R$ 0,00</div>
+                    <div class="kpi-desc">Dinheiro real já faturado EXCLUSIVAMENTE das inscrições que vocês já aprovaram como Pagas.</div>
+                </div>
+                <div class="stat-card" style="border-left: 4px solid var(--primary-light);">
+                    <div style="color: var(--text-secondary);"><i class="fas fa-tshirt"></i> Camisetas a Produzir (Pagas)</div>
+                    <div class="stat-card-value" id="kpiCamisasProduzir" style="color: var(--primary-light);">0</div>
+                    <div class="kpi-desc">Número exato de camisetas (todos os tamanhos) compradas apenas pelos atletas já Pagos.</div>
+                </div>
+                <div class="stat-card" style="border-left: 4px solid #f43f5e;">
+                    <div style="color: var(--text-secondary);"><i class="fas fa-venus"></i> Público Feminino</div>
+                    <div class="stat-card-value" id="kpiMulheres" style="color: #f43f5e;">0</div>
+                    <div class="kpi-desc">Total de mulheres cadastradas no sistema. Ajuda a definir as categorias de troféus e banheiros.</div>
+                </div>
+                <div class="stat-card" style="border-left: 4px solid #0ea5e9;">
+                    <div style="color: var(--text-secondary);"><i class="fas fa-mars"></i> Público Masculino</div>
+                    <div class="stat-card-value" id="kpiHomens" style="color: #0ea5e9;">0</div>
+                    <div class="kpi-desc">Total de homens cadastrados no sistema. Ajuda a direcionar logística e premiações.</div>
+                </div>
+            </div>
+
             <div class="charts-grid">
                 <div class="chart-container"><canvas id="categoriaChart"></canvas></div>
                 <div class="chart-container"><canvas id="tamanhosChart"></canvas></div>
@@ -144,10 +325,10 @@
                 <input type="text" id="searchInput" placeholder="Buscar nome ou Nº Peito..." style="padding: 0.5rem; border-radius: var(--radius-md); border: 1px solid var(--border); background: var(--surface); color: white; width: 300px;">
                 <select id="filtroPagamento" style="padding: 0.5rem; border-radius: var(--radius-md); border: 1px solid var(--border); background: var(--surface); color: white;">
                     <option value="all">Todos Pagamentos</option>
-                    <option value="pago">Apenas Pagos</option>
+                    <option value="pago">Apenas Pagos/Confirmados</option>
                     <option value="pendente">Apenas Pendentes</option>
                 </select>
-                <button class="btn" style="width: auto;" onclick="exportarExcel()"><i class="fas fa-file-excel"></i> Exportar Excel</button>
+                <button class="btn" style="width: auto;" onclick="exportarExcel()"><i class="fas fa-file-excel"></i> Exportar Inscrições</button>
                 <button class="btn btn-secondary" style="width: auto;" onclick="exportarCamisetas()"><i class="fas fa-tshirt"></i> Relatório Fábrica</button>
             </div>
 
@@ -158,7 +339,7 @@
                             <th style="width: 80px;">Nº Peito</th>
                             <th>Nome, Nasc. e Contato</th>
                             <th>Modalidade</th>
-                            <th>Camiseta Casual</th>
+                            <th>Kit/Camiseta</th>
                             <th>Total (R$)</th>
                             <th>Status Pagamento</th>
                             <th>Ações</th>
@@ -169,11 +350,71 @@
             </div>
         </div>
 
+        <div id="financas" class="tab-content">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+                <h2 style="color: white; margin: 0;"><i class="fas fa-wallet" style="color: var(--success);"></i> Cofre do Evento</h2>
+                <div style="display: flex; gap: 1rem;">
+                    <button class="btn btn-secondary" style="width: auto;" onclick="exportarFinancasExcel()"><i class="fas fa-file-excel"></i> Exportar Extrato</button>
+                    <button class="btn" style="width: auto; background: linear-gradient(135deg, var(--success), #16a34a);" onclick="abrirModalFinancas()"><i class="fas fa-plus"></i> Novo Lançamento</button>
+                </div>
+            </div>
+
+            <div class="stats-grid" style="margin-bottom: 2rem;">
+                <div class="stat-card" style="border-top: 4px solid var(--primary-color);">
+                    <div style="color: var(--text-secondary); font-size: 0.85rem;"><i class="fas fa-ticket-alt"></i> Total Inscrições (Pagas)</div>
+                    <div class="stat-card-value" id="finTotalInscricoes" style="color: white;">R$ 0,00</div>
+                </div>
+                <div class="stat-card" style="border-top: 4px solid #38bdf8;">
+                    <div style="color: var(--text-secondary); font-size: 0.85rem;"><i class="fas fa-hand-holding-usd"></i> Patrocínios / Doações Extras</div>
+                    <div class="stat-card-value" id="finTotalExtras" style="color: #38bdf8;">R$ 0,00</div>
+                </div>
+                <div class="stat-card" style="border-top: 4px solid var(--error);">
+                    <div style="color: var(--text-secondary); font-size: 0.85rem;"><i class="fas fa-shopping-cart"></i> Despesas / Compras</div>
+                    <div class="stat-card-value" id="finTotalDespesas" style="color: var(--error);">R$ 0,00</div>
+                </div>
+                <div class="stat-card" style="border-top: 4px solid var(--success); background: rgba(34, 197, 94, 0.05);">
+                    <div style="color: var(--text-secondary); font-size: 0.85rem;"><i class="fas fa-piggy-bank"></i> Saldo Líquido do Evento</div>
+                    <div class="stat-card-value" id="finSaldoLiquido" style="color: var(--success);">R$ 0,00</div>
+                </div>
+            </div>
+
+            <!-- NOVA ÁREA DE FILTROS DO FINANCEIRO RESTAURADA -->
+            <div style="display: flex; gap: 1rem; margin-bottom: 1rem; align-items: center; flex-wrap: wrap;">
+                <input type="text" id="searchFinancaInput" placeholder="Buscar entidade ou descrição..." style="padding: 0.5rem; border-radius: var(--radius-md); border: 1px solid var(--border); background: var(--surface); color: white; width: 300px;">
+                <select id="filtroFinancaTipo" style="padding: 0.5rem; border-radius: var(--radius-md); border: 1px solid var(--border); background: var(--surface); color: white;">
+                    <option value="all">Todas as Transações</option>
+                    <option value="Receita (Inscrição)">Apenas Receitas (Inscrições)</option>
+                    <option value="Inscrição Gratuita">Apenas Inscrições Gratuitas</option>
+                    <option value="Receita">Apenas Outras Receitas</option>
+                    <option value="Patrocinio">Apenas Patrocínios</option>
+                    <option value="Doacao">Apenas Doações</option>
+                    <option value="Despesa">Apenas Despesas</option>
+                </select>
+            </div>
+
+            <div style="overflow-x: auto; background: var(--surface); border-radius: var(--radius-lg); border: 1px solid var(--border);">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 120px;">Data</th>
+                            <th>Tipo</th>
+                            <th>Entidade / Nome</th>
+                            <th>Descrição / Origem</th>
+                            <th>Registrado Por</th>
+                            <th style="text-align: right;">Valor</th>
+                            <th style="width: 60px;">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableFinancasBody"></tbody>
+                </table>
+            </div>
+        </div>
+
         <div id="logs" class="tab-content">
             <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem; align-items: center;">
-                <h2 style="color: white; margin: 0;"><i class="fas fa-history" style="color: var(--primary-light);"></i> Linha do Tempo (Ações de Admins)</h2>
+                <h2 style="color: white; margin: 0;"><i class="fas fa-history" style="color: var(--primary-light);"></i> Linha do Tempo de Auditoria</h2>
             </div>
-            <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 1.5rem;">Registro de segurança de todas as exclusões de atletas e aprovações de pagamento realizadas no sistema.</p>
+            <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 1.5rem;">Registro de segurança de exclusões, correções de cadastro e movimentações financeiras feitas pela equipe de Admins.</p>
 
             <div style="overflow-x: auto; background: var(--surface); border-radius: var(--radius-lg); border: 1px solid var(--border);">
                 <table class="data-table">
@@ -182,7 +423,7 @@
                             <th style="width: 160px;">Data e Hora</th>
                             <th>Administrador</th>
                             <th>Ação Efetuada</th>
-                            <th>Atleta (Nº Peito)</th>
+                            <th>Alvo (Atleta / Transação)</th>
                             <th>Motivo / Detalhes</th>
                         </tr>
                     </thead>
@@ -240,14 +481,24 @@
 
         <div id="gestaoConteudo" class="tab-content">
             <div class="settings-card" style="max-width: 900px;">
-                <h3><i class="fas fa-cloud-upload-alt"></i> Upload de Arquivos via Cloudinary</h3>
+                <h3><i class="fas fa-cloud-upload-alt"></i> Gestão do Site</h3>
                 <div class="form-group">
                     <label>Mensagem de Destaque no Início do Site</label>
                     <input type="text" id="contHero" placeholder="Ex: Prepare-se para o maior evento beneficente do ano!">
                 </div>
                 <hr style="border: none; border-top: 1px solid var(--border); margin: 1.5rem 0;">
                 
-                <h4 style="color: var(--primary-light); margin-bottom: 1rem;">1. Imagens do Evento</h4>
+                <h4 style="color: var(--primary-light); margin-bottom: 1rem;">1. Mapa Interativo (Google Maps / Strava)</h4>
+                <div class="form-group" style="background: var(--background); padding: 1.5rem; border-radius: var(--radius-md); border: 1px dashed var(--primary-color);">
+                    <label><i class="fas fa-map-marked-alt" style="color: var(--primary-light);"></i> Código de Incorporação (Google Maps ou Strava)</label>
+                    <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">Crie sua rota no <strong>Google My Maps</strong> (código <code>&lt;iframe...</code>) ou <strong>Strava</strong> (código <code>&lt;div...&lt;script...</code>) e cole o código inteiro aqui. Ele substituirá a imagem estática pelo mapa interativo navegável.</p>
+                    <input type="text" id="mapaIframeInput" placeholder='Cole o código do Google Maps ou do Strava aqui...' style="font-family: monospace; font-size: 0.85rem;">
+                    <button class="btn btn-secondary btn-sm" onclick="salvarIframeMapa()"><i class="fas fa-save"></i> Salvar Mapa Interativo</button>
+                </div>
+
+                <hr style="border: none; border-top: 1px solid var(--border); margin: 1.5rem 0;">
+                
+                <h4 style="color: var(--primary-light); margin-bottom: 1rem;">2. Imagens do Evento (Upload Cloudinary)</h4>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
                     <div class="form-group" style="background: var(--background); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border);">
                         <label><i class="fas fa-image" style="color: var(--primary-light);"></i> Cartaz do Evento (Fim da Página)</label>
@@ -255,7 +506,7 @@
                         <button class="btn btn-secondary btn-sm" onclick="fazerUploadCloudinary('uploadCartaz', 'cartazUrl')"><i class="fas fa-upload"></i> Enviar Cartaz</button>
                     </div>
                     <div class="form-group" style="background: var(--background); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border);">
-                        <label><i class="fas fa-map-marked-alt" style="color: var(--primary-light);"></i> Mapa do Percurso</label>
+                        <label><i class="fas fa-map-marked-alt" style="color: var(--primary-light);"></i> Imagem Estática do Mapa</label>
                         <input type="file" id="uploadMapa" accept="image/*" style="padding: 0.5rem; margin-bottom: 0.5rem;">
                         <button class="btn btn-secondary btn-sm" onclick="fazerUploadCloudinary('uploadMapa', 'mapaUrl')"><i class="fas fa-upload"></i> Enviar Mapa</button>
                     </div>
@@ -273,56 +524,106 @@
 
                 <hr style="border: none; border-top: 1px solid var(--border); margin: 1.5rem 0;">
                 
-                <h4 style="color: var(--primary-light); margin-bottom: 1rem;">2. Logos: Organizadores</h4>
+                <h4 style="color: var(--primary-light); margin-bottom: 1rem;">3. Logos: Organizadores</h4>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
                     <div class="form-group" style="background: var(--background); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border);">
-                        <label>Organizador 1</label><input type="file" id="upOrg1" accept="image/*">
-                        <button class="btn btn-secondary btn-sm" onclick="fazerUploadCloudinary('upOrg1', 'org1Url')">Enviar</button>
+                        <label>Organizador 1</label>
+                        <input type="file" id="upOrg1" accept="image/*" style="margin-bottom: 0.5rem; padding: 0.4rem;">
+                        <button class="btn btn-secondary btn-sm" onclick="fazerUploadCloudinary('upOrg1', 'org1Url')" style="margin-bottom: 1rem;">Enviar Logo</button>
+                        <label style="font-size: 0.75rem; color: var(--text-muted);">Link (Site ou Instagram)</label>
+                        <input type="text" id="linkOrg1" placeholder="https://instagram.com/..." style="padding: 0.4rem; font-size: 0.8rem;">
                     </div>
                     <div class="form-group" style="background: var(--background); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border);">
-                        <label>Organizador 2</label><input type="file" id="upOrg2" accept="image/*">
-                        <button class="btn btn-secondary btn-sm" onclick="fazerUploadCloudinary('upOrg2', 'org2Url')">Enviar</button>
+                        <label>Organizador 2</label>
+                        <input type="file" id="upOrg2" accept="image/*" style="margin-bottom: 0.5rem; padding: 0.4rem;">
+                        <button class="btn btn-secondary btn-sm" onclick="fazerUploadCloudinary('upOrg2', 'org2Url')" style="margin-bottom: 1rem;">Enviar Logo</button>
+                        <label style="font-size: 0.75rem; color: var(--text-muted);">Link (Site ou Instagram)</label>
+                        <input type="text" id="linkOrg2" placeholder="https://instagram.com/..." style="padding: 0.4rem; font-size: 0.8rem;">
                     </div>
                     <div class="form-group" style="background: var(--background); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border);">
-                        <label>Organizador 3</label><input type="file" id="upOrg3" accept="image/*">
-                        <button class="btn btn-secondary btn-sm" onclick="fazerUploadCloudinary('upOrg3', 'org3Url')">Enviar</button>
+                        <label>Organizador 3</label>
+                        <input type="file" id="upOrg3" accept="image/*" style="margin-bottom: 0.5rem; padding: 0.4rem;">
+                        <button class="btn btn-secondary btn-sm" onclick="fazerUploadCloudinary('upOrg3', 'org3Url')" style="margin-bottom: 1rem;">Enviar Logo</button>
+                        <label style="font-size: 0.75rem; color: var(--text-muted);">Link (Site ou Instagram)</label>
+                        <input type="text" id="linkOrg3" placeholder="https://instagram.com/..." style="padding: 0.4rem; font-size: 0.8rem;">
                     </div>
                     <div class="form-group" style="background: var(--background); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border);">
-                        <label>Organizador 4</label><input type="file" id="upOrg4" accept="image/*">
-                        <button class="btn btn-secondary btn-sm" onclick="fazerUploadCloudinary('upOrg4', 'org4Url')">Enviar</button>
+                        <label>Organizador 4</label>
+                        <input type="file" id="upOrg4" accept="image/*" style="margin-bottom: 0.5rem; padding: 0.4rem;">
+                        <button class="btn btn-secondary btn-sm" onclick="fazerUploadCloudinary('upOrg4', 'org4Url')" style="margin-bottom: 1rem;">Enviar Logo</button>
+                        <label style="font-size: 0.75rem; color: var(--text-muted);">Link (Site ou Instagram)</label>
+                        <input type="text" id="linkOrg4" placeholder="https://instagram.com/..." style="padding: 0.4rem; font-size: 0.8rem;">
                     </div>
                 </div>
 
                 <hr style="border: none; border-top: 1px solid var(--border); margin: 1.5rem 0;">
 
-                <h4 style="color: var(--primary-light); margin-bottom: 1rem;">3. Logos: Patrocinadores</h4>
+                <h4 style="color: var(--primary-light); margin-bottom: 1rem;">4. Logos: Patrocinadores</h4>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
                     <div class="form-group" style="background: var(--background); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border);">
-                        <label>Patrocinador 1</label><input type="file" id="upPat1" accept="image/*">
-                        <button class="btn btn-secondary btn-sm" onclick="fazerUploadCloudinary('upPat1', 'pat1Url')">Enviar</button>
+                        <label>Patrocinador 1</label>
+                        <input type="file" id="upPat1" accept="image/*" style="margin-bottom: 0.5rem; padding: 0.4rem;">
+                        <button class="btn btn-secondary btn-sm" onclick="fazerUploadCloudinary('upPat1', 'pat1Url')" style="margin-bottom: 1rem;">Enviar Logo</button>
+                        <label style="font-size: 0.75rem; color: var(--text-muted);">Link (Site ou Instagram)</label>
+                        <input type="text" id="linkPat1" placeholder="https://instagram.com/..." style="padding: 0.4rem; font-size: 0.8rem;">
                     </div>
                     <div class="form-group" style="background: var(--background); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border);">
-                        <label>Patrocinador 2</label><input type="file" id="upPat2" accept="image/*">
-                        <button class="btn btn-secondary btn-sm" onclick="fazerUploadCloudinary('upPat2', 'pat2Url')">Enviar</button>
+                        <label>Patrocinador 2</label>
+                        <input type="file" id="upPat2" accept="image/*" style="margin-bottom: 0.5rem; padding: 0.4rem;">
+                        <button class="btn btn-secondary btn-sm" onclick="fazerUploadCloudinary('upPat2', 'pat2Url')" style="margin-bottom: 1rem;">Enviar Logo</button>
+                        <label style="font-size: 0.75rem; color: var(--text-muted);">Link (Site ou Instagram)</label>
+                        <input type="text" id="linkPat2" placeholder="https://instagram.com/..." style="padding: 0.4rem; font-size: 0.8rem;">
                     </div>
                     <div class="form-group" style="background: var(--background); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border);">
-                        <label>Patrocinador 3</label><input type="file" id="upPat3" accept="image/*">
-                        <button class="btn btn-secondary btn-sm" onclick="fazerUploadCloudinary('upPat3', 'pat3Url')">Enviar</button>
+                        <label>Patrocinador 3</label>
+                        <input type="file" id="upPat3" accept="image/*" style="margin-bottom: 0.5rem; padding: 0.4rem;">
+                        <button class="btn btn-secondary btn-sm" onclick="fazerUploadCloudinary('upPat3', 'pat3Url')" style="margin-bottom: 1rem;">Enviar Logo</button>
+                        <label style="font-size: 0.75rem; color: var(--text-muted);">Link (Site ou Instagram)</label>
+                        <input type="text" id="linkPat3" placeholder="https://instagram.com/..." style="padding: 0.4rem; font-size: 0.8rem;">
                     </div>
                     <div class="form-group" style="background: var(--background); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border);">
-                        <label>Patrocinador 4</label><input type="file" id="upPat4" accept="image/*">
-                        <button class="btn btn-secondary btn-sm" onclick="fazerUploadCloudinary('upPat4', 'pat4Url')">Enviar</button>
+                        <label>Patrocinador 4</label>
+                        <input type="file" id="upPat4" accept="image/*" style="margin-bottom: 0.5rem; padding: 0.4rem;">
+                        <button class="btn btn-secondary btn-sm" onclick="fazerUploadCloudinary('upPat4', 'pat4Url')" style="margin-bottom: 1rem;">Enviar Logo</button>
+                        <label style="font-size: 0.75rem; color: var(--text-muted);">Link (Site ou Instagram)</label>
+                        <input type="text" id="linkPat4" placeholder="https://instagram.com/..." style="padding: 0.4rem; font-size: 0.8rem;">
                     </div>
                 </div>
 
                 <div id="uploadStatus" class="status-message" style="display:none; margin-top: 1.5rem; padding: 1rem; background: var(--surface-elevated); border-radius: var(--radius-md); border-left: 4px solid var(--primary-color);"></div>
                 <hr style="border: none; border-top: 1px solid var(--border); margin: 1.5rem 0;">
-                <button class="btn" onclick="salvarConteudoTexto()" style="max-width: 300px;"><i class="fas fa-save"></i> Salvar Apenas Texto</button>
+                <button class="btn" onclick="salvarConteudoTexto()" style="max-width: 400px; margin: 0 auto;"><i class="fas fa-save"></i> Salvar Textos e Links do Instagram</button>
             </div>
         </div>
 
         <div id="configuracoes" class="tab-content">
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 1.5rem;">
+                
+                <!-- NOVO: CHAVE MESTRA DE ENCERRAMENTO -->
+                <div class="settings-card" style="border-color: #ef4444; grid-column: 1 / -1;">
+                    <h3 style="color: #ef4444;"><i class="fas fa-power-off"></i> Status Geral das Inscrições</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 1rem;">Use esta chave para encerrar DEFINITIVAMENTE as inscrições do evento. O site esconderá o formulário e exibirá a mensagem "Inscrições Encerradas".</p>
+                    <div class="form-group">
+                        <select id="confStatusGeral" style="border-color: #ef4444; font-weight: bold; background: rgba(239, 68, 68, 0.05);">
+                            <option value="true">✅ ABERTAS (Aceitando Inscrições no Site)</option>
+                            <option value="false">❌ ENCERRADAS (Bloquear Formulário do Site)</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-secondary" style="color: #ef4444; border-color: #ef4444;" onclick="salvarConfiguracoes()"><i class="fas fa-save"></i> Salvar Status Geral</button>
+                </div>
+
+                <div class="settings-card" style="border-color: #8b5cf6; grid-column: 1 / -1;">
+                    <h3 style="color: #8b5cf6;"><i class="fas fa-hand-holding-heart"></i> Liberação de Inscrição Gratuita (Sem Camiseta)</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 1rem;">Quando ativado, o site vai parar de cobrar R$ 50,00 e vai esconder a opção de escolher camiseta. O atleta poderá se inscrever de graça, mas <strong>a regra da doação de alimentos continua exigida</strong>.</p>
+                    <div class="form-group">
+                        <select id="confGratuito" style="border-color: #8b5cf6;">
+                            <option value="false">Desativado (Cobrar Camiseta Padrão)</option>
+                            <option value="true">Ativado (Inscrição Gratuita Sem Camiseta)</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-secondary" style="color: #8b5cf6; border-color: #8b5cf6;" onclick="salvarConfiguracoes()"><i class="fas fa-save"></i> Salvar Modo de Inscrição</button>
+                </div>
+
                 <div class="settings-card">
                     <h3><i class="fas fa-sliders-h"></i> Regras Financeiras e Contato</h3>
                     <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 1rem;">Atualize preços, vagas e WhatsApp.</p>
@@ -330,7 +631,7 @@
                     <div class="form-group"><label>Preço da Camiseta (R$)</label><input type="number" step="0.01" id="confPreco"></div>
                     <div class="form-group"><label>Sua Chave PIX</label><input type="text" id="confPix"></div>
                     <div class="form-group"><label>WhatsApp Gestor (Ex: 5517999999999)</label><input type="text" id="confWhats"></div>
-                    <button class="btn" onclick="salvarConfiguracoes()"><i class="fas fa-save"></i> Salvar Regras</button>
+                    <button class="btn" onclick="salvarConfiguracoes()"><i class="fas fa-save"></i> Salvar Regras Base</button>
                 </div>
 
                 <div class="settings-card" style="border-color: var(--secondary-color);">
@@ -338,7 +639,6 @@
                     <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 1rem;">Defina o estoque abaixo e clique em salvar. O sistema controlará as vendas automaticamente.</p>
                     
                     <div class="stock-grid">
-                        <div class="form-group"><label>PP</label><input type="number" id="estoquePP" value="0"></div>
                         <div class="form-group"><label>P</label><input type="number" id="estoqueP" value="0"></div>
                         <div class="form-group"><label>M</label><input type="number" id="estoqueM" value="0"></div>
                         <div class="form-group"><label>G</label><input type="number" id="estoqueG" value="0"></div>
@@ -352,7 +652,7 @@
 
                 <div class="settings-card" style="border-color: #ef4444; grid-column: 1 / -1;">
                     <h3 style="color: #ef4444;"><i class="fas fa-skull-crossbones"></i> Modo Teste: Zerar Sistema</h3>
-                    <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 1rem;">Isso vai APAGAR todos os inscritos, zerar o contador de peito, apagar a fila de números reciclados e limpar os LOGS.</p>
+                    <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 1rem;">Isso vai APAGAR todos os inscritos, apagar as finanças, zerar o contador de peito, apagar a fila de números reciclados e limpar os LOGS.</p>
                     <button class="btn btn-danger" style="width: auto;" onclick="zerarSistema()"><i class="fas fa-trash-alt"></i> ZERAR TUDO</button>
                 </div>
             </div>
@@ -407,9 +707,73 @@
 
         let allUsers = [];
         let allLogs = [];
+        let allFinancas = [];
+        let unifiedFinancas = []; // Array unificado
         let chartCategoria, chartTamanhos;
         let currentUserEmail = "";
         let metaVagasAtual = 300;
+
+        try {
+            if (typeof window !== 'undefined' && window.localStorage) {
+                const savedEmail = window.localStorage.getItem('amicc_admin_email');
+                if (savedEmail) {
+                    const adminEmailInput = document.getElementById('adminEmail');
+                    const rememberMeInput = document.getElementById('rememberMe');
+                    if(adminEmailInput) adminEmailInput.value = savedEmail;
+                    if(rememberMeInput) rememberMeInput.checked = true;
+                }
+            }
+        } catch (e) {
+            console.log("LocalStorage indisponível neste ambiente de prévia.");
+        }
+
+        function applyPhoneMask(value) {
+            let digits = value.replace(/\D/g, '');
+            if (digits.length > 11) digits = digits.slice(0, 11);
+            if (digits.length > 10) return digits.replace(/^(\d{2})(\d{5})(\d{4}).*/, '($1) $2-$3');
+            if (digits.length > 5) return digits.replace(/^(\d{2})(\d{4})(\d{0,4}).*/, '($1) $2-$3');
+            if (digits.length > 2) return digits.replace(/^(\d{2})(\d{0,5}).*/, '($1) $2');
+            if (digits.length > 0) return digits.replace(/^(\d{0,2}).*/, '($1');
+            return digits;
+        }
+        function applyCpfMask(value) {
+            let digits = value.replace(/\D/g, '');
+            if (digits.length > 11) digits = digits.slice(0, 11);
+            return digits.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4")
+                         .replace(/(\d{3})(\d{3})(\d{1,3})/, "$1.$2.$3")
+                         .replace(/(\d{3})(\d{1,3})/, "$1.$2");
+        }
+        function applyDateMask(value) {
+            let v = value.replace(/\D/g, '');
+            if (v.length > 8) v = v.slice(0, 8);
+            if (v.length >= 5) return `${v.slice(0, 2)}/${v.slice(2, 4)}/${v.slice(4)}`;
+            else if (v.length >= 3) return `${v.slice(0, 2)}/${v.slice(2)}`;
+            return v;
+        }
+
+        const editPhoneInput = document.getElementById('editPhone');
+        const editCpfInput = document.getElementById('editCpf');
+        const editBirthDateInput = document.getElementById('editBirthDate');
+        
+        if(editPhoneInput) editPhoneInput.addEventListener('input', e => e.target.value = applyPhoneMask(e.target.value));
+        if(editCpfInput) editCpfInput.addEventListener('input', e => e.target.value = applyCpfMask(e.target.value));
+        if(editBirthDateInput) editBirthDateInput.addEventListener('input', e => e.target.value = applyDateMask(e.target.value));
+
+        function isCpfValido(cpf) {
+            cpf = cpf.replace(/[^\d]+/g,'');
+            if(cpf == '' || cpf.length != 11 || /^(\d)\1{10}$/.test(cpf)) return false;
+            let add = 0;
+            for (let i=0; i < 9; i ++) add += parseInt(cpf.charAt(i)) * (10 - i);
+            let rev = 11 - (add % 11);
+            if (rev == 10 || rev == 11) rev = 0;
+            if (rev != parseInt(cpf.charAt(9))) return false;
+            add = 0;
+            for (let i = 0; i < 10; i ++) add += parseInt(cpf.charAt(i)) * (11 - i);
+            rev = 11 - (add % 11);
+            if (rev == 10 || rev == 11) rev = 0;
+            if (rev != parseInt(cpf.charAt(10))) return false;
+            return true;
+        }
 
         async function checkAdminStatus(email) {
             try {
@@ -435,7 +799,7 @@
                     
                     carregarConfiguracoes();
                     carregarListaAdminsUI();
-                    window.loadUsers();
+                    window.loadData();
                 } else {
                     document.getElementById('loginError').innerText = "Sem permissão.";
                     document.getElementById('loginError').style.display = "block";
@@ -452,12 +816,27 @@
             e.preventDefault();
             const btn = document.getElementById('loginBtn');
             btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Autenticando...';
+            
+            const emailValue = document.getElementById('adminEmail').value;
+            const passValue = document.getElementById('adminPassword').value;
+
             try { 
-                await signInWithEmailAndPassword(auth, document.getElementById('adminEmail').value, document.getElementById('adminPassword').value); 
+                await signInWithEmailAndPassword(auth, emailValue, passValue); 
                 btn.innerHTML = 'Entrar no Painel';
+                
+                try {
+                    if (typeof window !== 'undefined' && window.localStorage) {
+                        if(document.getElementById('rememberMe').checked) {
+                            window.localStorage.setItem('amicc_admin_email', emailValue);
+                        } else {
+                            window.localStorage.removeItem('amicc_admin_email');
+                        }
+                    }
+                } catch(storageError) {}
+                
             } catch (e) { 
                 btn.innerHTML = 'Entrar no Painel';
-                document.getElementById('loginError').innerText = 'Falha no login.';
+                document.getElementById('loginError').innerText = 'Falha no login. E-mail ou senha incorretos.';
                 document.getElementById('loginError').style.display = "block";
             }
         });
@@ -473,8 +852,9 @@
 
         let unsub = null;
         let unsubLogs = null;
+        let unsubFin = null;
 
-        window.loadUsers = function() {
+        window.loadData = function() {
             if(unsub) unsub();
             unsub = onSnapshot(query(collection(db, 'users'), orderBy('createdAt', 'desc')), (snap) => {
                 allUsers = snap.docs.map(d => ({ id: d.id, ...d.data() }));
@@ -482,6 +862,8 @@
                 filtrarLista();
                 desenharGraficos();
                 renderPremiacao();
+                calcularResumoFinanceiro();
+                renderFinancasTable(); // Atualiza a tabela financeira unificada
             });
 
             if(unsubLogs) unsubLogs();
@@ -489,7 +871,373 @@
                 allLogs = snap.docs.map(d => ({ id: d.id, ...d.data() }));
                 renderLogsTable();
             });
+
+            if(unsubFin) unsubFin();
+            unsubFin = onSnapshot(query(collection(db, 'financas'), orderBy('createdAt', 'desc')), (snap) => {
+                allFinancas = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+                calcularResumoFinanceiro();
+                renderFinancasTable();
+            });
         };
+
+        const searchInputEl = document.getElementById('searchInput');
+        if(searchInputEl) searchInputEl.addEventListener('input', filtrarLista);
+        
+        const filtroPagamentoEl = document.getElementById('filtroPagamento');
+        if(filtroPagamentoEl) filtroPagamentoEl.addEventListener('change', filtrarLista);
+
+        function filtrarLista() {
+            const t = document.getElementById('searchInput').value.toLowerCase();
+            const s = document.getElementById('filtroPagamento').value;
+            renderTable(allUsers.filter(u => {
+                const peitoStr = u.numeroPeito ? u.numeroPeito.toString() : '';
+                const mNome = u.fullName.toLowerCase().includes(t) || (u.email && u.email.toLowerCase().includes(t)) || peitoStr.includes(t) || (u.cpf && u.cpf.includes(t));
+                return mNome && (s === 'all' || u.paymentStatus === s);
+            }));
+        }
+
+        // ==========================================
+        // LÓGICA DE FINANÇAS UNIFICADAS
+        // ==========================================
+        window.abrirModalFinancas = function() {
+            document.getElementById('finTipo').value = 'Receita';
+            document.getElementById('finValor').value = '';
+            document.getElementById('finEntidade').value = '';
+            document.getElementById('finDescricao').value = '';
+            document.getElementById('finData').value = new Date().toISOString().split('T')[0];
+            document.getElementById('modalFinancas').style.display = 'flex';
+        }
+
+        window.fecharModalFinancas = function() {
+            document.getElementById('modalFinancas').style.display = 'none';
+        }
+
+        window.salvarTransacaoFinanceira = async function() {
+            const tipo = document.getElementById('finTipo').value;
+            const valorStr = document.getElementById('finValor').value;
+            const entidade = document.getElementById('finEntidade').value.trim();
+            const descricao = document.getElementById('finDescricao').value.trim();
+            const dataStr = document.getElementById('finData').value;
+
+            if(!valorStr || !entidade || !descricao || !dataStr) {
+                alert("Preencha todos os campos do financeiro.");
+                return;
+            }
+
+            const valor = parseFloat(valorStr);
+            if(valor <= 0) {
+                alert("O valor deve ser maior que zero.");
+                return;
+            }
+
+            try {
+                const transacao = {
+                    tipo: tipo,
+                    valor: valor,
+                    entidade: entidade,
+                    descricao: descricao,
+                    dataReferencia: dataStr,
+                    registradoPor: currentUserEmail,
+                    createdAt: serverTimestamp()
+                };
+
+                await addDoc(collection(db, 'financas'), transacao);
+
+                await addDoc(collection(db, 'logs'), {
+                    action: 'FINANCA_' + tipo.toUpperCase(),
+                    admin: currentUserEmail,
+                    userNome: entidade,
+                    motivo: `Lançou R$ ${valor.toFixed(2)} - ${descricao}`,
+                    timestamp: serverTimestamp()
+                });
+
+                fecharModalFinancas();
+                alert("Lançamento gravado no Cofre com sucesso!");
+            } catch (e) {
+                alert("Erro ao salvar transação financeira. Verifique as Regras do Firestore.");
+                console.error(e);
+            }
+        }
+
+        window.deletarTransacaoFinanceira = async function(id, tipo, valor, entidade) {
+            const motivo = prompt(`⚠️ Você está excluindo o lançamento: ${tipo} de R$ ${valor.toFixed(2)} (${entidade}).\n\nPara prosseguir, digite o MOTIVO da exclusão (obrigatório):`);
+            if (motivo === null || motivo.trim() === '') {
+                alert("Exclusão cancelada. O motivo é obrigatório.");
+                return;
+            }
+
+            try {
+                await addDoc(collection(db, 'logs'), {
+                    action: 'EXCLUSAO_FINANCA',
+                    admin: currentUserEmail,
+                    userNome: entidade,
+                    motivo: `Deletou ${tipo} de R$ ${valor.toFixed(2)}. Motivo: ${motivo.trim()}`,
+                    timestamp: serverTimestamp()
+                });
+
+                await deleteDoc(doc(db, 'financas', id));
+            } catch (e) {
+                alert("Erro ao excluir lançamento.");
+            }
+        }
+
+        function calcularResumoFinanceiro() {
+            let totalInscricoes = 0;
+            allUsers.forEach(u => {
+                if(u.paymentStatus === 'pago' && u.totalAmount) {
+                    totalInscricoes += parseFloat(u.totalAmount);
+                }
+            });
+
+            let totalExtras = 0;
+            let totalDespesas = 0;
+
+            allFinancas.forEach(f => {
+                if(f.tipo === 'Despesa') {
+                    totalDespesas += parseFloat(f.valor);
+                } else {
+                    totalExtras += parseFloat(f.valor);
+                }
+            });
+
+            const saldoLiquido = (totalInscricoes + totalExtras) - totalDespesas;
+
+            document.getElementById('finTotalInscricoes').innerText = 'R$ ' + totalInscricoes.toFixed(2).replace('.', ',');
+            document.getElementById('finTotalExtras').innerText = 'R$ ' + totalExtras.toFixed(2).replace('.', ',');
+            document.getElementById('finTotalDespesas').innerText = 'R$ ' + totalDespesas.toFixed(2).replace('.', ',');
+            document.getElementById('finSaldoLiquido').innerText = 'R$ ' + saldoLiquido.toFixed(2).replace('.', ',');
+        }
+
+        function buildUnifiedFinancas() {
+            unifiedFinancas = [];
+
+            allUsers.filter(u => u.paymentStatus === 'pago').forEach(u => {
+                let dataAprovacao = '-';
+                let dataRaw = 0;
+                if (u.approvedAt) {
+                    const d = u.approvedAt.toDate ? u.approvedAt.toDate() : new Date(u.approvedAt);
+                    dataAprovacao = d.toLocaleDateString('pt-BR');
+                    dataRaw = d.getTime();
+                }
+
+                let valorInscricao = parseFloat(u.totalAmount || 0);
+                let isGratuito = valorInscricao === 0;
+                let tipoLancamento = isGratuito ? 'Inscrição Gratuita' : 'Receita (Inscrição)';
+                let descLancamento = isGratuito
+                    ? `Inscrição Gratuita Confirmada - Peito: #${u.numeroPeito || 'ND'}`
+                    : `Inscrição Paga - Peito: #${u.numeroPeito || 'ND'} | Kit: ${u.hasShirt ? u.shirtSize.split(' ')[0] : 'S/ Camiseta'}`;
+
+                unifiedFinancas.push({
+                    id: u.id,
+                    isUser: true,
+                    dataBR: dataAprovacao,
+                    dataRaw: dataRaw,
+                    tipo: tipoLancamento,
+                    entidade: u.fullName,
+                    descricao: descLancamento,
+                    registradoPor: u.approvedBy || 'Sistema',
+                    valor: valorInscricao
+                });
+            });
+
+            allFinancas.forEach(f => {
+                let dataBR = f.dataReferencia ? f.dataReferencia.split('-').reverse().join('/') : '-';
+                let dataRaw = f.dataReferencia ? new Date(f.dataReferencia).getTime() : 0;
+                
+                unifiedFinancas.push({
+                    id: f.id,
+                    isUser: false,
+                    dataBR: dataBR,
+                    dataRaw: dataRaw,
+                    tipo: f.tipo,
+                    entidade: f.entidade,
+                    descricao: f.descricao,
+                    registradoPor: f.registradoPor || 'Admin',
+                    valor: parseFloat(f.valor || 0)
+                });
+            });
+
+            // Ordena unificado pela data decrescente
+            unifiedFinancas.sort((a, b) => b.dataRaw - a.dataRaw);
+        }
+
+        const searchFinEl = document.getElementById('searchFinancaInput');
+        if(searchFinEl) searchFinEl.addEventListener('input', renderFinancasTable);
+        const filtroFinEl = document.getElementById('filtroFinancaTipo');
+        if(filtroFinEl) filtroFinEl.addEventListener('change', renderFinancasTable);
+
+        function renderFinancasTable() {
+            buildUnifiedFinancas();
+            
+            const tbody = document.getElementById('tableFinancasBody');
+            tbody.innerHTML = '';
+            
+            const t = document.getElementById('searchFinancaInput') ? document.getElementById('searchFinancaInput').value.toLowerCase() : '';
+            const s = document.getElementById('filtroFinancaTipo') ? document.getElementById('filtroFinancaTipo').value : 'all';
+
+            const filtered = unifiedFinancas.filter(f => {
+                const matchText = f.entidade.toLowerCase().includes(t) || f.descricao.toLowerCase().includes(t);
+                const matchType = s === 'all' || f.tipo === s;
+                return matchText && matchType;
+            });
+            
+            if(filtered.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; color:var(--text-muted);">Nenhuma transação encontrada.</td></tr>`;
+                return;
+            }
+
+            filtered.forEach(f => {
+                let badgeClass = 'badge receita';
+                if(f.tipo === 'Despesa') badgeClass = 'badge despesa';
+                if(f.tipo === 'Receita (Inscrição)') badgeClass = 'badge pago';
+                if(f.tipo === 'Inscrição Gratuita') badgeClass = 'badge gratuito'; // Nova classe para as inscrições grátis
+
+                let btnDel = '';
+                if(!f.isUser) {
+                    btnDel = `<button class="btn btn-danger btn-sm" onclick="deletarTransacaoFinanceira('${f.id}', '${f.tipo}', ${f.valor}, '${f.entidade}')" style="padding: 5px 8px; border-radius: 4px;" title="Excluir"><i class="fas fa-trash"></i></button>`;
+                } else {
+                    btnDel = `<span style="font-size:0.7rem; color:var(--text-muted);" title="Exclua a inscrição na aba Geral">Via Insc.</span>`;
+                }
+
+                let valorDisplay = f.tipo === 'Despesa' ? `- R$ ${f.valor.toFixed(2).replace('.', ',')}` : `+ R$ ${f.valor.toFixed(2).replace('.', ',')}`;
+                let valorColor = f.tipo === 'Despesa' ? 'var(--error)' : 'var(--success)';
+
+                tbody.innerHTML += `<tr>
+                    <td style="color:var(--text-secondary);">${f.dataBR}</td>
+                    <td><span class="${badgeClass}">${f.tipo.toUpperCase()}</span></td>
+                    <td style="font-weight:bold;">${f.entidade}</td>
+                    <td style="color:var(--text-secondary); font-size:0.8rem;">${f.descricao}</td>
+                    <td style="font-size:0.8rem;">${f.registradoPor}</td>
+                    <td style="text-align: right; font-weight:bold; color:${valorColor};">${valorDisplay}</td>
+                    <td>${btnDel}</td>
+                </tr>`;
+            });
+        }
+        // ==========================================
+
+        window.abrirModalEdicao = function(id) {
+            const user = allUsers.find(u => u.id === id);
+            if(!user) return;
+
+            document.getElementById('editUserId').value = user.id;
+            document.getElementById('editFullName').value = user.fullName || '';
+            document.getElementById('editCpf').value = user.cpf ? applyCpfMask(user.cpf) : '';
+            document.getElementById('editBirthDate').value = user.birthDate || '';
+            document.getElementById('editPhone').value = user.phone ? applyPhoneMask(user.phone) : '';
+            
+            if(user.gender) document.getElementById('editGender').value = user.gender;
+            if(user.category) document.getElementById('editCategory').value = user.category;
+            
+            if(!user.hasShirt || user.shirtSize === 'Sem Camiseta') {
+                document.getElementById('editShirtSize').value = 'Sem Camiseta';
+            } else if(user.shirtSize) {
+                document.getElementById('editShirtSize').value = user.shirtSize;
+            }
+
+            document.getElementById('modalEditarUsuario').style.display = 'flex';
+        }
+
+        window.fecharModalEdicao = function() {
+            document.getElementById('modalEditarUsuario').style.display = 'none';
+        }
+
+        window.salvarEdicaoUsuario = async function() {
+            const id = document.getElementById('editUserId').value;
+            const fullName = document.getElementById('editFullName').value.trim();
+            const cpfDigitado = document.getElementById('editCpf').value;
+            const cpfClean = cpfDigitado.replace(/\D/g, '');
+            const birthDate = document.getElementById('editBirthDate').value;
+            const phone = document.getElementById('editPhone').value.replace(/\D/g, '');
+            const gender = document.getElementById('editGender').value;
+            const category = document.getElementById('editCategory').value;
+            const shirtSize = document.getElementById('editShirtSize').value;
+
+            if(!fullName || !cpfClean || !birthDate || !phone) {
+                alert("Preencha todos os campos corretamente.");
+                return;
+            }
+
+            if(cpfClean.length !== 11 || !isCpfValido(cpfClean)) {
+                alert("CPF Inválido. Não é possível salvar a alteração.");
+                return;
+            }
+
+            const userAntigo = allUsers.find(u => u.id === id);
+            if(!userAntigo) return;
+
+            if(cpfClean !== userAntigo.cpf) {
+                const checkDup = allUsers.find(u => u.cpf === cpfClean && u.id !== id);
+                if(checkDup) {
+                    alert("Este novo CPF já está cadastrado em outra ficha!");
+                    return;
+                }
+            }
+
+            const motivo = prompt("Digite o MOTIVO desta alteração (obrigatório para os Logs):");
+            if (motivo === null || motivo.trim() === '') {
+                alert("Edição cancelada. Motivo obrigatório.");
+                return;
+            }
+
+            try {
+                let hasShirtNova = shirtSize !== 'Sem Camiseta';
+                let qtdNova = hasShirtNova ? 1 : 0;
+                
+                if (userAntigo.shirtSize !== shirtSize) {
+                    const inventoryRef = doc(db, 'estoque', 'camisetas');
+                    const inventoryDoc = await getDoc(inventoryRef);
+                    if (inventoryDoc.exists()) {
+                        let estoqueDados = inventoryDoc.data();
+                        
+                        let trueSizeAntigo = userAntigo.shirtSize ? userAntigo.shirtSize.split(' ')[0] : '';
+                        let trueSizeNovo = shirtSize !== 'Sem Camiseta' ? shirtSize.split(' ')[0] : '';
+
+                        if (userAntigo.hasShirt && trueSizeAntigo) {
+                            estoqueDados[trueSizeAntigo] = (estoqueDados[trueSizeAntigo] || 0) + (userAntigo.quantity || 1);
+                        }
+                        
+                        if (hasShirtNova && trueSizeNovo) {
+                            if ((estoqueDados[trueSizeNovo] || 0) < 1) {
+                                alert(`Estoque insuficiente para o tamanho ${trueSizeNovo}. A edição não foi salva.`);
+                                return;
+                            }
+                            estoqueDados[trueSizeNovo] -= 1;
+                        }
+                        
+                        await updateDoc(inventoryRef, estoqueDados);
+                    }
+                }
+
+                const novosDados = {
+                    fullName: fullName,
+                    cpf: cpfClean,
+                    birthDate: birthDate,
+                    phone: phone,
+                    gender: gender,
+                    category: category,
+                    hasShirt: hasShirtNova,
+                    shirtSize: shirtSize,
+                    quantity: qtdNova
+                };
+
+                await updateDoc(doc(db, 'users', id), novosDados);
+
+                await addDoc(collection(db, 'logs'), {
+                    action: 'EDICAO_USUARIO',
+                    admin: currentUserEmail,
+                    userNome: fullName,
+                    userPeito: userAntigo.numeroPeito || null,
+                    motivo: `Editou dados. Motivo: ${motivo.trim()}`,
+                    timestamp: serverTimestamp()
+                });
+
+                alert("Dados atualizados com sucesso!");
+                fecharModalEdicao();
+
+            } catch (e) {
+                alert("Erro ao salvar edição.");
+            }
+        }
 
         function renderLogsTable() {
             const tbody = document.getElementById('tableLogsBody');
@@ -508,8 +1256,10 @@
                 }
                 
                 let actionBadge = '';
-                if(log.action === 'EXCLUSAO') actionBadge = `<span class="badge" style="background: rgba(239, 68, 68, 0.1); color: var(--error);">EXCLUSÃO</span>`;
-                else if(log.action === 'APROVACAO') actionBadge = `<span class="badge" style="background: rgba(34, 197, 94, 0.1); color: var(--success);">APROVAÇÃO PGT</span>`;
+                if(log.action.includes('EXCLUSAO')) actionBadge = `<span class="badge" style="background: rgba(239, 68, 68, 0.1); color: var(--error);">${log.action}</span>`;
+                else if(log.action.includes('APROVACAO')) actionBadge = `<span class="badge" style="background: rgba(34, 197, 94, 0.1); color: var(--success);">${log.action}</span>`;
+                else if(log.action.includes('FINANCA')) actionBadge = `<span class="badge" style="background: rgba(56, 189, 248, 0.1); color: #38bdf8;">${log.action}</span>`;
+                else if(log.action.includes('EDICAO')) actionBadge = `<span class="badge" style="background: rgba(234, 179, 8, 0.1); color: var(--warning);">${log.action}</span>`;
                 else actionBadge = `<span class="badge">${log.action}</span>`;
 
                 tbody.innerHTML += `<tr>
@@ -517,43 +1267,84 @@
                     <td style="font-weight: 500;">${log.admin}</td>
                     <td>${actionBadge}</td>
                     <td><strong>${log.userNome}</strong> <span style="color:var(--primary-light)">(${log.userPeito ? '#'+String(log.userPeito).padStart(3, '0') : '-'})</span></td>
-                    <td style="color: var(--text-secondary); font-style: italic;">${log.motivo || '-'}</td>
+                    <td style="color: var(--text-secondary); font-style: italic; font-size:0.85rem;">${log.motivo || '-'}</td>
                 </tr>`;
             });
         }
 
         function atualizarCards() {
-            document.getElementById('statTotal').innerText = allUsers.length;
+            const total = allUsers.length;
+            const pagosArr = allUsers.filter(u => u.paymentStatus === 'pago');
+            const pagos = pagosArr.length;
+            const pendentes = allUsers.filter(u => u.paymentStatus === 'pendente').length;
+
+            document.getElementById('statTotal').innerText = total;
             document.getElementById('statVagasInfo').innerText = metaVagasAtual;
-            document.getElementById('statPagos').innerText = allUsers.filter(u => u.paymentStatus === 'pago').length;
-            document.getElementById('statPendentes').innerText = allUsers.filter(u => u.paymentStatus === 'pendente').length;
+            document.getElementById('statPagos').innerText = pagos;
+            document.getElementById('statPendentes').innerText = pendentes;
+
+            // KPIs ESTRATÉGICOS
+            const taxa = total > 0 ? ((pagos / total) * 100).toFixed(1) : 0;
+            document.getElementById('kpiConversao').innerText = `${taxa}%`;
+
+            let receitaTotal = 0;
+            allUsers.forEach(u => receitaTotal += parseFloat(u.totalAmount || 0));
+            document.getElementById('kpiReceitaPotencial').innerText = 'R$ ' + receitaTotal.toFixed(2).replace('.', ',');
+
+            const total5km = allUsers.filter(u => u.category === 'corrida-5km').length;
+            const total3km = allUsers.filter(u => u.category === 'caminhada-3km').length;
+            document.getElementById('kpi5km').innerText = total5km;
+            document.getElementById('kpi3km').innerText = total3km;
+
+            // KPIs FINANCEIROS E DEMOGRÁFICOS
+            let receitaEfetiva = 0;
+            let camisasProduzir = 0;
+            let mulheres = 0;
+            let homens = 0;
+
+            pagosArr.forEach(u => {
+                receitaEfetiva += parseFloat(u.totalAmount || 0);
+                if(u.hasShirt && u.shirtSize !== 'Sem Camiseta') {
+                    camisasProduzir += (u.quantity || 1);
+                }
+            });
+
+            allUsers.forEach(u => {
+                if(u.gender === 'Feminino') mulheres++;
+                if(u.gender === 'Masculino') homens++;
+            });
+
+            document.getElementById('kpiReceitaEfetiva').innerText = 'R$ ' + receitaEfetiva.toFixed(2).replace('.', ',');
+            document.getElementById('kpiCamisasProduzir').innerText = camisasProduzir;
+            document.getElementById('kpiMulheres').innerText = mulheres;
+            document.getElementById('kpiHomens').innerText = homens;
         }
 
         function renderTable(users) {
             const tbody = document.getElementById('tableBody');
             tbody.innerHTML = '';
 
-            // Mapeia quantos atletas tem no mesmo pedido (batchId)
             let batchCounts = {};
             allUsers.forEach(u => {
                 if(u.batchId) batchCounts[u.batchId] = (batchCounts[u.batchId] || 0) + 1;
             });
 
             users.forEach(u => {
-                let pClass = u.paymentStatus === 'pago' ? 'pago' : 'pendente';
-                let infoCam = `${u.shirtSize} (1x)`;
+                let isGratuito = parseFloat(u.totalAmount || 0) === 0;
+                let pClass = u.paymentStatus === 'pago' ? (isGratuito ? 'gratuito' : 'pago') : 'pendente';
+                let statusDisplay = u.paymentStatus === 'pago' ? (isGratuito ? 'CONFIRMADO (GRÁTIS)' : 'PAGO') : 'PENDENTE';
+
+                let infoCam = u.hasShirt ? `${u.shirtSize.split(' ')[0]} (1x)` : 'Sem Camiseta';
                 let catNome = u.category === 'caminhada-3km' ? 'Caminhada 3 KM' : 'Corrida 5 KM';
                 let peito = u.numeroPeito ? `#${String(u.numeroPeito).padStart(3, '0')}` : '-';
                 let sexo = u.gender ? u.gender : '-';
-                let dataNasc = u.birthDate ? u.birthDate.split('-').reverse().join('/') : '-'; 
+                let dataNasc = u.birthDate ? u.birthDate : '-'; 
                 
-                // Info do Admin que aprovou
                 let aprovacaoInfo = '';
                 if (u.paymentStatus === 'pago' && u.approvedBy) {
                     aprovacaoInfo = `<br><small style="color:var(--text-muted); font-size:0.7rem;">por ${u.approvedBy}</small>`;
                 }
                 
-                // Etiqueta se for um Grupo (Pedido com + de 1 pessoa)
                 let badgeGrupo = '';
                 if (u.batchId && batchCounts[u.batchId] > 1) {
                     badgeGrupo = `<br><span class="badge" style="background:#8b5cf6; font-size:0.65rem; margin-top:4px; display:inline-block;"><i class="fas fa-layer-group"></i> Grupo de ${batchCounts[u.batchId]}</span>`;
@@ -563,21 +1354,24 @@
                 let peitoArg = u.numeroPeito ? `'${u.numeroPeito}'` : null;
                 let batchArg = u.batchId ? `'${u.batchId}'` : null;
 
+                let btnPagoTexto = isGratuito ? 'Confirmar (Grátis)' : 'Pago';
                 let select = `<select onchange="mudarStatus('${u.id}', this.value, '${u.phone}', '${safeName}', ${peitoArg}, ${batchArg})" style="padding:4px; border-radius:4px; background:var(--background); color:white; border:1px solid var(--border); margin-right: 5px;">
                     <option value="pendente" ${u.paymentStatus === 'pendente'?'selected':''}>Pendente</option>
-                    <option value="pago" ${u.paymentStatus === 'pago'?'selected':''}>Pago</option>
+                    <option value="pago" ${u.paymentStatus === 'pago'?'selected':''}>${btnPagoTexto}</option>
                 </select>`;
                 
-                let btnWhats = `<button class="btn btn-whats btn-sm" onclick="abrirZapConfirmacao('${u.phone}', '${safeName}', ${peitoArg})" style="padding: 5px 8px; border-radius: 4px; display: inline-block; width: auto; margin-right: 5px;" title="Avisar no WhatsApp"><i class="fab fa-whatsapp"></i></button>`;
+                let btnWhats = `<button class="btn btn-whats btn-sm" onclick="abrirZapConfirmacao('${u.phone}', '${safeName}', ${peitoArg}, ${isGratuito})" style="padding: 5px 8px; border-radius: 4px; display: inline-block; width: auto; margin-right: 5px;" title="Avisar no WhatsApp"><i class="fab fa-whatsapp"></i></button>`;
+
+                let btnEdit = `<button class="btn btn-info btn-sm" onclick="abrirModalEdicao('${u.id}')" style="padding: 5px 8px; border-radius: 4px; display: inline-block; width: auto; margin-right: 5px;" title="Editar Atleta"><i class="fas fa-edit"></i></button>`;
 
                 let btnDelete = `<button class="btn btn-danger btn-sm" onclick="deletarInscrito('${u.id}', ${u.hasShirt}, '${u.shirtSize}', 1, ${peitoArg}, '${safeName}')" style="padding: 5px 8px; border-radius: 4px; display: inline-block; width: auto;" title="Excluir Inscrição e Relatar"><i class="fas fa-trash"></i></button>`;
 
                 tbody.innerHTML += `<tr>
                     <td style="color:var(--primary-light); font-weight:bold; font-size:1.1rem;">${peito}${badgeGrupo}</td>
                     <td><strong>${u.fullName}</strong> <span style="font-size:0.7rem; background:#334155; padding:2px 5px; border-radius:4px;">${sexo}</span><br><small style="color:var(--text-muted)">${u.email}<br>${u.phone} • Nasc: ${dataNasc}</small></td>
-                    <td>${catNome}</td><td>${infoCam}</td><td>R$ ${u.totalAmount || 0}</td>
-                    <td><span class="badge ${pClass}">${u.paymentStatus.toUpperCase()}</span>${aprovacaoInfo}</td>
-                    <td><div style="display: flex; align-items: center;">${select} ${btnWhats} ${btnDelete}</div></td>
+                    <td>${catNome}</td><td>${infoCam}</td><td>R$ ${parseFloat(u.totalAmount || 0).toFixed(2).replace('.',',')}</td>
+                    <td><span class="badge ${pClass}">${statusDisplay}</span>${aprovacaoInfo}</td>
+                    <td style="min-width: 140px;"><div style="display: flex; align-items: center;">${select} ${btnWhats} ${btnEdit} ${btnDelete}</div></td>
                 </tr>`;
             });
         }
@@ -595,7 +1389,7 @@
                 let sorted = list.sort((a, b) => (a.numeroPeito || 0) - (b.numeroPeito || 0));
                 sorted.forEach(u => {
                     let peito = u.numeroPeito ? `#${String(u.numeroPeito).padStart(3, '0')}` : '-';
-                    let dataNasc = u.birthDate ? u.birthDate.split('-').reverse().join('/') : '-';
+                    let dataNasc = u.birthDate ? u.birthDate : '-';
                     html += `<tr>
                         <td style="color:var(--primary-light); font-weight:bold;">${peito}</td>
                         <td>${u.fullName}</td>
@@ -613,17 +1407,20 @@
             document.getElementById('tb-3f').innerHTML = buildRows(c3f);
         }
 
-        // LÓGICA DE APROVAÇÃO (AGORA ENTENDE SE É GRUPO OU INDIVIDUAL)
         window.mudarStatus = async function(id, st, phone, name, peito, batchId) { 
             try {
+                // Recupera os dados do usuário para verificar se é inscrição gratuita
+                const userObj = allUsers.find(u => u.id === id);
+                const isGratuito = userObj ? parseFloat(userObj.totalAmount || 0) === 0 : false;
+
                 if (st === 'pago' && batchId && batchId !== 'undefined' && batchId !== 'null') {
-                    // Pega todas as inscrições pendentes do mesmo grupo
                     const groupPendentes = allUsers.filter(u => u.batchId === batchId && u.paymentStatus === 'pendente');
                     
                     if (groupPendentes.length > 1) {
-                        if(confirm(`Esta inscrição faz parte de um pacote de ${groupPendentes.length} atletas (mesmo pedido/comprador).\n\nDeseja aprovar TODAS as ${groupPendentes.length} inscrições deste grupo de uma só vez?`)) {
+                        const isGrupoGratuito = parseFloat(groupPendentes[0].totalAmount || 0) === 0;
+
+                        if(confirm(`Esta inscrição faz parte de um pacote de ${groupPendentes.length} atletas.\n\nDeseja aprovar TODAS as ${groupPendentes.length} inscrições deste grupo de uma só vez?`)) {
                             
-                            // Aprova todos no banco
                             for (let u of groupPendentes) {
                                 await updateDoc(doc(db, 'users', u.id), { 
                                     paymentStatus: 'pago',
@@ -631,7 +1428,7 @@
                                     approvedAt: serverTimestamp()
                                 });
                                 await addDoc(collection(db, 'logs'), {
-                                    action: 'APROVACAO',
+                                    action: 'APROVACAO_GRUPO',
                                     admin: currentUserEmail,
                                     userNome: u.fullName,
                                     userPeito: u.numeroPeito || null,
@@ -641,14 +1438,13 @@
                             }
                             
                             if(confirm("Grupo inteiro aprovado com sucesso! Deseja enviar uma mensagem ao WhatsApp do responsável agora?")) {
-                                abrirZapConfirmacao(phone, name + " (e Equipe)", "Múltiplos");
+                                abrirZapConfirmacao(phone, name + " (e Equipe)", "Múltiplos", isGrupoGratuito);
                             }
-                            return; // Encerra a função pois já fez em lote
+                            return; 
                         }
                     }
                 }
 
-                // Se não for grupo ou o admin clicar em "Não", aprova só o individual normal
                 let updateData = { paymentStatus: st };
                 if (st === 'pago') {
                     updateData.approvedBy = currentUserEmail;
@@ -657,19 +1453,22 @@
 
                 await updateDoc(doc(db, 'users', id), updateData); 
 
-                // Registra o Log Individual
                 if (st === 'pago') {
                     await addDoc(collection(db, 'logs'), {
                         action: 'APROVACAO',
                         admin: currentUserEmail,
                         userNome: name,
                         userPeito: peito || null,
-                        motivo: 'Pagamento confirmado manualmente',
+                        motivo: isGratuito ? 'Inscrição Gratuita confirmada' : 'Pagamento confirmado manualmente',
                         timestamp: serverTimestamp()
                     });
 
-                    if(confirm("Status individual atualizado para PAGO! Deseja avisar no WhatsApp?")) {
-                        abrirZapConfirmacao(phone, name, peito);
+                    let promptWhats = isGratuito 
+                        ? "Inscrição gratuita validada e status atualizado para CONFIRMADO! Deseja avisar no WhatsApp?"
+                        : "Status individual atualizado para PAGO! Deseja avisar no WhatsApp?";
+
+                    if(confirm(promptWhats)) {
+                        abrirZapConfirmacao(phone, name, peito, isGratuito);
                     }
                 }
             } catch(e) {
@@ -677,14 +1476,15 @@
             }
         }
 
-        window.abrirZapConfirmacao = function(phone, name, peito) {
+        window.abrirZapConfirmacao = function(phone, name, peito, isGratuito = false) {
             let pStr = peito === "Múltiplos" ? "Múltiplos Números" : (peito ? String(peito).padStart(3, '0') : 'ND');
-            const msg = `🏃 Olá, *${name}*!\n\nPassando para informar que *recebemos o seu pagamento* e sua vaga na 3° TREINO DA AMICC RP está 100% CONFIRMADA! ✅\n\n🎫 Número(s) de Peito: *#${pStr}*.\n\nLembre-se de levar 2L de Leite ou 2kg de alimentos no dia da retirada do kit. Nos vemos na corrida!`;
+            let confirmacaoTxt = isGratuito ? "que *recebemos sua confirmação*" : "que *recebemos o seu pagamento*";
+            const msg = `🏃 Olá, *${name}*!\n\nPassando para informar ${confirmacaoTxt} e sua vaga na 3° TREINO DA AMICC RP está 100% CONFIRMADA! ✅\n\n🎫 Número(s) de Peito: *#${pStr}*.\n\nLembre-se de levar 2L de Leite ou 2kg de alimentos no dia da retirada do kit. Nos vemos na corrida!`;
             window.open(`https://wa.me/55${phone}?text=${encodeURIComponent(msg)}`, '_blank');
         }
         
         window.deletarInscrito = async function(id, hasShirt, shirtSize, quantity, numeroPeito, fullName) {
-            const motivo = prompt(`⚠️ ATENÇÃO: Você está excluindo o atleta ${fullName}.\nA camiseta voltará para o estoque e o NÚMERO DE PEITO voltará a ficar disponível para o próximo!\n\nPara prosseguir, digite o MOTIVO da exclusão (obrigatório):`);
+            const motivo = prompt(`⚠️ ATENÇÃO: Você está excluindo o atleta ${fullName}.\nSe houver camiseta ela voltará para o estoque e o NÚMERO DE PEITO voltará a ficar disponível para o próximo!\n\nPara prosseguir, digite o MOTIVO da exclusão (obrigatório):`);
             
             if (motivo === null || motivo.trim() === '') {
                 alert("Exclusão cancelada. O motivo é obrigatório para registrar nos logs de auditoria.");
@@ -693,7 +1493,7 @@
 
             try {
                 await addDoc(collection(db, 'logs'), {
-                    action: 'EXCLUSAO',
+                    action: 'EXCLUSAO_ATLETA',
                     admin: currentUserEmail,
                     userNome: fullName,
                     userPeito: numeroPeito || null,
@@ -701,13 +1501,14 @@
                     timestamp: serverTimestamp()
                 });
 
-                if (hasShirt && shirtSize && quantity > 0) {
+                if (hasShirt && shirtSize && shirtSize !== 'Sem Camiseta' && quantity > 0) {
+                    let trueSize = shirtSize.split(' ')[0]; // Pega só a letra
                     const inventoryRef = doc(db, 'estoque', 'camisetas');
                     const inventoryDoc = await getDoc(inventoryRef);
                     if (inventoryDoc.exists()) {
-                        const estoqueAtual = inventoryDoc.data()[shirtSize] || 0;
-                        await updateDoc(inventoryRef, { [shirtSize]: estoqueAtual + quantity });
-                        document.getElementById('estoque'+shirtSize).value = estoqueAtual + quantity;
+                        const estoqueAtual = inventoryDoc.data()[trueSize] || 0;
+                        await updateDoc(inventoryRef, { [trueSize]: estoqueAtual + quantity });
+                        document.getElementById('estoque'+trueSize).value = estoqueAtual + quantity;
                     }
                 }
                 
@@ -721,12 +1522,201 @@
 
             } catch (error) { 
                 alert("Erro ao excluir. Verifique sua conexão."); 
-                console.error(error);
             }
         };
 
+        // PROTEÇÃO CONTRA PREVIEWS QUE BLOQUEIAM CHART.JS
+        function desenharGraficos() {
+            if (typeof Chart === 'undefined') return;
+
+            const cCount = {}; allUsers.forEach(u => {
+                let lbl = u.category === 'caminhada-3km' ? 'Caminhada 3 KM' : 'Corrida 5 KM';
+                cCount[lbl] = (cCount[lbl] || 0) + 1;
+            });
+            if(chartCategoria) chartCategoria.destroy();
+            chartCategoria = new Chart(document.getElementById('categoriaChart'), { type: 'pie', data: { labels: Object.keys(cCount), datasets: [{ data: Object.values(cCount), backgroundColor: ['#f97316', '#22c55e'] }] }, options: { plugins: { title: { display: true, text: 'Modalidades Escolhidas', color: 'white' } }, maintainAspectRatio: false } });
+
+            const tCount = { 'P':0, 'M':0, 'G':0, 'GG':0, 'XG':0, 'XXG':0 };
+            allUsers.forEach(u => { 
+                if(u.hasShirt && u.shirtSize !== 'Sem Camiseta') {
+                    let trueSize = u.shirtSize.split(' ')[0];
+                    tCount[trueSize] = (tCount[trueSize] || 0) + (u.quantity || 1); 
+                }
+            });
+            if(chartTamanhos) chartTamanhos.destroy();
+            chartTamanhos = new Chart(document.getElementById('tamanhosChart'), { type: 'bar', data: { labels: Object.keys(tCount), datasets: [{ label: 'Qtd Camisetas (Vendidas)', data: Object.values(tCount), backgroundColor: '#f97316' }] }, options: { plugins: { title: { display: true, text: 'Demanda de Camisetas', color: 'white' } }, scales: { y: { ticks: { color:'white' } }, x: { ticks: {color:'white'} } }, maintainAspectRatio: false } });
+        }
+
+        window.exportarExcel = function() {
+            if (typeof XLSX === 'undefined') return alert("A biblioteca de Excel foi bloqueada pelo seu navegador de testes.");
+            const data = allUsers.map(u => ({ 
+                "Nº Peito": u.numeroPeito || '-', 
+                "Nome": u.fullName, 
+                "Sexo": u.gender || '-',
+                "CPF": u.cpf || '-',
+                "Data Nasc.": u.birthDate ? u.birthDate : '-',
+                "Email": u.email, 
+                "Telefone": u.phone, 
+                "Categoria": u.category === 'caminhada-3km' ? 'Caminhada 3km' : 'Corrida 5km', 
+                "Tamanho": u.hasShirt ? u.shirtSize.split(' ')[0] : 'Sem Camiseta', 
+                "Quantidade": u.hasShirt ? u.quantity : 0, 
+                "Valor Cobrado": u.totalAmount, 
+                "Status Pagamento": u.paymentStatus 
+            }));
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(data), "Inscritos");
+            XLSX.writeFile(wb, "Relatorio_Geral_AMICC.xlsx");
+        }
+
+        window.exportarCamisetas = function() {
+            if (typeof XLSX === 'undefined') return alert("A biblioteca de Excel foi bloqueada pelo seu navegador de testes.");
+            if (!allUsers.length) return alert("Nenhuma inscrição encontrada.");
+            const res = {}; 
+            allUsers.forEach(u => { 
+                if(u.hasShirt && u.shirtSize !== 'Sem Camiseta') {
+                    let trueSize = u.shirtSize.split(' ')[0];
+                    res[trueSize] = (res[trueSize] || 0) + u.quantity; 
+                }
+            });
+            const data = Object.keys(res).map(t => ({ 'Tamanho Oficial': t, 'Total a Produzir': res[t] }));
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(data), "Producao_Camisetas");
+            XLSX.writeFile(wb, "Relatorio_Camisetas_AMICC.xlsx");
+        }
+
+        window.exportarFinancasExcel = function() {
+            if (typeof XLSX === 'undefined') return alert("A biblioteca de Excel foi bloqueada pelo seu navegador de testes.");
+            if (allFinancas.length === 0 && allUsers.filter(u => u.paymentStatus === 'pago').length === 0) {
+                return alert("Nenhum dado financeiro pago ou lançado no momento para exportar.");
+            }
+
+            const extrato = [];
+            
+            allUsers.filter(u => u.paymentStatus === 'pago').forEach(u => {
+                let dataAprovacao = '-';
+                if (u.approvedAt) {
+                    const d = u.approvedAt.toDate ? u.approvedAt.toDate() : new Date(u.approvedAt);
+                    dataAprovacao = d.toLocaleDateString('pt-BR');
+                }
+
+                let valorInsc = parseFloat(u.totalAmount || 0);
+                let isGratuito = valorInsc === 0;
+                
+                extrato.push({
+                    "Data": dataAprovacao,
+                    "Categoria": isGratuito ? "Inscrição Gratuita" : "Receita (Inscrição)",
+                    "Pessoa / Entidade": u.fullName,
+                    "Descrição Detalhada": isGratuito ? `Inscrição Gratuita - Peito: #${u.numeroPeito || 'ND'}` : `Inscrição Paga - Peito: #${u.numeroPeito || 'ND'} | Kit: ${u.hasShirt ? u.shirtSize.split(' ')[0] : 'S/ Camiseta'}`,
+                    "Entrada (R$)": valorInsc,
+                    "Saída (R$)": 0,
+                    "Responsável (Log)": u.approvedBy || 'Sistema'
+                });
+            });
+
+            allFinancas.forEach(f => {
+                let dataBR = f.dataReferencia ? f.dataReferencia.split('-').reverse().join('/') : '-';
+                let isDespesa = f.tipo === 'Despesa';
+                
+                extrato.push({
+                    "Data": dataBR,
+                    "Categoria": f.tipo,
+                    "Pessoa / Entidade": f.entidade,
+                    "Descrição Detalhada": f.descricao,
+                    "Entrada (R$)": isDespesa ? 0 : parseFloat(f.valor),
+                    "Saída (R$)": isDespesa ? parseFloat(f.valor) : 0,
+                    "Responsável (Log)": f.registradoPor || 'Admin'
+                });
+            });
+
+            extrato.sort((a, b) => {
+                let dA = a.Data.split('/').reverse().join('');
+                let dB = b.Data.split('/').reverse().join('');
+                return dA.localeCompare(dB);
+            });
+
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(extrato), "Extrato_Financeiro");
+            XLSX.writeFile(wb, "Relatorio_Financeiro_AMICC.xlsx");
+        }
+
+        async function carregarConfiguracoes() {
+            const ds = await getDoc(doc(db, 'settings', 'event'));
+            if (ds.exists()) {
+                document.getElementById('confVagas').value = ds.data().limiteVagas || 300;
+                metaVagasAtual = ds.data().limiteVagas || 300;
+                document.getElementById('confPreco').value = ds.data().precoCamiseta || 50.00;
+                document.getElementById('confPix').value = ds.data().pixKey || '';
+                document.getElementById('confWhats').value = ds.data().whatsappGestor || '';
+                
+                if(document.getElementById('confGratuito')) {
+                    document.getElementById('confGratuito').value = ds.data().inscricaoGratuita === true ? "true" : "false";
+                }
+                
+                if(document.getElementById('confStatusGeral')) {
+                    document.getElementById('confStatusGeral').value = ds.data().inscricoesAbertas !== false ? "true" : "false";
+                }
+            } else {
+                document.getElementById('confVagas').value = 300;
+            }
+            const ts = await getDoc(doc(db, 'settings', 'content'));
+            if (ts.exists()) {
+                const tData = ts.data();
+                if(tData.heroInfo) document.getElementById('contHero').value = tData.heroInfo;
+                if(tData.mapaIframe) document.getElementById('mapaIframeInput').value = tData.mapaIframe;
+                
+                if(tData.org1Link) document.getElementById('linkOrg1').value = tData.org1Link;
+                if(tData.org2Link) document.getElementById('linkOrg2').value = tData.org2Link;
+                if(tData.org3Link) document.getElementById('linkOrg3').value = tData.org3Link;
+                if(tData.org4Link) document.getElementById('linkOrg4').value = tData.org4Link;
+                
+                if(tData.pat1Link) document.getElementById('linkPat1').value = tData.pat1Link;
+                if(tData.pat2Link) document.getElementById('linkPat2').value = tData.pat2Link;
+                if(tData.pat3Link) document.getElementById('linkPat3').value = tData.pat3Link;
+                if(tData.pat4Link) document.getElementById('linkPat4').value = tData.pat4Link;
+            }
+
+            const est = await getDoc(doc(db, 'estoque', 'camisetas'));
+            if(est.exists()){
+                const ed = est.data();
+                ['P','M','G','GG','XG','XXG'].forEach(sz => {
+                    document.getElementById('estoque'+sz).value = ed[sz] || 0;
+                });
+            }
+            atualizarCards();
+        }
+
+        window.salvarConfiguracoes = async function() {
+            const isGratuito = document.getElementById('confGratuito').value === "true";
+            const isAberto = document.getElementById('confStatusGeral').value === "true";
+            await setDoc(doc(db, 'settings', 'event'), { 
+                limiteVagas: parseInt(document.getElementById('confVagas').value), 
+                precoCamiseta: parseFloat(document.getElementById('confPreco').value), 
+                pixKey: document.getElementById('confPix').value,
+                whatsappGestor: document.getElementById('confWhats').value,
+                inscricaoGratuita: isGratuito,
+                inscricoesAbertas: isAberto
+            }, { merge: true });
+            alert("Regras salvas e Configurações de Inscrição atualizadas!");
+            carregarConfiguracoes();
+        }
+
+        window.salvarEstoque = async function() {
+            try {
+                const estoqueAtualizado = {
+                    'P': parseInt(document.getElementById('estoqueP').value) || 0,
+                    'M': parseInt(document.getElementById('estoqueM').value) || 0,
+                    'G': parseInt(document.getElementById('estoqueG').value) || 0,
+                    'GG': parseInt(document.getElementById('estoqueGG').value) || 0,
+                    'XG': parseInt(document.getElementById('estoqueXG').value) || 0,
+                    'XXG': parseInt(document.getElementById('estoqueXXG').value) || 0,
+                };
+                await setDoc(doc(db, 'estoque', 'camisetas'), estoqueAtualizado, { merge: true });
+                alert("Estoque atualizado no banco de dados com sucesso!");
+            } catch (error) { alert("Erro ao salvar o estoque."); }
+        }
+
         window.zerarSistema = async function() {
-            const digitado = prompt("⚠️ PERIGO: Isso vai apagar TODOS os inscritos, zerar o contador de peito, apagar a fila de números reciclados E APAGAR O HISTÓRICO DE LOGS.\n\nPara confirmar, digite a palavra ZERAR em maiúsculo:");
+            const digitado = prompt("⚠️ PERIGO: Isso vai apagar TODOS os inscritos, FINANÇAS, zerar o contador de peito, apagar a fila de números reciclados E APAGAR O HISTÓRICO DE LOGS.\n\nPara confirmar, digite a palavra ZERAR em maiúsculo:");
             if (digitado === "ZERAR") {
                 try {
                     const confirmacaoFinal = confirm("Tem certeza absoluta? Essa ação não pode ser desfeita.");
@@ -744,6 +1734,11 @@
                         await deleteDoc(doc(db, "logs", documento.id));
                     });
 
+                    const finSnap = await getDocs(collection(db, "financas"));
+                    finSnap.forEach(async (documento) => {
+                        await deleteDoc(doc(db, "financas", documento.id));
+                    });
+
                     await setDoc(doc(db, "meta", "counter"), { lastNumber: 0, recycledNumbers: [] }, { merge: true });
 
                     alert("Sistema zerado com sucesso! Os testes foram limpos e o próximo inscrito receberá o número #001.");
@@ -755,116 +1750,29 @@
             }
         };
 
-        document.getElementById('searchInput').addEventListener('input', filtrarLista);
-        document.getElementById('filtroPagamento').addEventListener('change', filtrarLista);
-
-        function filtrarLista() {
-            const t = document.getElementById('searchInput').value.toLowerCase();
-            const s = document.getElementById('filtroPagamento').value;
-            renderTable(allUsers.filter(u => {
-                const peitoStr = u.numeroPeito ? u.numeroPeito.toString() : '';
-                const mNome = u.fullName.toLowerCase().includes(t) || u.email.toLowerCase().includes(t) || peitoStr.includes(t) || (u.cpf && u.cpf.includes(t));
-                return mNome && (s === 'all' || u.paymentStatus === s);
-            }));
-        }
-
-        function desenharGraficos() {
-            const cCount = {}; allUsers.forEach(u => {
-                let lbl = u.category === 'caminhada-3km' ? 'Caminhada 3 KM' : 'Corrida 5 KM';
-                cCount[lbl] = (cCount[lbl] || 0) + 1;
-            });
-            if(chartCategoria) chartCategoria.destroy();
-            chartCategoria = new Chart(document.getElementById('categoriaChart'), { type: 'pie', data: { labels: Object.keys(cCount), datasets: [{ data: Object.values(cCount), backgroundColor: ['#f97316', '#22c55e'] }] }, options: { plugins: { title: { display: true, text: 'Modalidades Escolhidas', color: 'white' } }, maintainAspectRatio: false } });
-
-            const tCount = { 'PP':0, 'P':0, 'M':0, 'G':0, 'GG':0, 'XG':0, 'XXG':0 };
-            allUsers.forEach(u => { if(u.shirtSize) tCount[u.shirtSize] += u.quantity; });
-            if(chartTamanhos) chartTamanhos.destroy();
-            chartTamanhos = new Chart(document.getElementById('tamanhosChart'), { type: 'bar', data: { labels: Object.keys(tCount), datasets: [{ label: 'Qtd Camisetas (Vendidas)', data: Object.values(tCount), backgroundColor: '#f97316' }] }, options: { plugins: { title: { display: true, text: 'Demanda de Camisetas (Casual)', color: 'white' } }, scales: { y: { ticks: { color:'white' } }, x: { ticks: {color:'white'} } }, maintainAspectRatio: false } });
-        }
-
-        window.exportarExcel = function() {
-            const data = allUsers.map(u => ({ 
-                "Nº Peito": u.numeroPeito || '-', 
-                "Nome": u.fullName, 
-                "Sexo": u.gender || '-',
-                "CPF": u.cpf || '-',
-                "Data Nasc.": u.birthDate ? u.birthDate.split('-').reverse().join('/') : '-',
-                "Email": u.email, 
-                "Telefone": u.phone, 
-                "Categoria": u.category === 'caminhada-3km' ? 'Caminhada 3km' : 'Corrida 5km', 
-                "Tamanho": u.shirtSize || '-', 
-                "Quantidade": 1, 
-                "Valor Cobrado": u.totalAmount, 
-                "Status Pagamento": u.paymentStatus 
-            }));
-            const wb = XLSX.utils.book_new();
-            XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(data), "Inscritos");
-            XLSX.writeFile(wb, "Relatorio_Geral_AMICC.xlsx");
-        }
-
-        window.exportarCamisetas = function() {
-            if (!allUsers.length) return alert("Nenhuma inscrição encontrada.");
-            const res = {}; allUsers.forEach(u => { if(u.shirtSize) res[u.shirtSize] = (res[u.shirtSize] || 0) + u.quantity; });
-            const data = Object.keys(res).map(t => ({ 'Tamanho (Casual)': t, 'Total a Produzir': res[t] }));
-            const wb = XLSX.utils.book_new();
-            XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(data), "Producao_Casual");
-            XLSX.writeFile(wb, "Relatorio_Camisetas_AMICC.xlsx");
-        }
-
-        async function carregarConfiguracoes() {
-            const ds = await getDoc(doc(db, 'settings', 'event'));
-            if (ds.exists()) {
-                document.getElementById('confVagas').value = ds.data().limiteVagas || 300;
-                metaVagasAtual = ds.data().limiteVagas || 300;
-                document.getElementById('confPreco').value = ds.data().precoCamiseta || 50.00;
-                document.getElementById('confPix').value = ds.data().pixKey || '';
-                document.getElementById('confWhats').value = ds.data().whatsappGestor || '';
-            } else {
-                document.getElementById('confVagas').value = 300;
-            }
-            const ts = await getDoc(doc(db, 'settings', 'content'));
-            if (ts.exists() && ts.data().heroInfo) document.getElementById('contHero').value = ts.data().heroInfo;
-
-            const est = await getDoc(doc(db, 'estoque', 'camisetas'));
-            if(est.exists()){
-                const ed = est.data();
-                ['PP','P','M','G','GG','XG','XXG'].forEach(sz => {
-                    document.getElementById('estoque'+sz).value = ed[sz] || 0;
-                });
-            }
-            atualizarCards();
-        }
-
-        window.salvarConfiguracoes = async function() {
-            await setDoc(doc(db, 'settings', 'event'), { 
-                limiteVagas: parseInt(document.getElementById('confVagas').value), 
-                precoCamiseta: parseFloat(document.getElementById('confPreco').value), 
-                pixKey: document.getElementById('confPix').value,
-                whatsappGestor: document.getElementById('confWhats').value
-            }, { merge: true });
-            alert("Regras salvas!");
-            carregarConfiguracoes();
-        }
-
-        window.salvarEstoque = async function() {
-            try {
-                const estoqueAtualizado = {
-                    'PP': parseInt(document.getElementById('estoquePP').value) || 0,
-                    'P': parseInt(document.getElementById('estoqueP').value) || 0,
-                    'M': parseInt(document.getElementById('estoqueM').value) || 0,
-                    'G': parseInt(document.getElementById('estoqueG').value) || 0,
-                    'GG': parseInt(document.getElementById('estoqueGG').value) || 0,
-                    'XG': parseInt(document.getElementById('estoqueXG').value) || 0,
-                    'XXG': parseInt(document.getElementById('estoqueXXG').value) || 0,
-                };
-                await setDoc(doc(db, 'estoque', 'camisetas'), estoqueAtualizado, { merge: true });
-                alert("Estoque atualizado no banco de dados com sucesso!");
-            } catch (error) { alert("Erro ao salvar o estoque."); }
-        }
-
         window.salvarConteudoTexto = async function() { 
-            await setDoc(doc(db, 'settings', 'content'), { heroInfo: document.getElementById('contHero').value }, { merge: true }); 
-            alert("Textos atualizados!"); 
+            await setDoc(doc(db, 'settings', 'content'), { 
+                heroInfo: document.getElementById('contHero').value,
+                org1Link: document.getElementById('linkOrg1') ? document.getElementById('linkOrg1').value : '',
+                org2Link: document.getElementById('linkOrg2') ? document.getElementById('linkOrg2').value : '',
+                org3Link: document.getElementById('linkOrg3') ? document.getElementById('linkOrg3').value : '',
+                org4Link: document.getElementById('linkOrg4') ? document.getElementById('linkOrg4').value : '',
+                pat1Link: document.getElementById('linkPat1') ? document.getElementById('linkPat1').value : '',
+                pat2Link: document.getElementById('linkPat2') ? document.getElementById('linkPat2').value : '',
+                pat3Link: document.getElementById('linkPat3') ? document.getElementById('linkPat3').value : '',
+                pat4Link: document.getElementById('linkPat4') ? document.getElementById('linkPat4').value : ''
+            }, { merge: true }); 
+            alert("Textos e links do Instagram salvos com sucesso!"); 
+        };
+
+        window.salvarIframeMapa = async function() {
+            const iframeCode = document.getElementById('mapaIframeInput').value;
+            try {
+                await setDoc(doc(db, 'settings', 'content'), { mapaIframe: iframeCode }, { merge: true });
+                alert("Mapa Interativo atualizado com sucesso!");
+            } catch (e) {
+                alert("Erro ao salvar o mapa interativo.");
+            }
         };
 
         window.fazerUploadCloudinary = async function(inputId, dbCampoDestino) {

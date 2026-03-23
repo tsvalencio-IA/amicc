@@ -1,0 +1,8 @@
+{
+  "name": "amicc-backend",
+  "version": "1.0.0",
+  "description": "Backend de envio de Whatsapp",
+  "dependencies": {
+    "axios": "^1.6.5"
+  }
+}

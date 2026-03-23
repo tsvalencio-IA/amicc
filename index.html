@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>3° Treino em prol da AMICC Rio Preto - Inscrição Oficial</title>
+    <meta name="description" content="Página oficial de inscrição para o 3° Treino de 5km e Caminhada de 3km em prol da AMICC São José do Rio Preto. Participe, cuide da sua saúde e apoie esta causa beneficente!">
     
     <link rel="icon" type="image/png" href="./assets/favicon.png">
     
@@ -106,7 +107,6 @@
         .form-group input, .form-group select { width: 100%; padding: 0.875rem 1rem; background: var(--background); border: 1px solid var(--border); border-radius: var(--radius-md); color: var(--text-primary); font-size: 1rem; transition: all 0.2s ease; }
         .form-group input:focus, .form-group select:focus { outline: none; border-color: var(--primary-color); box-shadow: 0 0 0 3px rgb(249 115 22 / 0.2); }
         
-        /* Correção para evitar que os campos esmagem no celular */
         .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
         @media (max-width: 600px) {
             .form-row { grid-template-columns: 1fr; gap: 1.25rem; }
@@ -136,7 +136,6 @@
         .footer-thiaguinho { text-align: center; padding: 1.5rem; font-size: 0.8rem; color: #94a3b8; border-top: 1px solid var(--border); background: var(--background); margin-top: auto; letter-spacing: 0.05em; }
         .footer-thiaguinho strong { color: #fdba74; font-weight: 800; }
 
-        /* Estilo do Carrinho de Inscrições */
         .cart-section { display: none; margin-top: 2rem; background: var(--surface); padding: 1.5rem; border-radius: var(--radius-xl); border: 2px solid var(--primary-color); box-shadow: var(--shadow-glow); }
         .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 1rem; background: var(--surface-elevated); border: 1px solid var(--border); border-radius: var(--radius-md); margin-bottom: 0.5rem; }
     </style>
@@ -148,7 +147,7 @@
         <div class="container header-content">
             <a href="#" class="logo">
                 <div class="logo-icon"><i class="fas fa-person-running"></i></div>
-                <span>3° TREINO EM PROL DA AMICC RP</span>
+                <span>3° TREINO DE 5KM EM PROL DA AMICC RP</span>
             </a>
             <nav>
                 <a href="#inscricao" class="btn btn-sm">Inscreva-se</a>
@@ -160,15 +159,15 @@
     <main class="container">
         <!-- HERO -->
         <section class="hero">
-            <div class="hero-badge"><i class="fas fa-heart"></i><span>Evento Beneficente • Lote Inicial de Camisetas</span></div>
-            <h1>3° TREINO DE 5 KM EM PROL DA AMICC RP</h1>
-            <p id="heroText">Participe desta corrida beneficente organizada em prol da saúde e solidariedade.</p>
+            <div class="hero-badge"><i class="fas fa-heart"></i><span>Evento Beneficente • Apoie esta causa</span></div>
+            <h1>3° TREINÃO AMICC</h1>
+            <p id="heroText">Participe deste treino solidário e cuide da sua saúde!</p>
 
             <div class="organizers-gallery" id="boxOrganizadores"></div>
 
             <div class="progress-container">
                 <div class="progress-header">
-                    <span>Camisetas Lote 1</span>
+                    <span>Inscrições Realizadas</span>
                     <span id="vagasText">Carregando...</span>
                 </div>
                 <div class="progress-bar-bg">
@@ -184,8 +183,8 @@
         </section>
 
         <!-- SEÇÃO CAMISETAS -->
-        <section class="extra-section">
-            <h2 class="section-title"><i class="fas fa-tshirt"></i> Camiseta Oficial (Modelo Casual)</h2>
+        <section class="extra-section" id="shirtShowcaseSection">
+            <h2 class="section-title"><i class="fas fa-tshirt"></i> Camiseta Oficial (Modelo Unissex)</h2>
             <div class="shirt-showcase">
                 <div style="text-align: center;">
                     <img id="imgCamisetaFrente" src="./assets/shirt-front.png" alt="Frente da Camiseta" class="shirt-img" onerror="this.src='https://placehold.co/300x400/1e293b/f8fafc?text=Frente+Camiseta'">
@@ -197,7 +196,7 @@
                 </div>
                 <div style="max-width: 400px; margin-left: 2rem;">
                     <h3>Tamanhos Disponíveis</h3>
-                    <p style="color: var(--text-secondary); margin-bottom: 1rem;">PP, P, M, G, GG, XG, XXG (Apenas modelo casual).</p>
+                    <p style="color: var(--text-secondary); margin-bottom: 1rem;">P, M, G, GG, XG, XXG (Modelo Unissex com medidas exatas de Busto x Altura).</p>
                     <div style="background: var(--surface); padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--primary-color);">
                         <h4 style="color: var(--primary-light); font-size: 1.5rem;">Valor Único: R$ <span id="displayPrecoCamiseta">50,00</span></h4>
                     </div>
@@ -210,7 +209,14 @@
             <div class="form-container">
                 <div class="form-header">
                     <h2><i class="fas fa-clipboard-list"></i> Ficha de Inscrição</h2>
-                    <p>Você pode adicionar quantos atletas quiser (amigos, familiares) neste mesmo pedido. Preencha os dados e clique em "Adicionar Atleta".</p>
+                    <p id="formInstrucoes">Você pode adicionar quantos atletas quiser (amigos, familiares) neste mesmo pedido. Preencha os dados e clique em "Adicionar Atleta".</p>
+                </div>
+
+                <!-- AVISO DE INSCRIÇÕES ENCERRADAS (ESCONDIDO POR PADRÃO) -->
+                <div id="mensagemEncerrado" style="display: none; text-align: center; padding: 3rem 1rem; background: rgba(239, 68, 68, 0.05); border: 2px dashed var(--error); border-radius: var(--radius-lg); margin-top: 1rem;">
+                    <i class="fas fa-lock" style="font-size: 3.5rem; color: var(--error); margin-bottom: 1.5rem;"></i>
+                    <h2 style="color: var(--error); font-size: 1.8rem; margin-bottom: 0.5rem;">Inscrições Encerradas</h2>
+                    <p style="color: var(--text-secondary); font-size: 1.1rem;">O limite de vagas para este evento foi atingido ou as inscrições foram finalizadas pela organização. Agradecemos imensamente o seu interesse!</p>
                 </div>
 
                 <form id="accessForm">
@@ -218,19 +224,19 @@
                         
                         <!-- DADOS DE CONTATO DO RESPONSÁVEL -->
                         <div style="background: var(--background); padding: 1.5rem; border-radius: var(--radius-lg); border: 1px solid var(--border);">
-                            <h4 style="color: var(--primary-light); margin-bottom: 1rem;"><i class="fas fa-address-book"></i> Contato do Responsável (Comprador)</h4>
+                            <h3 style="color: var(--primary-light); margin-bottom: 1rem; font-size: 1.1rem;"><i class="fas fa-address-book"></i> Contato do Responsável (Comprador)</h3>
                             <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1rem;">Estes dados são do responsável pela compra. Eles serão mantidos caso você adicione mais pessoas.</p>
                             <div class="form-group">
-                                <label>E-mail do Responsável</label>
+                                <label for="email">E-mail do Responsável</label>
                                 <input type="email" id="email" name="email" required>
                             </div>
                             <div class="form-row">
                                 <div class="form-group">
-                                    <label>WhatsApp (Com DDD)</label>
+                                    <label for="phone">WhatsApp (Com DDD)</label>
                                     <input type="tel" id="phone" name="phone" placeholder="(17) 99999-9999" required>
                                 </div>
                                 <div class="form-group">
-                                    <label>Contato de Emergência</label>
+                                    <label for="emergencyContact">Contato de Emergência</label>
                                     <input type="tel" id="emergencyContact" name="emergencyContact" placeholder="(17) 99999-9999" required>
                                 </div>
                             </div>
@@ -238,28 +244,28 @@
 
                         <!-- DADOS DO ATLETA -->
                         <div style="background: var(--background); padding: 1.5rem; border-radius: var(--radius-lg); border: 1px dashed var(--primary-color); margin-top: 1rem;">
-                            <h4 style="color: white; margin-bottom: 1rem;"><i class="fas fa-running"></i> Dados do Atleta</h4>
+                            <h3 style="color: white; margin-bottom: 1rem; font-size: 1.1rem;"><i class="fas fa-running"></i> Dados do Atleta</h3>
                             
                             <div class="form-group">
-                                <label>Nome Completo do Atleta</label>
+                                <label for="fullName">Nome Completo do Atleta</label>
                                 <input type="text" id="fullName" name="fullName" required>
                             </div>
                             
                             <div class="form-row">
                                 <div class="form-group">
-                                    <label>CPF do Atleta</label>
-                                    <input type="text" id="cpf" name="cpf" placeholder="000.000.000-00" required>
-                                    <small style="color: var(--warning); font-size: 0.75rem;">1 Inscrição por CPF</small>
+                                    <label for="cpf">CPF do Atleta</label>
+                                    <input type="text" inputmode="numeric" id="cpf" name="cpf" placeholder="000.000.000-00" required>
+                                    <small style="color: var(--warning); font-size: 0.75rem;">Obrigatório e Válido (1 Inscrição por CPF)</small>
                                 </div>
                                 <div class="form-group">
-                                    <label>Data de Nascimento</label>
-                                    <input type="date" id="birthDate" name="birthDate" required>
+                                    <label for="birthDate">Data de Nascimento</label>
+                                    <input type="text" inputmode="numeric" id="birthDate" name="birthDate" placeholder="DD/MM/AAAA" maxlength="10" required>
                                 </div>
                             </div>
                             
                             <div class="form-row">
                                 <div class="form-group">
-                                    <label>Sexo</label>
+                                    <label for="gender">Sexo</label>
                                     <select id="gender" name="gender" required>
                                         <option value="">Selecione...</option>
                                         <option value="Masculino">Masculino</option>
@@ -267,7 +273,7 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label>Modalidade</label>
+                                    <label for="category">Modalidade</label>
                                     <select id="category" name="category" required>
                                         <option value="">Selecione...</option>
                                         <option value="caminhada-3km">Caminhada de 3 KM</option>
@@ -276,18 +282,19 @@
                                 </div>
                             </div>
 
-                            <div class="form-group" style="margin-top: 0.5rem;">
-                                <label>Tamanho da Camiseta (1 Unidade Obrigatória)</label>
-                                <select id="shirtSize" name="shirtSize" required>
-                                    <option value="">Selecione o tamanho...</option>
-                                    <option value="PP">PP (Casual)</option>
-                                    <option value="P">P (Casual)</option>
-                                    <option value="M">M (Casual)</option>
-                                    <option value="G">G (Casual)</option>
-                                    <option value="GG">GG (Casual)</option>
-                                    <option value="XG">XG (Casual)</option>
-                                    <option value="XXG">XXG (Casual)</option>
-                                </select>
+                            <div id="shirtFieldsWrapper">
+                                <div class="form-group" style="margin-top: 0.5rem;">
+                                    <label for="shirtSize">Tamanho da Camiseta (Modelo Unissex)</label>
+                                    <select id="shirtSize" name="shirtSize" required>
+                                        <option value="">Selecione o tamanho exato...</option>
+                                        <option value="P">P (Busto: 48cm / Altura: 68cm)</option>
+                                        <option value="M">M (Busto: 50cm / Altura: 69cm)</option>
+                                        <option value="G">G (Busto: 52cm / Altura: 71cm)</option>
+                                        <option value="GG">GG (Busto: 54cm / Altura: 73cm)</option>
+                                        <option value="XG">XG (Busto: 56cm / Altura: 75cm)</option>
+                                        <option value="XXG">XXG (Busto: 58cm / Altura: 77cm)</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
 
@@ -309,7 +316,7 @@
                     <h3 style="color: var(--primary-light); text-align: center; font-size: 1.8rem; margin-bottom: 1.5rem;">Total: R$ <span id="cartTotal">0,00</span></h3>
                     
                     <button type="button" class="btn" id="btnFinalizar" style="width: 100%; font-size: 1.1rem; padding: 1rem;" onclick="finalizarPedido()">
-                        <span class="btn-text">Finalizar Inscrições (PIX) <i class="fas fa-check-circle"></i></span>
+                        <span class="btn-text">Finalizar Inscrições <i class="fas fa-check-circle"></i></span>
                         <span class="btn-loading" style="display: none;"><i class="fas fa-spinner fa-spin" style="margin-right: 8px;"></i> Processando lote e reservando vagas...</span>
                     </button>
                 </div>
@@ -317,11 +324,14 @@
             </div>
         </section>
 
+        <!-- SEÇÃO DO MAPA (SUPORTA GOOGLE MAPS E STRAVA) -->
         <section class="extra-section">
             <h2 class="section-title"><i class="fas fa-map-marked-alt"></i> Local e Percurso</h2>
             <div style="text-align: center; max-width: 800px; margin: 0 auto;">
                 <p style="margin-bottom: 1rem; color: var(--text-secondary);">A largada acontecerá no Parque da Represa Municipal de São José do Rio Preto.</p>
-                <img id="imgMapa" src="./assets/mapa-percurso.png" alt="Mapa do Percurso" style="width: 100%; border-radius: var(--radius-lg); border: 2px solid var(--border);" onerror="this.src='https://placehold.co/800x400/1e293b/f8fafc?text=Mapa+do+Percurso+Aqui'">
+                <div id="mapContainer" style="width: 100%; border-radius: var(--radius-lg); overflow: hidden; border: 2px solid var(--border); background: var(--surface-elevated); min-height: 200px;">
+                    <img id="imgMapa" src="./assets/mapa-percurso.png" alt="Mapa do Percurso" style="width: 100%; display: block;" onerror="this.src='https://placehold.co/800x400/1e293b/f8fafc?text=Mapa+do+Percurso+Aqui'">
+                </div>
             </div>
         </section>
 
@@ -343,7 +353,7 @@
             
             <div class="faq-item">
                 <div class="faq-question">Quando e onde será a entrega dos kits? <i class="fas fa-chevron-down"></i></div>
-                <div class="faq-answer">A entrega dos kits (camisetas) será realizada em data a ser anunciada no nosso WhatsApp. <strong>Atenção: É obrigatório levar 2 Litros de Leite ou 2 kg de alimentos não perecíveis no momento da retirada.</strong></div>
+                <div class="faq-answer">A entrega dos kits será realizada em data a ser anunciada no nosso WhatsApp. <strong>Atenção: É obrigatório levar 2 Litros de Leite ou 2 kg de alimentos não perecíveis no momento da retirada.</strong></div>
             </div>
             <div class="faq-item">
                 <div class="faq-question">Quais são as opções de percurso? <i class="fas fa-chevron-down"></i></div>
@@ -351,7 +361,7 @@
             </div>
             <div class="faq-item">
                 <div class="faq-question">Posso fazer inscrição para amigos/familiares? <i class="fas fa-chevron-down"></i></div>
-                <div class="faq-answer">Sim! Você preenche o seu e-mail como responsável, e depois adiciona os dados (Nome, CPF e Tamanho da Camiseta) de quantos atletas quiser no carrinho. O pagamento será gerado em um único PIX no final.</div>
+                <div class="faq-answer">Sim! Você preenche o seu e-mail como responsável, e depois adiciona os dados (Nome, CPF) de quantos atletas quiser no carrinho. Se houver custo, o pagamento será gerado em um único PIX no final.</div>
             </div>
         </section>
 
@@ -389,7 +399,9 @@
 
         let precoCamiseta = 50.00; 
         let limiteVagas = 300; 
-        let cart = []; // Carrinho de atletas
+        let isModoGratuito = false; 
+        
+        let cart = []; 
         let isProcessing = false;
 
         const form = document.getElementById('accessForm');
@@ -397,8 +409,8 @@
         const statusMessage = document.getElementById('statusMessage');
         const displayPrecoCamiseta = document.getElementById('displayPrecoCamiseta');
         const cpfField = document.getElementById('cpf');
+        const dateField = document.getElementById('birthDate');
 
-        // Máscaras de Input (Telefones e CPF)
         function applyPhoneMask(value) {
             let digits = value.replace(/\D/g, '');
             if (digits.length > 11) digits = digits.slice(0, 11);
@@ -416,14 +428,40 @@
                          .replace(/(\d{3})(\d{3})(\d{1,3})/, "$1.$2.$3")
                          .replace(/(\d{3})(\d{1,3})/, "$1.$2");
         }
+
+        function applyDateMask(value) {
+            let v = value.replace(/\D/g, '');
+            if (v.length > 8) v = v.slice(0, 8);
+            if (v.length >= 5) {
+                return `${v.slice(0, 2)}/${v.slice(2, 4)}/${v.slice(4)}`;
+            } else if (v.length >= 3) {
+                return `${v.slice(0, 2)}/${v.slice(2)}`;
+            }
+            return v;
+        }
+
+        function isCpfValido(cpf) {
+            cpf = cpf.replace(/[^\d]+/g,'');
+            if(cpf == '' || cpf.length != 11 || /^(\d)\1{10}$/.test(cpf)) return false;
+            let add = 0;
+            for (let i=0; i < 9; i ++) add += parseInt(cpf.charAt(i)) * (10 - i);
+            let rev = 11 - (add % 11);
+            if (rev == 10 || rev == 11) rev = 0;
+            if (rev != parseInt(cpf.charAt(9))) return false;
+            add = 0;
+            for (let i = 0; i < 10; i ++) add += parseInt(cpf.charAt(i)) * (11 - i);
+            rev = 11 - (add % 11);
+            if (rev == 10 || rev == 11) rev = 0;
+            if (rev != parseInt(cpf.charAt(10))) return false;
+            return true;
+        }
         
         document.getElementById('phone').addEventListener('input', e => e.target.value = applyPhoneMask(e.target.value));
         document.getElementById('emergencyContact').addEventListener('input', e => e.target.value = applyPhoneMask(e.target.value));
+        dateField.addEventListener('input', e => e.target.value = applyDateMask(e.target.value));
         
-        // Eventos no CPF para checagem em tempo real
         cpfField.addEventListener('input', e => {
             e.target.value = applyCpfMask(e.target.value);
-            // Libera o erro se o usuário voltar a digitar
             statusMessage.style.display = 'none';
             btnAddCart.disabled = false;
             cpfField.style.borderColor = 'var(--border)';
@@ -432,9 +470,15 @@
         cpfField.addEventListener('blur', async (e) => {
             const cpfClean = e.target.value.replace(/\D/g, '');
             
-            // Só faz a busca no banco se o CPF estiver completo (11 dígitos)
             if (cpfClean.length === 11) {
-                // 1. Checa se já está na lista atual do carrinho
+                
+                if (!isCpfValido(cpfClean)) {
+                    mostrarErro(`O CPF digitado (${e.target.value}) é INVÁLIDO ou INEXISTENTE. Verifique os números.`);
+                    btnAddCart.disabled = true;
+                    cpfField.style.borderColor = 'var(--error)';
+                    return;
+                }
+
                 if (cart.some(item => item.cpf === cpfClean)) {
                     mostrarErro(`O CPF ${e.target.value} já foi adicionado na lista de atletas abaixo.`);
                     btnAddCart.disabled = true;
@@ -442,7 +486,6 @@
                     return;
                 }
 
-                // 2. Checa no Banco de Dados permanentemente (Não importa a data da inscrição)
                 try {
                     const usersRef = collection(db, 'users');
                     const qCpf = query(usersRef, where('cpf', '==', cpfClean));
@@ -453,7 +496,6 @@
                         btnAddCart.disabled = true;
                         cpfField.style.borderColor = 'var(--error)';
                     } else {
-                        // CPF livre
                         cpfField.style.borderColor = 'var(--success)';
                     }
                 } catch (error) {
@@ -476,7 +518,31 @@
                 if(textSnap.exists()) {
                     const cData = textSnap.data();
                     if(cData.heroInfo) document.getElementById('heroText').innerText = cData.heroInfo;
-                    if(cData.mapaUrl) document.getElementById('imgMapa').src = cData.mapaUrl;
+                    
+                    if(cData.mapaIframe && (cData.mapaIframe.includes('<iframe') || cData.mapaIframe.includes('strava-embed'))) {
+                        const mapContainer = document.getElementById('mapContainer');
+                        mapContainer.innerHTML = cData.mapaIframe;
+                        
+                        const iframe = mapContainer.querySelector('iframe');
+                        if(iframe) {
+                            iframe.style.width = '100%';
+                            iframe.style.height = '450px';
+                            iframe.style.border = 'none';
+                            iframe.style.display = 'block';
+                            iframe.setAttribute('title', 'Mapa interativo do evento');
+                        }
+                        const scripts = mapContainer.querySelectorAll('script');
+                        scripts.forEach(oldScript => {
+                            const newScript = document.createElement('script');
+                            Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
+                            newScript.text = oldScript.text;
+                            oldScript.parentNode.replaceChild(newScript, oldScript);
+                        });
+                    } else if(cData.mapaUrl) {
+                        const imgMapa = document.getElementById('imgMapa');
+                        if(imgMapa) imgMapa.src = cData.mapaUrl;
+                    }
+
                     if(cData.camisetaFrenteUrl) document.getElementById('imgCamisetaFrente').src = cData.camisetaFrenteUrl;
                     if(cData.camisetaVersoUrl) document.getElementById('imgCamisetaVerso').src = cData.camisetaVersoUrl;
 
@@ -486,17 +552,41 @@
                     }
 
                     let orgsHtml = '';
-                    if(cData.org1Url) orgsHtml += `<img src="${cData.org1Url}" class="organizer-logo">`;
-                    if(cData.org2Url) orgsHtml += `<img src="${cData.org2Url}" class="organizer-logo">`;
-                    if(cData.org3Url) orgsHtml += `<img src="${cData.org3Url}" class="organizer-logo">`;
-                    if(cData.org4Url) orgsHtml += `<img src="${cData.org4Url}" class="organizer-logo">`;
+                    if(cData.org1Url) {
+                        let img = `<img src="${cData.org1Url}" class="organizer-logo" alt="Logotipo do Organizador">`;
+                        orgsHtml += cData.org1Link ? `<a href="${cData.org1Link}" target="_blank" title="Visitar Site/Instagram">${img}</a>` : img;
+                    }
+                    if(cData.org2Url) {
+                        let img = `<img src="${cData.org2Url}" class="organizer-logo" alt="Logotipo do Organizador">`;
+                        orgsHtml += cData.org2Link ? `<a href="${cData.org2Link}" target="_blank" title="Visitar Site/Instagram">${img}</a>` : img;
+                    }
+                    if(cData.org3Url) {
+                        let img = `<img src="${cData.org3Url}" class="organizer-logo" alt="Logotipo do Organizador">`;
+                        orgsHtml += cData.org3Link ? `<a href="${cData.org3Link}" target="_blank" title="Visitar Site/Instagram">${img}</a>` : img;
+                    }
+                    if(cData.org4Url) {
+                        let img = `<img src="${cData.org4Url}" class="organizer-logo" alt="Logotipo do Organizador">`;
+                        orgsHtml += cData.org4Link ? `<a href="${cData.org4Link}" target="_blank" title="Visitar Site/Instagram">${img}</a>` : img;
+                    }
                     if(orgsHtml !== '') document.getElementById('boxOrganizadores').innerHTML = orgsHtml;
 
                     let patsHtml = '';
-                    if(cData.pat1Url) patsHtml += `<img src="${cData.pat1Url}" class="organizer-logo">`;
-                    if(cData.pat2Url) patsHtml += `<img src="${cData.pat2Url}" class="organizer-logo">`;
-                    if(cData.pat3Url) patsHtml += `<img src="${cData.pat3Url}" class="organizer-logo">`;
-                    if(cData.pat4Url) patsHtml += `<img src="${cData.pat4Url}" class="organizer-logo">`;
+                    if(cData.pat1Url) {
+                        let img = `<img src="${cData.pat1Url}" class="organizer-logo" alt="Logotipo do Patrocinador">`;
+                        patsHtml += cData.pat1Link ? `<a href="${cData.pat1Link}" target="_blank" title="Visitar Site/Instagram">${img}</a>` : img;
+                    }
+                    if(cData.pat2Url) {
+                        let img = `<img src="${cData.pat2Url}" class="organizer-logo" alt="Logotipo do Patrocinador">`;
+                        patsHtml += cData.pat2Link ? `<a href="${cData.pat2Link}" target="_blank" title="Visitar Site/Instagram">${img}</a>` : img;
+                    }
+                    if(cData.pat3Url) {
+                        let img = `<img src="${cData.pat3Url}" class="organizer-logo" alt="Logotipo do Patrocinador">`;
+                        patsHtml += cData.pat3Link ? `<a href="${cData.pat3Link}" target="_blank" title="Visitar Site/Instagram">${img}</a>` : img;
+                    }
+                    if(cData.pat4Url) {
+                        let img = `<img src="${cData.pat4Url}" class="organizer-logo" alt="Logotipo do Patrocinador">`;
+                        patsHtml += cData.pat4Link ? `<a href="${cData.pat4Link}" target="_blank" title="Visitar Site/Instagram">${img}</a>` : img;
+                    }
                     if(patsHtml !== '') document.getElementById('boxPatrocinadores').innerHTML = patsHtml;
                 }
 
@@ -506,8 +596,29 @@
                     const data = settingsDoc.data();
                     if(data.precoCamiseta) precoCamiseta = parseFloat(data.precoCamiseta);
                     if(data.limiteVagas) limiteVagas = parseInt(data.limiteVagas);
+                    
+                    if(data.inscricaoGratuita === true) {
+                        isModoGratuito = true;
+                        precoCamiseta = 0;
+                        document.getElementById('shirtShowcaseSection').style.display = 'none';
+                        document.getElementById('shirtFieldsWrapper').style.display = 'none';
+                        document.getElementById('shirtSize').removeAttribute('required');
+                    } else {
+                        displayPrecoCamiseta.textContent = precoCamiseta.toFixed(2).replace('.', ',');
+                    }
+
+                    // Verifica se as inscrições foram encerradas manualmente no painel
+                    if (data.inscricoesAbertas === false) {
+                        document.getElementById('accessForm').style.display = 'none';
+                        if (document.getElementById('btnAddCart')) document.getElementById('btnAddCart').style.display = 'none';
+                        if (document.getElementById('formInstrucoes')) document.getElementById('formInstrucoes').style.display = 'none';
+                        document.getElementById('mensagemEncerrado').style.display = 'block';
+                        
+                        // ESCONDER A VITRINE DE CAMISETAS SE ESTIVER ENCERRADO
+                        const shirtShowcase = document.getElementById('shirtShowcaseSection');
+                        if (shirtShowcase) shirtShowcase.style.display = 'none';
+                    }
                 }
-                displayPrecoCamiseta.textContent = precoCamiseta.toFixed(2).replace('.', ',');
 
                 const usersRef = collection(db, 'users');
                 const usersSnapshot = await getDocs(usersRef);
@@ -523,7 +634,6 @@
         }
         carregarDadosEvento();
 
-        // FUNÇÃO DE ADICIONAR ATLETA AO CARRINHO (NÍVEL 1 DE VERIFICAÇÃO NO SUBMIT)
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             
@@ -532,8 +642,14 @@
             const cpfClean = formData.get('cpf').replace(/\D/g, ''); 
             const cpfDigitadoComMascara = formData.get('cpf');
             
-            if (cpfClean.length !== 11) {
-                mostrarErro("Por favor, digite um CPF válido contendo 11 números.");
+            if (cpfClean.length !== 11 || !isCpfValido(cpfClean)) {
+                mostrarErro("Por favor, digite um CPF válido.");
+                return;
+            }
+
+            const birthVal = formData.get('birthDate');
+            if (birthVal.length !== 10) {
+                mostrarErro("Por favor, digite a Data de Nascimento completa (Ex: 10/07/1984).");
                 return;
             }
 
@@ -541,21 +657,18 @@
             btnAddCart.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Verificando no sistema...';
 
             try {
-                // Bloqueio de CPF duplicado no BANCO DE DADOS
                 const usersRef = collection(db, 'users');
                 const qCpf = query(usersRef, where('cpf', '==', cpfClean));
                 const snapCpf = await getDocs(qCpf);
                 
                 if (!snapCpf.empty) {
-                    throw new Error(`Este CPF (${cpfDigitadoComMascara}) já possui uma inscrição pendente ou paga confirmada no sistema. Cada atleta deve usar seu próprio CPF.`);
+                    throw new Error(`Este CPF (${cpfDigitadoComMascara}) já possui uma inscrição pendente ou paga confirmada no sistema.`);
                 }
 
-                // Bloqueio de CPF duplicado no CARRINHO ATUAL
                 if (cart.some(item => item.cpf === cpfClean)) {
-                    throw new Error(`Este CPF (${cpfDigitadoComMascara}) já foi adicionado na lista verde logo abaixo. Preencha o CPF do próximo atleta.`);
+                    throw new Error(`Este CPF (${cpfDigitadoComMascara}) já foi adicionado na lista verde logo abaixo.`);
                 }
 
-                // Prepara os dados do Atleta
                 const atleta = {
                     email: formData.get('email').toLowerCase().trim(), 
                     phone: formData.get('phone').replace(/\D/g, ''),
@@ -563,27 +676,26 @@
                     
                     fullName: formData.get('fullName').trim(),
                     cpf: cpfClean,
-                    birthDate: formData.get('birthDate'),
+                    birthDate: birthVal,
                     gender: formData.get('gender'),
                     category: formData.get('category'),
                     
-                    hasShirt: true, 
-                    shirtSize: formData.get('shirtSize'),
-                    quantity: 1, // Regra fixa
-                    totalAmount: precoCamiseta,
+                    hasShirt: !isModoGratuito, 
+                    shirtSize: isModoGratuito ? 'Sem Camiseta' : formData.get('shirtSize'),
+                    quantity: isModoGratuito ? 0 : 1,
+                    totalAmount: isModoGratuito ? 0 : precoCamiseta,
                     paymentStatus: 'pendente'
                 };
 
                 cart.push(atleta);
                 renderCart();
                 
-                // Limpa apenas os dados do atleta para facilitar a próxima inscrição
                 document.getElementById('fullName').value = '';
                 document.getElementById('cpf').value = '';
                 document.getElementById('birthDate').value = '';
                 document.getElementById('gender').value = '';
                 document.getElementById('category').value = '';
-                document.getElementById('shirtSize').value = '';
+                if(!isModoGratuito) document.getElementById('shirtSize').value = '';
                 cpfField.style.borderColor = 'var(--border)';
 
                 btnAddCart.innerHTML = '<i class="fas fa-check"></i> Adicionado! Cadastre outro ou Finalize.';
@@ -611,14 +723,15 @@
             
             cart.forEach((item, index) => {
                 let catNome = item.category === 'caminhada-3km' ? 'Caminhada 3km' : 'Corrida 5km';
-                // Máscara bonita do CPF só para exibir na tela do carrinho
                 let cpfFormatado = item.cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
-                
+                let shirtLabel = isModoGratuito ? 'Sem Camiseta' : item.shirtSize;
+                let precoLabel = isModoGratuito ? 'Gratuito' : `R$ ${item.totalAmount.toFixed(2).replace('.',',')}`;
+
                 cartDiv.innerHTML += `
                     <div class="cart-item">
                         <div>
                             <strong style="color:white; font-size:1.1rem;">${item.fullName}</strong> <span style="font-size:0.75rem; background: var(--primary-color); color: white; padding: 2px 6px; border-radius: 4px; margin-left: 5px;">${catNome}</span><br>
-                            <small style="color:var(--text-secondary);">CPF: ${cpfFormatado} | Camiseta: ${item.shirtSize} | R$ ${item.totalAmount.toFixed(2).replace('.',',')}</small>
+                            <small style="color:var(--text-secondary);">CPF: ${cpfFormatado} | Kit: ${shirtLabel} | ${precoLabel}</small>
                         </div>
                         <button type="button" class="btn-sm" style="background:var(--error); border:none; color:white; border-radius:0.25rem; cursor:pointer;" onclick="removerDoCarrinho(${index})"><i class="fas fa-trash"></i></button>
                     </div>
@@ -627,7 +740,12 @@
 
             document.getElementById('cartCount').innerText = cart.length;
             const total = cart.length * precoCamiseta;
-            document.getElementById('cartTotal').innerText = total.toFixed(2).replace('.', ',');
+            
+            if(isModoGratuito) {
+                document.getElementById('cartTotal').innerText = '0,00 (Gratuito)';
+            } else {
+                document.getElementById('cartTotal').innerText = total.toFixed(2).replace('.', ',');
+            }
             
             document.getElementById('cartSection').style.display = cart.length > 0 ? 'block' : 'none';
         }
@@ -637,7 +755,6 @@
             renderCart();
         };
 
-        // LÓGICA FINAL: ENVIANDO TODO O GRUPO PARA O BANCO DE DADOS (NÍVEL 2 DE VERIFICAÇÃO)
         window.finalizarPedido = async function() {
             if (cart.length === 0) return;
             
@@ -656,10 +773,6 @@
             document.querySelector('#btnFinalizar .btn-loading').style.display = 'inline-block';
 
             try {
-                // ==========================================
-                // BLINDAGEM FINAL DE CPF ANTES DE SALVAR
-                // ==========================================
-                // Garante que se o usuário abriu 2 abas ou deixou o site muito tempo aberto, não haja duplicidade.
                 for (let i = 0; i < cart.length; i++) {
                     const qCheck = query(collection(db, 'users'), where('cpf', '==', cart[i].cpf));
                     const snapCheck = await getDocs(qCheck);
@@ -668,34 +781,34 @@
                     }
                 }
 
-                // Gera um ID de Lote (Batch) para linkar todos esses atletas ao mesmo comprador
                 const batchId = 'B' + Date.now().toString() + Math.floor(Math.random() * 1000).toString();
 
                 await runTransaction(db, async (transaction) => {
                     const counterRef = doc(db, 'meta', 'counter');
                     const inventoryRef = doc(db, 'estoque', 'camisetas');
 
-                    // ==========================================
-                    // CHECA ESTOQUE PRIMEIRO PARA TODO O CARRINHO
-                    // ==========================================
-                    const inventoryDoc = await transaction.get(inventoryRef);
-                    let estoqueDados = inventoryDoc.exists() ? inventoryDoc.data() : { 'PP': 100, 'P': 100, 'M': 100, 'G': 100, 'GG': 100, 'XG': 100, 'XXG': 100 };
+                    let estoqueDados = {};
                     
-                    let neededStock = {};
-                    cart.forEach(item => {
-                        neededStock[item.shirtSize] = (neededStock[item.shirtSize] || 0) + 1;
-                    });
+                    if (!isModoGratuito) {
+                        const inventoryDoc = await transaction.get(inventoryRef);
+                        estoqueDados = inventoryDoc.exists() ? inventoryDoc.data() : { 'P': 100, 'M': 100, 'G': 100, 'GG': 100, 'XG': 100, 'XXG': 100 };
+                        
+                        let neededStock = {};
+                        cart.forEach(item => {
+                            if (item.hasShirt && item.shirtSize !== 'Sem Camiseta') {
+                                let trueSize = item.shirtSize.split(' ')[0];
+                                neededStock[trueSize] = (neededStock[trueSize] || 0) + 1;
+                            }
+                        });
 
-                    for (let size in neededStock) {
-                        if ((estoqueDados[size] || 0) < neededStock[size]) {
-                            throw new Error(`Estoque esgotado para o tamanho de camiseta ${size}. Remova-o do carrinho e escolha outro tamanho.`);
+                        for (let size in neededStock) {
+                            if ((estoqueDados[size] || 0) < neededStock[size]) {
+                                throw new Error(`Estoque esgotado para o tamanho de camiseta ${size}. Remova-o do carrinho e escolha outro tamanho.`);
+                            }
+                            estoqueDados[size] -= neededStock[size];
                         }
-                        estoqueDados[size] -= neededStock[size];
                     }
 
-                    // ==========================================
-                    // PUXA NÚMEROS DE PEITO E SALVA USUÁRIOS
-                    // ==========================================
                     const counterDoc = await transaction.get(counterRef);
                     let cData = counterDoc.exists() ? counterDoc.data() : {};
                     let nextNumeroPeito = cData.lastNumber || 0;
@@ -707,25 +820,26 @@
                         
                         let assignedPeito;
                         if (recycledList.length > 0) {
-                            assignedPeito = recycledList.pop(); // Usa o reciclado
+                            assignedPeito = recycledList.pop(); 
                         } else {
                             nextNumeroPeito++;
-                            assignedPeito = nextNumeroPeito; // Gera número novo
+                            assignedPeito = nextNumeroPeito; 
                         }
 
                         item.numeroPeito = assignedPeito;
-                        item.batchId = batchId; // A MÁGICA DO AGRUPAMENTO
+                        item.batchId = batchId; 
                         item.createdAt = serverTimestamp();
                         
                         const newUserRef = doc(collection(db, 'users'));
                         transaction.set(newUserRef, item);
                     }
 
-                    transaction.set(inventoryRef, estoqueDados, { merge: true });
+                    if (!isModoGratuito) {
+                        transaction.set(inventoryRef, estoqueDados, { merge: true });
+                    }
                     transaction.set(counterRef, { lastNumber: nextNumeroPeito, recycledNumbers: recycledList }, { merge: true });
                 });
 
-                // Redireciona para a tela de confirmação enviando a ID do pacote
                 window.location.href = `confirmacao.html?batch=${batchId}`;
 
             } catch (error) {
