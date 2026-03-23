@@ -8,6 +8,9 @@
     
     <link rel="icon" type="image/png" href="./assets/favicon.png">
     
+    <!-- OTIMIZAÇÃO: Pré-conectando aos servidores do Google/Firebase para carregar mais rápido no Mobile -->
+    <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://firestore.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -19,7 +22,6 @@
             --primary-color: #f97316;
             --primary-dark: #ea580c;
             --primary-light: #fdba74;
-            /* Cores ajustadas para passar no teste de contraste WCAG AA/AAA do Google Lighthouse */
             --secondary-color: #4ade80; 
             --accent-color: #facc15; 
             
@@ -213,7 +215,7 @@
                     <p id="formInstrucoes">Pode adicionar quantos atletas quiser (amigos, familiares) nesta mesma encomenda. Preencha os dados e clique em "Adicionar Atleta".</p>
                 </div>
 
-                <!-- AVISO DE INSCRIÇÕES ENCERRADAS (ESCONDIDO POR PADRÃO) -->
+                <!-- AVISO DE INSCRIÇÕES ENCERRADAS -->
                 <div id="mensagemEncerrado" style="display: none; text-align: center; padding: 3rem 1rem; background: rgba(248, 113, 113, 0.05); border: 2px dashed var(--error); border-radius: var(--radius-lg); margin-top: 1rem;">
                     <i class="fas fa-lock" style="font-size: 3.5rem; color: var(--error); margin-bottom: 1.5rem;"></i>
                     <h2 style="color: var(--error); font-size: 1.8rem; margin-bottom: 0.5rem;">Inscrições Encerradas</h2>
@@ -345,7 +347,8 @@
 
         <section class="extra-section" id="cartazSection" style="display: none; text-align: center; border-top: none; padding-top: 0; padding-bottom: 2rem;">
             <div class="container">
-                <img id="imgCartaz" src="" alt="Cartaz Oficial do Evento" width="800" height="1200" style="max-width: 100%; height: auto; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg);">
+                <!-- Imagem em branco/transparente por padrão para não dar erro 404 -->
+                <img id="imgCartaz" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Cartaz Oficial do Evento" width="800" height="1200" style="max-width: 100%; height: auto; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg);">
             </div>
         </section>
 
@@ -376,7 +379,6 @@
         </div>
     </footer>
 
-    <!-- Assinatura Global -->
     <div class="footer-thiaguinho">
         powered by <strong>thIAguinho Soluções</strong>
     </div>
