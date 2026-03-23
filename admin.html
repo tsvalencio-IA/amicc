@@ -16,12 +16,23 @@
     
     <style>
         :root {
-            --primary-color: #f97316; --primary-dark: #ea580c; --primary-light: #fdba74;
-            --secondary-color: #22c55e; --background: #0f172a; --surface: #1e293b;
-            --surface-elevated: #334155; --text-primary: #f8fafc; --text-secondary: #94a3b8;
-            --text-muted: #64748b; --border: #334155; --success: #22c55e; --error: #ef4444;
-            --warning: #f59e0b; --font-main: 'Inter', system-ui, sans-serif;
-            --radius-md: 0.5rem; --radius-lg: 0.75rem;
+            --primary-color: #f97316; 
+            --primary-dark: #ea580c; 
+            --primary-light: #fdba74;
+            --secondary-color: #4ade80; 
+            --background: #0f172a; 
+            --surface: #1e293b;
+            --surface-elevated: #334155; 
+            --text-primary: #f8fafc; 
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8; 
+            --border: #334155; 
+            --success: #4ade80; 
+            --error: #f87171;
+            --warning: #facc15; 
+            --font-main: 'Inter', system-ui, sans-serif;
+            --radius-md: 0.5rem; 
+            --radius-lg: 0.75rem;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -44,7 +55,7 @@
         .btn { width: 100%; padding: 0.75rem; background: linear-gradient(135deg, var(--primary-color), var(--primary-dark)); color: white; border: none; border-radius: var(--radius-md); font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.5rem; transition: opacity 0.2s; }
         .btn:hover { opacity: 0.9; }
         .btn-secondary { background: var(--surface-elevated); border: 1px solid var(--border); width: auto; }
-        .btn-danger { background: rgba(239, 68, 68, 0.1); border: 1px solid var(--error); color: var(--error); }
+        .btn-danger { background: rgba(248, 113, 113, 0.1); border: 1px solid var(--error); color: var(--error); }
         .btn-danger:hover { background: var(--error); color: white; }
         .btn-whats { background: rgba(37, 211, 102, 0.1); border: 1px solid #25D366; color: #25D366; }
         .btn-whats:hover { background: #25D366; color: white; }
@@ -74,11 +85,11 @@
         .data-table th, .data-table td { padding: 1rem; text-align: left; border-bottom: 1px solid var(--border); }
         .data-table th { background: var(--surface-elevated); color: var(--text-secondary); font-weight: 600; }
         .badge { padding: 0.25rem 0.5rem; border-radius: var(--radius-md); font-size: 0.75rem; font-weight: 600; }
-        .badge.pago { background: rgb(34 197 94 / 0.1); color: var(--success); }
-        .badge.pendente { background: rgb(245 158 11 / 0.1); color: var(--warning); }
+        .badge.pago { background: rgb(74 222 128 / 0.1); color: var(--success); }
+        .badge.pendente { background: rgb(250 204 21 / 0.1); color: var(--warning); }
         .badge.receita { background: rgb(56 189 248 / 0.1); color: #38bdf8; }
-        .badge.despesa { background: rgb(239 68 68 / 0.1); color: #ef4444; }
-        .badge.gratuito { background: rgb(139 92 246 / 0.1); color: #8b5cf6; } /* Adicionado para Inscrições Gratuitas */
+        .badge.despesa { background: rgb(248 113 113 / 0.1); color: var(--error); }
+        .badge.gratuito { background: rgb(139 92 246 / 0.1); color: #a78bfa; }
 
         .settings-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.5rem; margin-bottom: 1.5rem; }
         .admin-list { list-style: none; margin-top: 1rem; }
@@ -86,8 +97,8 @@
         
         .stock-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); gap: 1rem; margin-bottom: 1rem; }
         
-        .footer-thiaguinho { text-align: center; padding: 1.5rem; font-size: 0.8rem; color: #94a3b8; border-top: 1px solid var(--border); background: var(--background); margin-top: auto; letter-spacing: 0.05em; }
-        .footer-thiaguinho strong { color: #fdba74; font-weight: 800; }
+        .footer-thiaguinho { text-align: center; padding: 1.5rem; font-size: 0.8rem; color: var(--text-muted); border-top: 1px solid var(--border); background: var(--background); margin-top: auto; letter-spacing: 0.05em; }
+        .footer-thiaguinho strong { color: var(--primary-light); font-weight: 800; }
         
         .checkbox-container { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1.5rem; justify-content: center; }
         .checkbox-container input[type="checkbox"] { width: auto; margin: 0; cursor: pointer; }
@@ -372,13 +383,12 @@
                     <div style="color: var(--text-secondary); font-size: 0.85rem;"><i class="fas fa-shopping-cart"></i> Despesas / Compras</div>
                     <div class="stat-card-value" id="finTotalDespesas" style="color: var(--error);">R$ 0,00</div>
                 </div>
-                <div class="stat-card" style="border-top: 4px solid var(--success); background: rgba(34, 197, 94, 0.05);">
+                <div class="stat-card" style="border-top: 4px solid var(--success); background: rgba(74, 222, 128, 0.05);">
                     <div style="color: var(--text-secondary); font-size: 0.85rem;"><i class="fas fa-piggy-bank"></i> Saldo Líquido do Evento</div>
                     <div class="stat-card-value" id="finSaldoLiquido" style="color: var(--success);">R$ 0,00</div>
                 </div>
             </div>
 
-            <!-- NOVA ÁREA DE FILTROS DO FINANCEIRO RESTAURADA -->
             <div style="display: flex; gap: 1rem; margin-bottom: 1rem; align-items: center; flex-wrap: wrap;">
                 <input type="text" id="searchFinancaInput" placeholder="Buscar entidade ou descrição..." style="padding: 0.5rem; border-radius: var(--radius-md); border: 1px solid var(--border); background: var(--surface); color: white; width: 300px;">
                 <select id="filtroFinancaTipo" style="padding: 0.5rem; border-radius: var(--radius-md); border: 1px solid var(--border); background: var(--surface); color: white;">
@@ -604,7 +614,7 @@
                     <h3 style="color: #ef4444;"><i class="fas fa-power-off"></i> Status Geral das Inscrições</h3>
                     <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 1rem;">Use esta chave para encerrar DEFINITIVAMENTE as inscrições do evento. O site esconderá o formulário e exibirá a mensagem "Inscrições Encerradas".</p>
                     <div class="form-group">
-                        <select id="confStatusGeral" style="border-color: #ef4444; font-weight: bold; background: rgba(239, 68, 68, 0.05);">
+                        <select id="confStatusGeral" style="border-color: #ef4444; font-weight: bold; background: rgba(248, 113, 113, 0.05);">
                             <option value="true">✅ ABERTAS (Aceitando Inscrições no Site)</option>
                             <option value="false">❌ ENCERRADAS (Bloquear Formulário do Site)</option>
                         </select>
@@ -705,10 +715,18 @@
         const db = getFirestore(app);
         const auth = getAuth(app);
 
+        // FUNÇÃO DE SEGURANÇA (Adicionada contra XSS)
+        function escapeHTML(str) {
+            if (typeof str !== 'string') return str;
+            const div = document.createElement('div');
+            div.appendChild(document.createTextNode(str));
+            return div.innerHTML;
+        }
+
         let allUsers = [];
         let allLogs = [];
         let allFinancas = [];
-        let unifiedFinancas = []; // Array unificado
+        let unifiedFinancas = []; 
         let chartCategoria, chartTamanhos;
         let currentUserEmail = "";
         let metaVagasAtual = 300;
@@ -863,7 +881,7 @@
                 desenharGraficos();
                 renderPremiacao();
                 calcularResumoFinanceiro();
-                renderFinancasTable(); // Atualiza a tabela financeira unificada
+                renderFinancasTable(); 
             });
 
             if(unsubLogs) unsubLogs();
@@ -896,9 +914,6 @@
             }));
         }
 
-        // ==========================================
-        // LÓGICA DE FINANÇAS UNIFICADAS
-        // ==========================================
         window.abrirModalFinancas = function() {
             document.getElementById('finTipo').value = 'Receita';
             document.getElementById('finValor').value = '';
@@ -1057,7 +1072,6 @@
                 });
             });
 
-            // Ordena unificado pela data decrescente
             unifiedFinancas.sort((a, b) => b.dataRaw - a.dataRaw);
         }
 
@@ -1090,11 +1104,11 @@
                 let badgeClass = 'badge receita';
                 if(f.tipo === 'Despesa') badgeClass = 'badge despesa';
                 if(f.tipo === 'Receita (Inscrição)') badgeClass = 'badge pago';
-                if(f.tipo === 'Inscrição Gratuita') badgeClass = 'badge gratuito'; // Nova classe para as inscrições grátis
+                if(f.tipo === 'Inscrição Gratuita') badgeClass = 'badge gratuito';
 
                 let btnDel = '';
                 if(!f.isUser) {
-                    btnDel = `<button class="btn btn-danger btn-sm" onclick="deletarTransacaoFinanceira('${f.id}', '${f.tipo}', ${f.valor}, '${f.entidade}')" style="padding: 5px 8px; border-radius: 4px;" title="Excluir"><i class="fas fa-trash"></i></button>`;
+                    btnDel = `<button class="btn btn-danger btn-sm" onclick="deletarTransacaoFinanceira('${f.id}', '${f.tipo}', ${f.valor}, '${escapeHTML(f.entidade)}')” style="padding: 5px 8px; border-radius: 4px;" title="Excluir"><i class="fas fa-trash"></i></button>`;
                 } else {
                     btnDel = `<span style="font-size:0.7rem; color:var(--text-muted);" title="Exclua a inscrição na aba Geral">Via Insc.</span>`;
                 }
@@ -1104,16 +1118,15 @@
 
                 tbody.innerHTML += `<tr>
                     <td style="color:var(--text-secondary);">${f.dataBR}</td>
-                    <td><span class="${badgeClass}">${f.tipo.toUpperCase()}</span></td>
-                    <td style="font-weight:bold;">${f.entidade}</td>
-                    <td style="color:var(--text-secondary); font-size:0.8rem;">${f.descricao}</td>
-                    <td style="font-size:0.8rem;">${f.registradoPor}</td>
+                    <td><span class="${badgeClass}">${escapeHTML(f.tipo).toUpperCase()}</span></td>
+                    <td style="font-weight:bold;">${escapeHTML(f.entidade)}</td>
+                    <td style="color:var(--text-secondary); font-size:0.8rem;">${escapeHTML(f.descricao)}</td>
+                    <td style="font-size:0.8rem;">${escapeHTML(f.registradoPor)}</td>
                     <td style="text-align: right; font-weight:bold; color:${valorColor};">${valorDisplay}</td>
                     <td>${btnDel}</td>
                 </tr>`;
             });
         }
-        // ==========================================
 
         window.abrirModalEdicao = function(id) {
             const user = allUsers.find(u => u.id === id);
@@ -1256,18 +1269,18 @@
                 }
                 
                 let actionBadge = '';
-                if(log.action.includes('EXCLUSAO')) actionBadge = `<span class="badge" style="background: rgba(239, 68, 68, 0.1); color: var(--error);">${log.action}</span>`;
-                else if(log.action.includes('APROVACAO')) actionBadge = `<span class="badge" style="background: rgba(34, 197, 94, 0.1); color: var(--success);">${log.action}</span>`;
-                else if(log.action.includes('FINANCA')) actionBadge = `<span class="badge" style="background: rgba(56, 189, 248, 0.1); color: #38bdf8;">${log.action}</span>`;
-                else if(log.action.includes('EDICAO')) actionBadge = `<span class="badge" style="background: rgba(234, 179, 8, 0.1); color: var(--warning);">${log.action}</span>`;
-                else actionBadge = `<span class="badge">${log.action}</span>`;
+                if(log.action.includes('EXCLUSAO')) actionBadge = `<span class="badge" style="background: rgba(248, 113, 113, 0.1); color: var(--error);">${escapeHTML(log.action)}</span>`;
+                else if(log.action.includes('APROVACAO')) actionBadge = `<span class="badge" style="background: rgba(74, 222, 128, 0.1); color: var(--success);">${escapeHTML(log.action)}</span>`;
+                else if(log.action.includes('FINANCA')) actionBadge = `<span class="badge" style="background: rgba(56, 189, 248, 0.1); color: #38bdf8;">${escapeHTML(log.action)}</span>`;
+                else if(log.action.includes('EDICAO')) actionBadge = `<span class="badge" style="background: rgba(250, 204, 21, 0.1); color: var(--warning);">${escapeHTML(log.action)}</span>`;
+                else actionBadge = `<span class="badge">${escapeHTML(log.action)}</span>`;
 
                 tbody.innerHTML += `<tr>
                     <td style="color: var(--text-secondary); font-size: 0.8rem;">${dateStr}</td>
-                    <td style="font-weight: 500;">${log.admin}</td>
+                    <td style="font-weight: 500;">${escapeHTML(log.admin)}</td>
                     <td>${actionBadge}</td>
-                    <td><strong>${log.userNome}</strong> <span style="color:var(--primary-light)">(${log.userPeito ? '#'+String(log.userPeito).padStart(3, '0') : '-'})</span></td>
-                    <td style="color: var(--text-secondary); font-style: italic; font-size:0.85rem;">${log.motivo || '-'}</td>
+                    <td><strong>${escapeHTML(log.userNome)}</strong> <span style="color:var(--primary-light)">(${log.userPeito ? '#'+String(log.userPeito).padStart(3, '0') : '-'})</span></td>
+                    <td style="color: var(--text-secondary); font-style: italic; font-size:0.85rem;">${escapeHTML(log.motivo || '-')}</td>
                 </tr>`;
             });
         }
@@ -1283,7 +1296,6 @@
             document.getElementById('statPagos').innerText = pagos;
             document.getElementById('statPendentes').innerText = pendentes;
 
-            // KPIs ESTRATÉGICOS
             const taxa = total > 0 ? ((pagos / total) * 100).toFixed(1) : 0;
             document.getElementById('kpiConversao').innerText = `${taxa}%`;
 
@@ -1296,7 +1308,6 @@
             document.getElementById('kpi5km').innerText = total5km;
             document.getElementById('kpi3km').innerText = total3km;
 
-            // KPIs FINANCEIROS E DEMOGRÁFICOS
             let receitaEfetiva = 0;
             let camisasProduzir = 0;
             let mulheres = 0;
@@ -1334,15 +1345,15 @@
                 let pClass = u.paymentStatus === 'pago' ? (isGratuito ? 'gratuito' : 'pago') : 'pendente';
                 let statusDisplay = u.paymentStatus === 'pago' ? (isGratuito ? 'CONFIRMADO (GRÁTIS)' : 'PAGO') : 'PENDENTE';
 
-                let infoCam = u.hasShirt ? `${u.shirtSize.split(' ')[0]} (1x)` : 'Sem Camiseta';
+                let infoCam = u.hasShirt ? `${escapeHTML(u.shirtSize).split(' ')[0]} (1x)` : 'Sem Camiseta';
                 let catNome = u.category === 'caminhada-3km' ? 'Caminhada 3 KM' : 'Corrida 5 KM';
                 let peito = u.numeroPeito ? `#${String(u.numeroPeito).padStart(3, '0')}` : '-';
-                let sexo = u.gender ? u.gender : '-';
-                let dataNasc = u.birthDate ? u.birthDate : '-'; 
+                let sexo = u.gender ? escapeHTML(u.gender) : '-';
+                let dataNasc = u.birthDate ? escapeHTML(u.birthDate) : '-'; 
                 
                 let aprovacaoInfo = '';
                 if (u.paymentStatus === 'pago' && u.approvedBy) {
-                    aprovacaoInfo = `<br><small style="color:var(--text-muted); font-size:0.7rem;">por ${u.approvedBy}</small>`;
+                    aprovacaoInfo = `<br><small style="color:var(--text-muted); font-size:0.7rem;">por ${escapeHTML(u.approvedBy)}</small>`;
                 }
                 
                 let badgeGrupo = '';
@@ -1350,25 +1361,25 @@
                     badgeGrupo = `<br><span class="badge" style="background:#8b5cf6; font-size:0.65rem; margin-top:4px; display:inline-block;"><i class="fas fa-layer-group"></i> Grupo de ${batchCounts[u.batchId]}</span>`;
                 }
 
-                let safeName = u.fullName ? u.fullName.replace(/'/g, "\\'") : '';
+                let safeName = u.fullName ? escapeHTML(u.fullName).replace(/'/g, "\\'") : '';
                 let peitoArg = u.numeroPeito ? `'${u.numeroPeito}'` : null;
                 let batchArg = u.batchId ? `'${u.batchId}'` : null;
 
                 let btnPagoTexto = isGratuito ? 'Confirmar (Grátis)' : 'Pago';
-                let select = `<select onchange="mudarStatus('${u.id}', this.value, '${u.phone}', '${safeName}', ${peitoArg}, ${batchArg})" style="padding:4px; border-radius:4px; background:var(--background); color:white; border:1px solid var(--border); margin-right: 5px;">
+                let select = `<select onchange="mudarStatus('${u.id}', this.value, '${escapeHTML(u.phone)}', '${safeName}', ${peitoArg}, ${batchArg})" style="padding:4px; border-radius:4px; background:var(--background); color:white; border:1px solid var(--border); margin-right: 5px;">
                     <option value="pendente" ${u.paymentStatus === 'pendente'?'selected':''}>Pendente</option>
                     <option value="pago" ${u.paymentStatus === 'pago'?'selected':''}>${btnPagoTexto}</option>
                 </select>`;
                 
-                let btnWhats = `<button class="btn btn-whats btn-sm" onclick="abrirZapConfirmacao('${u.phone}', '${safeName}', ${peitoArg}, ${isGratuito})" style="padding: 5px 8px; border-radius: 4px; display: inline-block; width: auto; margin-right: 5px;" title="Avisar no WhatsApp"><i class="fab fa-whatsapp"></i></button>`;
+                let btnWhats = `<button class="btn btn-whats btn-sm" onclick="abrirZapConfirmacao('${escapeHTML(u.phone)}', '${safeName}', ${peitoArg}, ${isGratuito})" style="padding: 5px 8px; border-radius: 4px; display: inline-block; width: auto; margin-right: 5px;" title="Avisar no WhatsApp"><i class="fab fa-whatsapp"></i></button>`;
 
                 let btnEdit = `<button class="btn btn-info btn-sm" onclick="abrirModalEdicao('${u.id}')" style="padding: 5px 8px; border-radius: 4px; display: inline-block; width: auto; margin-right: 5px;" title="Editar Atleta"><i class="fas fa-edit"></i></button>`;
 
-                let btnDelete = `<button class="btn btn-danger btn-sm" onclick="deletarInscrito('${u.id}', ${u.hasShirt}, '${u.shirtSize}', 1, ${peitoArg}, '${safeName}')" style="padding: 5px 8px; border-radius: 4px; display: inline-block; width: auto;" title="Excluir Inscrição e Relatar"><i class="fas fa-trash"></i></button>`;
+                let btnDelete = `<button class="btn btn-danger btn-sm" onclick="deletarInscrito('${u.id}', ${u.hasShirt}, '${escapeHTML(u.shirtSize)}', 1, ${peitoArg}, '${safeName}')" style="padding: 5px 8px; border-radius: 4px; display: inline-block; width: auto;" title="Excluir Inscrição e Relatar"><i class="fas fa-trash"></i></button>`;
 
                 tbody.innerHTML += `<tr>
                     <td style="color:var(--primary-light); font-weight:bold; font-size:1.1rem;">${peito}${badgeGrupo}</td>
-                    <td><strong>${u.fullName}</strong> <span style="font-size:0.7rem; background:#334155; padding:2px 5px; border-radius:4px;">${sexo}</span><br><small style="color:var(--text-muted)">${u.email}<br>${u.phone} • Nasc: ${dataNasc}</small></td>
+                    <td><strong>${escapeHTML(u.fullName)}</strong> <span style="font-size:0.7rem; background:#334155; padding:2px 5px; border-radius:4px;">${sexo}</span><br><small style="color:var(--text-muted)">${escapeHTML(u.email)}<br>${escapeHTML(u.phone)} • Nasc: ${dataNasc}</small></td>
                     <td>${catNome}</td><td>${infoCam}</td><td>R$ ${parseFloat(u.totalAmount || 0).toFixed(2).replace('.',',')}</td>
                     <td><span class="badge ${pClass}">${statusDisplay}</span>${aprovacaoInfo}</td>
                     <td style="min-width: 140px;"><div style="display: flex; align-items: center;">${select} ${btnWhats} ${btnEdit} ${btnDelete}</div></td>
@@ -1389,11 +1400,11 @@
                 let sorted = list.sort((a, b) => (a.numeroPeito || 0) - (b.numeroPeito || 0));
                 sorted.forEach(u => {
                     let peito = u.numeroPeito ? `#${String(u.numeroPeito).padStart(3, '0')}` : '-';
-                    let dataNasc = u.birthDate ? u.birthDate : '-';
+                    let dataNasc = u.birthDate ? escapeHTML(u.birthDate) : '-';
                     html += `<tr>
                         <td style="color:var(--primary-light); font-weight:bold;">${peito}</td>
-                        <td>${u.fullName}</td>
-                        <td>${u.cpf || '-'}</td>
+                        <td>${escapeHTML(u.fullName)}</td>
+                        <td>${escapeHTML(u.cpf) || '-'}</td>
                         <td>${dataNasc}</td>
                     </tr>`;
                 });
@@ -1409,7 +1420,6 @@
 
         window.mudarStatus = async function(id, st, phone, name, peito, batchId) { 
             try {
-                // Recupera os dados do usuário para verificar se é inscrição gratuita
                 const userObj = allUsers.find(u => u.id === id);
                 const isGratuito = userObj ? parseFloat(userObj.totalAmount || 0) === 0 : false;
 
@@ -1525,7 +1535,6 @@
             }
         };
 
-        // PROTEÇÃO CONTRA PREVIEWS QUE BLOQUEIAM CHART.JS
         function desenharGraficos() {
             if (typeof Chart === 'undefined') return;
 
