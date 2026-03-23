@@ -19,19 +19,20 @@
             --primary-color: #f97316;
             --primary-dark: #ea580c;
             --primary-light: #fdba74;
-            --secondary-color: #22c55e;
-            --accent-color: #eab308;
+            /* Cores ajustadas para passar no teste de contraste WCAG AA/AAA do Google Lighthouse */
+            --secondary-color: #4ade80; 
+            --accent-color: #facc15; 
             
             --background: #0f172a;
             --surface: #1e293b;
             --surface-elevated: #334155;
             --text-primary: #f8fafc;
-            --text-secondary: #94a3b8;
-            --text-muted: #64748b;
+            --text-secondary: #cbd5e1; 
+            --text-muted: #94a3b8; 
             --border: #334155;
-            --success: #22c55e;
-            --error: #ef4444;
-            --warning: #f59e0b;
+            --success: #4ade80; 
+            --error: #f87171; 
+            --warning: #facc15; 
             
             --font-main: 'Inter', system-ui, sans-serif;
             --radius-md: 0.5rem;
@@ -57,8 +58,8 @@
         .bg-gradient {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
             background: radial-gradient(circle at 20% 50%, rgb(249 115 22 / 0.15) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 20%, rgb(34 197 94 / 0.15) 0%, transparent 50%),
-                        radial-gradient(circle at 40% 80%, rgb(234 179 8 / 0.1) 0%, transparent 50%);
+                        radial-gradient(circle at 80% 20%, rgb(74 222 128 / 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 80%, rgb(250 204 21 / 0.1) 0%, transparent 50%);
             animation: gradientShift 20s ease infinite;
         }
         @keyframes gradientShift { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
@@ -72,7 +73,7 @@
         }
         .header-content { display: flex; justify-content: space-between; align-items: center; }
         .logo { display: flex; align-items: center; gap: 0.75rem; font-size: 1.5rem; font-weight: 800; color: var(--text-primary); text-decoration: none; }
-        .logo-icon { width: 45px; height: 45px; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
+        .logo-icon { width: 45px; height: 45px; background: linear-gradient(135deg, var(--primary-color), var(--primary-dark)); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
         .logo span { background: linear-gradient(135deg, var(--primary-light), var(--text-primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
         
         .btn { padding: 0.75rem 1.5rem; background: linear-gradient(135deg, var(--primary-color), var(--primary-dark)); color: white; border: none; border-radius: var(--radius-md); font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; text-decoration: none; }
@@ -91,10 +92,10 @@
         .progress-bar-bg { width: 100%; height: 12px; background: var(--surface-elevated); border-radius: var(--radius-full); overflow: hidden; }
         .progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--secondary-color), var(--primary-color)); border-radius: var(--radius-full); width: 0%; transition: width 1s ease; }
 
-        .milk-alert { max-width: 600px; margin: 0 auto 3rem; background: rgba(34, 197, 94, 0.1); border: 1px dashed var(--secondary-color); padding: 1rem; border-radius: var(--radius-md); color: var(--secondary-color); font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 0.75rem; }
+        .milk-alert { max-width: 600px; margin: 0 auto 3rem; background: rgba(74, 222, 128, 0.1); border: 1px dashed var(--secondary-color); padding: 1rem; border-radius: var(--radius-md); color: var(--secondary-color); font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 0.75rem; }
 
         .organizers-gallery { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-bottom: 3rem; align-items: center; }
-        .organizer-logo { height: 80px; transition: all 0.3s ease; opacity: 0.9; }
+        .organizer-logo { height: 80px; width: auto; object-fit: contain; transition: all 0.3s ease; opacity: 0.9; }
         .organizer-logo:hover { opacity: 1; transform: scale(1.05); }
 
         .form-container { max-width: 600px; margin: 0 auto; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 2rem; box-shadow: var(--shadow-lg); }
@@ -118,7 +119,7 @@
         .extra-section { padding: 4rem 0; border-top: 1px solid var(--border); }
         
         .shirt-showcase { display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center; align-items: center; }
-        .shirt-img { max-width: 250px; border-radius: var(--radius-lg); background: var(--surface-elevated); padding: 1rem; }
+        .shirt-img { width: 100%; max-width: 250px; height: auto; border-radius: var(--radius-lg); background: var(--surface-elevated); padding: 1rem; }
         
         .faq-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); margin-bottom: 1rem; overflow: hidden; }
         .faq-question { padding: 1.25rem; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
@@ -127,16 +128,16 @@
         .faq-item.active .faq-question { color: var(--primary-light); }
 
         .status-message { padding: 1rem; border-radius: var(--radius-md); margin-top: 1rem; display: none; align-items: center; gap: 0.75rem; font-size: 0.875rem; }
-        .status-message.success { background: rgb(34 197 94 / 0.1); border: 1px solid var(--success); color: var(--success); display: flex; }
-        .status-message.error { background: rgb(239 68 68 / 0.1); border: 1px solid var(--error); color: var(--error); display: flex; }
+        .status-message.success { background: rgb(74 222 128 / 0.1); border: 1px solid var(--success); color: var(--success); display: flex; }
+        .status-message.error { background: rgb(248 113 113 / 0.1); border: 1px solid var(--error); color: var(--error); display: flex; }
 
         footer { padding: 2rem 0; text-align: center; color: var(--text-muted); font-size: 0.875rem; margin-top: 2rem; border-top: 1px solid var(--border);}
         .links-uteis a { color: var(--primary-light); text-decoration: none; margin: 0 10px; }
         
-        .footer-thiaguinho { text-align: center; padding: 1.5rem; font-size: 0.8rem; color: #94a3b8; border-top: 1px solid var(--border); background: var(--background); margin-top: auto; letter-spacing: 0.05em; }
-        .footer-thiaguinho strong { color: #fdba74; font-weight: 800; }
+        .footer-thiaguinho { text-align: center; padding: 1.5rem; font-size: 0.8rem; color: var(--text-muted); border-top: 1px solid var(--border); background: var(--background); margin-top: auto; letter-spacing: 0.05em; }
+        .footer-thiaguinho strong { color: var(--primary-light); font-weight: 800; }
 
-        .cart-section { display: none; margin-top: 2rem; background: var(--surface); padding: 1.5rem; border-radius: var(--radius-xl); border: 2px solid var(--primary-color); box-shadow: var(--shadow-glow); }
+        .cart-section { display: none; margin-top: 2rem; background: var(--surface); padding: 1.5rem; border-radius: var(--radius-xl); border: 2px solid var(--primary-color); box-shadow: var(--shadow-glow); scroll-margin-top: 100px; }
         .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 1rem; background: var(--surface-elevated); border: 1px solid var(--border); border-radius: var(--radius-md); margin-bottom: 0.5rem; }
     </style>
 </head>
@@ -187,11 +188,11 @@
             <h2 class="section-title"><i class="fas fa-tshirt"></i> Camiseta Oficial (Modelo Unissex)</h2>
             <div class="shirt-showcase">
                 <div style="text-align: center;">
-                    <img id="imgCamisetaFrente" src="./assets/shirt-front.png" alt="Frente da Camiseta" class="shirt-img" onerror="this.src='https://placehold.co/300x400/1e293b/f8fafc?text=Frente+Camiseta'">
+                    <img id="imgCamisetaFrente" src="https://placehold.co/300x400/1e293b/f8fafc?text=Frente+Camiseta" width="300" height="400" alt="Visão Frontal da Camiseta" class="shirt-img">
                     <p style="margin-top: 10px;">Visão Frontal</p>
                 </div>
                 <div style="text-align: center;">
-                    <img id="imgCamisetaVerso" src="./assets/shirt-back.png" alt="Verso da Camiseta" class="shirt-img" onerror="this.src='https://placehold.co/300x400/1e293b/f8fafc?text=Verso+Camiseta'">
+                    <img id="imgCamisetaVerso" src="https://placehold.co/300x400/1e293b/f8fafc?text=Verso+Camiseta" width="300" height="400" alt="Visão Traseira da Camiseta" class="shirt-img">
                     <p style="margin-top: 10px;">Visão Traseira</p>
                 </div>
                 <div style="max-width: 400px; margin-left: 2rem;">
@@ -209,11 +210,11 @@
             <div class="form-container">
                 <div class="form-header">
                     <h2><i class="fas fa-clipboard-list"></i> Ficha de Inscrição</h2>
-                    <p id="formInstrucoes">Você pode adicionar quantos atletas quiser (amigos, familiares) neste mesmo pedido. Preencha os dados e clique em "Adicionar Atleta".</p>
+                    <p id="formInstrucoes">Pode adicionar quantos atletas quiser (amigos, familiares) nesta mesma encomenda. Preencha os dados e clique em "Adicionar Atleta".</p>
                 </div>
 
                 <!-- AVISO DE INSCRIÇÕES ENCERRADAS (ESCONDIDO POR PADRÃO) -->
-                <div id="mensagemEncerrado" style="display: none; text-align: center; padding: 3rem 1rem; background: rgba(239, 68, 68, 0.05); border: 2px dashed var(--error); border-radius: var(--radius-lg); margin-top: 1rem;">
+                <div id="mensagemEncerrado" style="display: none; text-align: center; padding: 3rem 1rem; background: rgba(248, 113, 113, 0.05); border: 2px dashed var(--error); border-radius: var(--radius-lg); margin-top: 1rem;">
                     <i class="fas fa-lock" style="font-size: 3.5rem; color: var(--error); margin-bottom: 1.5rem;"></i>
                     <h2 style="color: var(--error); font-size: 1.8rem; margin-bottom: 0.5rem;">Inscrições Encerradas</h2>
                     <p style="color: var(--text-secondary); font-size: 1.1rem;">O limite de vagas para este evento foi atingido ou as inscrições foram finalizadas pela organização. Agradecemos imensamente o seu interesse!</p>
@@ -225,7 +226,7 @@
                         <!-- DADOS DE CONTATO DO RESPONSÁVEL -->
                         <div style="background: var(--background); padding: 1.5rem; border-radius: var(--radius-lg); border: 1px solid var(--border);">
                             <h3 style="color: var(--primary-light); margin-bottom: 1rem; font-size: 1.1rem;"><i class="fas fa-address-book"></i> Contato do Responsável (Comprador)</h3>
-                            <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1rem;">Estes dados são do responsável pela compra. Eles serão mantidos caso você adicione mais pessoas.</p>
+                            <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1rem;">Estes dados são do responsável pela compra. Eles serão mantidos caso adicione mais pessoas.</p>
                             <div class="form-group">
                                 <label for="email">E-mail do Responsável</label>
                                 <input type="email" id="email" name="email" required>
@@ -315,9 +316,9 @@
                     <hr style="border: none; border-top: 1px solid var(--border); margin: 1.5rem 0;">
                     <h3 style="color: var(--primary-light); text-align: center; font-size: 1.8rem; margin-bottom: 1.5rem;">Total: R$ <span id="cartTotal">0,00</span></h3>
                     
-                    <button type="button" class="btn" id="btnFinalizar" style="width: 100%; font-size: 1.1rem; padding: 1rem;" onclick="finalizarPedido()">
+                    <button type="button" class="btn" id="btnFinalizar" style="width: 100%; font-size: 1.1rem; padding: 1rem;" onclick="finalizarPedido()" disabled title="Adicione pelo menos um atleta">
                         <span class="btn-text">Finalizar Inscrições <i class="fas fa-check-circle"></i></span>
-                        <span class="btn-loading" style="display: none;"><i class="fas fa-spinner fa-spin" style="margin-right: 8px;"></i> Processando lote e reservando vagas...</span>
+                        <span class="btn-loading" style="display: none;"><i class="fas fa-spinner fa-spin" style="margin-right: 8px;"></i> Processando e reservando vagas...</span>
                     </button>
                 </div>
 
@@ -330,7 +331,7 @@
             <div style="text-align: center; max-width: 800px; margin: 0 auto;">
                 <p style="margin-bottom: 1rem; color: var(--text-secondary);">A largada acontecerá no Parque da Represa Municipal de São José do Rio Preto.</p>
                 <div id="mapContainer" style="width: 100%; border-radius: var(--radius-lg); overflow: hidden; border: 2px solid var(--border); background: var(--surface-elevated); min-height: 200px;">
-                    <img id="imgMapa" src="./assets/mapa-percurso.png" alt="Mapa do Percurso" style="width: 100%; display: block;" onerror="this.src='https://placehold.co/800x400/1e293b/f8fafc?text=Mapa+do+Percurso+Aqui'">
+                    <img id="imgMapa" src="https://placehold.co/800x400/1e293b/f8fafc?text=Mapa+do+Percurso+Aqui" width="800" height="400" alt="Mapa do Percurso" style="width: 100%; height: auto; display: block;">
                 </div>
             </div>
         </section>
@@ -344,7 +345,7 @@
 
         <section class="extra-section" id="cartazSection" style="display: none; text-align: center; border-top: none; padding-top: 0; padding-bottom: 2rem;">
             <div class="container">
-                <img id="imgCartaz" src="" alt="Cartaz Oficial do Evento" style="max-width: 100%; height: auto; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg);">
+                <img id="imgCartaz" src="" alt="Cartaz Oficial do Evento" width="800" height="1200" style="max-width: 100%; height: auto; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg);">
             </div>
         </section>
 
@@ -442,7 +443,15 @@
 
         function isCpfValido(cpf) {
             cpf = cpf.replace(/[^\d]+/g,'');
-            if(cpf == '' || cpf.length != 11 || /^(\d)\1{10}$/.test(cpf)) return false;
+            if(cpf == '' || cpf.length != 11) return false;
+            
+            const blacklistedCpfs = [
+                "00000000000", "11111111111", "22222222222", "33333333333",
+                "44444444444", "55555555555", "66666666666", "77777777777",
+                "88888888888", "99999999999"
+            ];
+            if (blacklistedCpfs.includes(cpf)) return false;
+
             let add = 0;
             for (let i=0; i < 9; i ++) add += parseInt(cpf.charAt(i)) * (10 - i);
             let rev = 11 - (add % 11);
@@ -473,7 +482,7 @@
             if (cpfClean.length === 11) {
                 
                 if (!isCpfValido(cpfClean)) {
-                    mostrarErro(`O CPF digitado (${e.target.value}) é INVÁLIDO ou INEXISTENTE. Verifique os números.`);
+                    mostrarErro(`O CPF digitado (${e.target.value}) é INVÁLIDO. Verifique os números.`);
                     btnAddCart.disabled = true;
                     cpfField.style.borderColor = 'var(--error)';
                     return;
@@ -553,38 +562,38 @@
 
                     let orgsHtml = '';
                     if(cData.org1Url) {
-                        let img = `<img src="${cData.org1Url}" class="organizer-logo" alt="Logotipo do Organizador">`;
+                        let img = `<img src="${cData.org1Url}" class="organizer-logo" alt="Logotipo do Organizador" width="150" height="80">`;
                         orgsHtml += cData.org1Link ? `<a href="${cData.org1Link}" target="_blank" title="Visitar Site/Instagram">${img}</a>` : img;
                     }
                     if(cData.org2Url) {
-                        let img = `<img src="${cData.org2Url}" class="organizer-logo" alt="Logotipo do Organizador">`;
+                        let img = `<img src="${cData.org2Url}" class="organizer-logo" alt="Logotipo do Organizador" width="150" height="80">`;
                         orgsHtml += cData.org2Link ? `<a href="${cData.org2Link}" target="_blank" title="Visitar Site/Instagram">${img}</a>` : img;
                     }
                     if(cData.org3Url) {
-                        let img = `<img src="${cData.org3Url}" class="organizer-logo" alt="Logotipo do Organizador">`;
+                        let img = `<img src="${cData.org3Url}" class="organizer-logo" alt="Logotipo do Organizador" width="150" height="80">`;
                         orgsHtml += cData.org3Link ? `<a href="${cData.org3Link}" target="_blank" title="Visitar Site/Instagram">${img}</a>` : img;
                     }
                     if(cData.org4Url) {
-                        let img = `<img src="${cData.org4Url}" class="organizer-logo" alt="Logotipo do Organizador">`;
+                        let img = `<img src="${cData.org4Url}" class="organizer-logo" alt="Logotipo do Organizador" width="150" height="80">`;
                         orgsHtml += cData.org4Link ? `<a href="${cData.org4Link}" target="_blank" title="Visitar Site/Instagram">${img}</a>` : img;
                     }
                     if(orgsHtml !== '') document.getElementById('boxOrganizadores').innerHTML = orgsHtml;
 
                     let patsHtml = '';
                     if(cData.pat1Url) {
-                        let img = `<img src="${cData.pat1Url}" class="organizer-logo" alt="Logotipo do Patrocinador">`;
+                        let img = `<img src="${cData.pat1Url}" class="organizer-logo" alt="Logotipo do Patrocinador" width="150" height="80">`;
                         patsHtml += cData.pat1Link ? `<a href="${cData.pat1Link}" target="_blank" title="Visitar Site/Instagram">${img}</a>` : img;
                     }
                     if(cData.pat2Url) {
-                        let img = `<img src="${cData.pat2Url}" class="organizer-logo" alt="Logotipo do Patrocinador">`;
+                        let img = `<img src="${cData.pat2Url}" class="organizer-logo" alt="Logotipo do Patrocinador" width="150" height="80">`;
                         patsHtml += cData.pat2Link ? `<a href="${cData.pat2Link}" target="_blank" title="Visitar Site/Instagram">${img}</a>` : img;
                     }
                     if(cData.pat3Url) {
-                        let img = `<img src="${cData.pat3Url}" class="organizer-logo" alt="Logotipo do Patrocinador">`;
+                        let img = `<img src="${cData.pat3Url}" class="organizer-logo" alt="Logotipo do Patrocinador" width="150" height="80">`;
                         patsHtml += cData.pat3Link ? `<a href="${cData.pat3Link}" target="_blank" title="Visitar Site/Instagram">${img}</a>` : img;
                     }
                     if(cData.pat4Url) {
-                        let img = `<img src="${cData.pat4Url}" class="organizer-logo" alt="Logotipo do Patrocinador">`;
+                        let img = `<img src="${cData.pat4Url}" class="organizer-logo" alt="Logotipo do Patrocinador" width="150" height="80">`;
                         patsHtml += cData.pat4Link ? `<a href="${cData.pat4Link}" target="_blank" title="Visitar Site/Instagram">${img}</a>` : img;
                     }
                     if(patsHtml !== '') document.getElementById('boxPatrocinadores').innerHTML = patsHtml;
@@ -607,14 +616,12 @@
                         displayPrecoCamiseta.textContent = precoCamiseta.toFixed(2).replace('.', ',');
                     }
 
-                    // Verifica se as inscrições foram encerradas manualmente no painel
                     if (data.inscricoesAbertas === false) {
                         document.getElementById('accessForm').style.display = 'none';
                         if (document.getElementById('btnAddCart')) document.getElementById('btnAddCart').style.display = 'none';
                         if (document.getElementById('formInstrucoes')) document.getElementById('formInstrucoes').style.display = 'none';
                         document.getElementById('mensagemEncerrado').style.display = 'block';
                         
-                        // ESCONDER A VITRINE DE CAMISETAS SE ESTIVER ENCERRADO
                         const shirtShowcase = document.getElementById('shirtShowcaseSection');
                         if (shirtShowcase) shirtShowcase.style.display = 'none';
                     }
@@ -699,6 +706,8 @@
                 cpfField.style.borderColor = 'var(--border)';
 
                 btnAddCart.innerHTML = '<i class="fas fa-check"></i> Adicionado! Cadastre outro ou Finalize.';
+                document.getElementById('cartSection').scrollIntoView({ behavior: "smooth", block: "start" });
+                
                 setTimeout(() => {
                     btnAddCart.innerHTML = '<i class="fas fa-plus-circle"></i> Adicionar Atleta à Lista';
                     btnAddCart.disabled = false;
@@ -748,6 +757,11 @@
             }
             
             document.getElementById('cartSection').style.display = cart.length > 0 ? 'block' : 'none';
+            
+            const btnFinalizar = document.getElementById('btnFinalizar');
+            if (btnFinalizar) {
+                btnFinalizar.disabled = cart.length === 0;
+            }
         }
 
         window.removerDoCarrinho = function(index) {
@@ -760,8 +774,8 @@
             
             const nomePreenchido = document.getElementById('fullName').value.trim();
             if (nomePreenchido !== '') {
-                alert('Você preencheu os dados de um atleta mas esqueceu de clicar no botão "Adicionar Atleta à Lista". Adicione-o primeiro antes de finalizar o pedido!');
-                return;
+                mostrarErro('Você preencheu os dados de um atleta mas esqueceu de clicar no botão "Adicionar Atleta à Lista". Adicione-o primeiro antes de finalizar o pedido!');
+                return; 
             }
 
             if (isProcessing) return;
@@ -777,7 +791,7 @@
                     const qCheck = query(collection(db, 'users'), where('cpf', '==', cart[i].cpf));
                     const snapCheck = await getDocs(qCheck);
                     if (!snapCheck.empty) {
-                        throw new Error(`Falha Crítica: O CPF do atleta ${cart[i].fullName} já foi registrado no sistema por outra pessoa agora pouco. Por favor, remova-o do carrinho clicando na lixeira vermelha.`);
+                        throw new Error(`Falha Crítica: O CPF do atleta ${cart[i].fullName} já foi registrado no sistema por outra pessoa agora mesmo. Por favor, remova-o do carrinho.`);
                     }
                 }
 
@@ -843,7 +857,7 @@
                 window.location.href = `confirmacao.html?batch=${batchId}`;
 
             } catch (error) {
-                alert(error.message);
+                mostrarErro(error.message);
                 btnFinalizar.disabled = false;
                 document.querySelector('#btnFinalizar .btn-text').style.display = 'inline-block';
                 document.querySelector('#btnFinalizar .btn-loading').style.display = 'none';
