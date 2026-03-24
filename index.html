@@ -8,7 +8,7 @@
     
     <link rel="icon" type="image/png" href="./assets/favicon.png">
     
-    <!-- OTIMIZAÇÃO: Pré-conectando aos servidores do Google/Firebase para carregar mais rápido no Mobile -->
+    <!-- OTIMIZAÇÃO EXTREMA MOBILE: Pré-conectando aos servidores do Google/Firebase -->
     <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://firestore.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -190,11 +190,11 @@
             <h2 class="section-title"><i class="fas fa-tshirt"></i> Camiseta Oficial (Modelo Unissex)</h2>
             <div class="shirt-showcase">
                 <div style="text-align: center;">
-                    <img id="imgCamisetaFrente" src="https://placehold.co/300x400/1e293b/f8fafc?text=Frente+Camiseta" width="300" height="400" alt="Visão Frontal da Camiseta" class="shirt-img">
+                    <img id="imgCamisetaFrente" src="https://placehold.co/300x400/1e293b/f8fafc?text=Frente+Camiseta" loading="lazy" width="300" height="400" alt="Visão Frontal da Camiseta" class="shirt-img">
                     <p style="margin-top: 10px;">Visão Frontal</p>
                 </div>
                 <div style="text-align: center;">
-                    <img id="imgCamisetaVerso" src="https://placehold.co/300x400/1e293b/f8fafc?text=Verso+Camiseta" width="300" height="400" alt="Visão Traseira da Camiseta" class="shirt-img">
+                    <img id="imgCamisetaVerso" src="https://placehold.co/300x400/1e293b/f8fafc?text=Verso+Camiseta" loading="lazy" width="300" height="400" alt="Visão Traseira da Camiseta" class="shirt-img">
                     <p style="margin-top: 10px;">Visão Traseira</p>
                 </div>
                 <div style="max-width: 400px; margin-left: 2rem;">
@@ -327,13 +327,13 @@
             </div>
         </section>
 
-        <!-- SEÇÃO DO MAPA (SUPORTA GOOGLE MAPS E STRAVA) -->
+        <!-- SEÇÃO DO MAPA -->
         <section class="extra-section">
             <h2 class="section-title"><i class="fas fa-map-marked-alt"></i> Local e Percurso</h2>
             <div style="text-align: center; max-width: 800px; margin: 0 auto;">
                 <p style="margin-bottom: 1rem; color: var(--text-secondary);">A largada acontecerá no Parque da Represa Municipal de São José do Rio Preto.</p>
                 <div id="mapContainer" style="width: 100%; border-radius: var(--radius-lg); overflow: hidden; border: 2px solid var(--border); background: var(--surface-elevated); min-height: 200px;">
-                    <img id="imgMapa" src="https://placehold.co/800x400/1e293b/f8fafc?text=Mapa+do+Percurso+Aqui" width="800" height="400" alt="Mapa do Percurso" style="width: 100%; height: auto; display: block;">
+                    <img id="imgMapa" src="https://placehold.co/800x400/1e293b/f8fafc?text=Mapa+do+Percurso+Aqui" loading="lazy" width="800" height="400" alt="Mapa do Percurso" style="width: 100%; height: auto; display: block;">
                 </div>
             </div>
         </section>
@@ -347,8 +347,7 @@
 
         <section class="extra-section" id="cartazSection" style="display: none; text-align: center; border-top: none; padding-top: 0; padding-bottom: 2rem;">
             <div class="container">
-                <!-- Imagem em branco/transparente por padrão para não dar erro 404 -->
-                <img id="imgCartaz" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Cartaz Oficial do Evento" width="800" height="1200" style="max-width: 100%; height: auto; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg);">
+                <img id="imgCartaz" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" loading="lazy" alt="Cartaz Oficial do Evento" width="800" height="1200" style="max-width: 100%; height: auto; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg);">
             </div>
         </section>
 
@@ -564,38 +563,38 @@
 
                     let orgsHtml = '';
                     if(cData.org1Url) {
-                        let img = `<img src="${cData.org1Url}" class="organizer-logo" alt="Logotipo do Organizador" width="150" height="80">`;
+                        let img = `<img src="${cData.org1Url}" class="organizer-logo" alt="Logotipo do Organizador" width="150" height="80" loading="lazy">`;
                         orgsHtml += cData.org1Link ? `<a href="${cData.org1Link}" target="_blank" title="Visitar Site/Instagram">${img}</a>` : img;
                     }
                     if(cData.org2Url) {
-                        let img = `<img src="${cData.org2Url}" class="organizer-logo" alt="Logotipo do Organizador" width="150" height="80">`;
+                        let img = `<img src="${cData.org2Url}" class="organizer-logo" alt="Logotipo do Organizador" width="150" height="80" loading="lazy">`;
                         orgsHtml += cData.org2Link ? `<a href="${cData.org2Link}" target="_blank" title="Visitar Site/Instagram">${img}</a>` : img;
                     }
                     if(cData.org3Url) {
-                        let img = `<img src="${cData.org3Url}" class="organizer-logo" alt="Logotipo do Organizador" width="150" height="80">`;
+                        let img = `<img src="${cData.org3Url}" class="organizer-logo" alt="Logotipo do Organizador" width="150" height="80" loading="lazy">`;
                         orgsHtml += cData.org3Link ? `<a href="${cData.org3Link}" target="_blank" title="Visitar Site/Instagram">${img}</a>` : img;
                     }
                     if(cData.org4Url) {
-                        let img = `<img src="${cData.org4Url}" class="organizer-logo" alt="Logotipo do Organizador" width="150" height="80">`;
+                        let img = `<img src="${cData.org4Url}" class="organizer-logo" alt="Logotipo do Organizador" width="150" height="80" loading="lazy">`;
                         orgsHtml += cData.org4Link ? `<a href="${cData.org4Link}" target="_blank" title="Visitar Site/Instagram">${img}</a>` : img;
                     }
                     if(orgsHtml !== '') document.getElementById('boxOrganizadores').innerHTML = orgsHtml;
 
                     let patsHtml = '';
                     if(cData.pat1Url) {
-                        let img = `<img src="${cData.pat1Url}" class="organizer-logo" alt="Logotipo do Patrocinador" width="150" height="80">`;
+                        let img = `<img src="${cData.pat1Url}" class="organizer-logo" alt="Logotipo do Patrocinador" width="150" height="80" loading="lazy">`;
                         patsHtml += cData.pat1Link ? `<a href="${cData.pat1Link}" target="_blank" title="Visitar Site/Instagram">${img}</a>` : img;
                     }
                     if(cData.pat2Url) {
-                        let img = `<img src="${cData.pat2Url}" class="organizer-logo" alt="Logotipo do Patrocinador" width="150" height="80">`;
+                        let img = `<img src="${cData.pat2Url}" class="organizer-logo" alt="Logotipo do Patrocinador" width="150" height="80" loading="lazy">`;
                         patsHtml += cData.pat2Link ? `<a href="${cData.pat2Link}" target="_blank" title="Visitar Site/Instagram">${img}</a>` : img;
                     }
                     if(cData.pat3Url) {
-                        let img = `<img src="${cData.pat3Url}" class="organizer-logo" alt="Logotipo do Patrocinador" width="150" height="80">`;
+                        let img = `<img src="${cData.pat3Url}" class="organizer-logo" alt="Logotipo do Patrocinador" width="150" height="80" loading="lazy">`;
                         patsHtml += cData.pat3Link ? `<a href="${cData.pat3Link}" target="_blank" title="Visitar Site/Instagram">${img}</a>` : img;
                     }
                     if(cData.pat4Url) {
-                        let img = `<img src="${cData.pat4Url}" class="organizer-logo" alt="Logotipo do Patrocinador" width="150" height="80">`;
+                        let img = `<img src="${cData.pat4Url}" class="organizer-logo" alt="Logotipo do Patrocinador" width="150" height="80" loading="lazy">`;
                         patsHtml += cData.pat4Link ? `<a href="${cData.pat4Link}" target="_blank" title="Visitar Site/Instagram">${img}</a>` : img;
                     }
                     if(patsHtml !== '') document.getElementById('boxPatrocinadores').innerHTML = patsHtml;
