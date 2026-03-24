@@ -6,8 +6,12 @@
     <title>Admin - Corrida AMICC RP</title>
     
     <link rel="icon" type="image/png" href="./assets/favicon.png">
+    <!-- OTIMIZAÇÃO EXTREMA MOBILE: Pré-conectando aos servidores do Google/Firebase -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://firestore.googleapis.com" crossorigin>
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -1107,7 +1111,8 @@
 
                 let btnDel = '';
                 if(!f.isUser) {
-                    btnDel = `<button class="btn btn-danger btn-sm" onclick="deletarTransacaoFinanceira('${f.id}', '${f.tipo}', ${f.valor}, '${escapeHTML(f.entidade)}')” style="padding: 5px 8px; border-radius: 4px;" title="Excluir"><i class="fas fa-trash"></i></button>`;
+                    let safeEntidade = f.entidade ? escapeHTML(f.entidade).replace(/'/g, "\\'") : '';
+                    btnDel = `<button class="btn btn-danger btn-sm" onclick="deletarTransacaoFinanceira('${f.id}', '${f.tipo}', ${f.valor}, '${safeEntidade}')" style="padding: 5px 8px; border-radius: 4px;" title="Excluir"><i class="fas fa-trash"></i></button>`;
                 } else {
                     btnDel = `<span style="font-size:0.7rem; color:var(--text-muted);" title="Exclua a inscrição na aba Geral">Via Insc.</span>`;
                 }
@@ -1361,20 +1366,22 @@
                 }
 
                 let safeName = u.fullName ? escapeHTML(u.fullName).replace(/'/g, "\\'") : '';
+                let safePhone = u.phone ? escapeHTML(u.phone).replace(/'/g, "\\'") : '';
+                let safeShirt = u.shirtSize ? escapeHTML(u.shirtSize).replace(/'/g, "\\'") : '';
                 let peitoArg = u.numeroPeito ? `'${u.numeroPeito}'` : null;
                 let batchArg = u.batchId ? `'${u.batchId}'` : null;
 
                 let btnPagoTexto = isGratuito ? 'Confirmar (Grátis)' : 'Pago';
-                let select = `<select onchange="mudarStatus('${u.id}', this.value, '${escapeHTML(u.phone)}', '${safeName}', ${peitoArg}, ${batchArg})" style="padding:4px; border-radius:4px; background:var(--background); color:white; border:1px solid var(--border); margin-right: 5px;">
+                let select = `<select onchange="mudarStatus('${u.id}', this.value, '${safePhone}', '${safeName}', ${peitoArg}, ${batchArg})" style="padding:4px; border-radius:4px; background:var(--background); color:white; border:1px solid var(--border); margin-right: 5px;">
                     <option value="pendente" ${u.paymentStatus === 'pendente'?'selected':''}>Pendente</option>
                     <option value="pago" ${u.paymentStatus === 'pago'?'selected':''}>${btnPagoTexto}</option>
                 </select>`;
                 
-                let btnWhats = `<button class="btn btn-whats btn-sm" onclick="abrirZapConfirmacao('${escapeHTML(u.phone)}', '${safeName}', ${peitoArg}, ${isGratuito})" style="padding: 5px 8px; border-radius: 4px; display: inline-block; width: auto; margin-right: 5px;" title="Avisar no WhatsApp"><i class="fab fa-whatsapp"></i></button>`;
+                let btnWhats = `<button class="btn btn-whats btn-sm" onclick="abrirZapConfirmacao('${safePhone}', '${safeName}', ${peitoArg}, ${isGratuito})" style="padding: 5px 8px; border-radius: 4px; display: inline-block; width: auto; margin-right: 5px;" title="Avisar no WhatsApp"><i class="fab fa-whatsapp"></i></button>`;
 
                 let btnEdit = `<button class="btn btn-info btn-sm" onclick="abrirModalEdicao('${u.id}')" style="padding: 5px 8px; border-radius: 4px; display: inline-block; width: auto; margin-right: 5px;" title="Editar Atleta"><i class="fas fa-edit"></i></button>`;
 
-                let btnDelete = `<button class="btn btn-danger btn-sm" onclick="deletarInscrito('${u.id}', ${u.hasShirt}, '${escapeHTML(u.shirtSize)}', 1, ${peitoArg}, '${safeName}')" style="padding: 5px 8px; border-radius: 4px; display: inline-block; width: auto;" title="Excluir Inscrição e Relatar"><i class="fas fa-trash"></i></button>`;
+                let btnDelete = `<button class="btn btn-danger btn-sm" onclick="deletarInscrito('${u.id}', ${u.hasShirt}, '${safeShirt}', 1, ${peitoArg}, '${safeName}')" style="padding: 5px 8px; border-radius: 4px; display: inline-block; width: auto;" title="Excluir Inscrição e Relatar"><i class="fas fa-trash"></i></button>`;
 
                 tbody.innerHTML += `<tr>
                     <td style="color:var(--primary-light); font-weight:bold; font-size:1.1rem;">${peito}${badgeGrupo}</td>
